@@ -1,19 +1,28 @@
 <?php
-include 'toro.php';
-include 'pointDAO.php';
+include '../lib/toro.php';
+include '../dao/pointDAO.php';
+
+//POSTMAN
+//localhost/proyecto/Quedamos/php/servidor/services/pointService.php/
 
 ToroHook::add("404", function() {
             header('HTTP/1.0 404 Not Found');
             echo "Error enlace no encontrado";
 });
 
-Toro::serve(array(    
+Toro::serve(array( 
+    "/" => "services",
     "/getPoint" => "getPoint",
     "/getAll" => "sign_in",
     "/insert" => "sign_in",
     "/update" => "sign_in",
     "/delete" => "sign_in"
 ));
+class services{
+     function get() {          
+        echo "Services";
+    }   
+}
 
 class getPoint{
      function post() {          

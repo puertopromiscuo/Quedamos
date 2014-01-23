@@ -1,5 +1,5 @@
 <?php
-include 'conection.php';
+include '../utils/conection.php';
 class Point {
    var $point_id;
    var $point_x;
