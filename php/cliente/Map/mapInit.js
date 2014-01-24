@@ -1,19 +1,25 @@
 (function() {
 
     $(document).ready(function() {
-         $('#clearMarkers').on('click',function(){
-             clearMarkers();
-         });         
+        $('#clearMarkers').on('click', function() {
+            clearMarkers();
+        });
+        //CARGAR MAPA 
         initialize();
-        addMarker(new google.maps.LatLng(37.7699298, -122.4469157));
-
-
+        drop();
+        addMarker1(new google.maps.LatLng(52.517683, 13.394393));
+        
     });
     var map;
-    var markers = [];
+    var markers = [
+        new google.maps.LatLng(52.511467, 13.447179),
+        new google.maps.LatLng(52.549061, 13.422975),
+        new google.maps.LatLng(52.497622, 13.396110)        
+    ];
+    var iterator = 0;
 
     function initialize() {
-        var haightAshbury = new google.maps.LatLng(37.7699298, -122.4469157);
+        var haightAshbury = new google.maps.LatLng(52.520816, 13.410186);
         var mapOptions = {
             zoom: 12,
             center: haightAshbury,
@@ -21,41 +27,52 @@
         };
         map = new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions);
-
-        google.maps.event.addListener(map, 'click', function(event) {
-            addMarker(event.latLng);
-        });
     }
 
-// Add a marker to the map and push to the array.
-    function addMarker(location) {
+    //Añade el marcador al mapa y lo guarda en el array
+    function addMarker1(location) {
         var marker = new google.maps.Marker({
             position: location,
             map: map
         });
         markers.push(marker);
     }
-
-// Sets the map on all markers in the array.
     
+    function drop() {
+        for (var i = 0; i < markers.length; i++) {
+          setTimeout(function() {
+            addMarker();
+          }, i * 3000);
+        }
+      }
+    function addMarker() {
+        markers.push(new google.maps.Marker({
+          position: markers[iterator],
+          map: map,
+          draggable: false,
+          animation: google.maps.Animation.DROP
+        }));
+        iterator++;
+      }
 
-// Removes the markers from the map, but keeps them in the array.
+    //Oculta marcadores del mapa
     function clearMarkers() {
         setAllMap(null);
     }
 
-// Shows any markers currently in the array.
+    // Mostrar los marcadores del array
     function showMarkers() {
         setAllMap(map);
     }
-    
+
+    //Muestra y Oculta marcadores en el mapa
     function setAllMap(map) {
         for (var i = 0; i < markers.length; i++) {
             markers[i].setMap(map);
         }
     }
 
-// Deletes all markers in the array by removing references to them.
+    // Borra marcadores del mapa y del array
     function deleteMarkers() {
         clearMarkers();
         markers = [];

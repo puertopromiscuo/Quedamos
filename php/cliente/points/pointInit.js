@@ -4,21 +4,23 @@
         //RECUPERAR PUNTO
         $('#get-point').on('click', function() {
             var point_id = $('#point-id').val();
-            viewPointDOM(point_id);
+            getPointDOM(point_id);            
+        });
+        $('#get-all-point').on('click', function() {            
+            getAllPointsDOM();
         });
     });
 
-    function viewPointDOM(point_id) {
+    function getPointDOM(point_id) {
         MAP_APP.getPoint(point_id, function(data) {
-            var result = "";
-            result += "<br/>Estado:" + data.status;
-            result += "<br/>Mensaje:" + data.message;
-            result += "<br/>Id:" + data.result.point_id;
-            result += "<br/>CoordX:" + data.result.point_x;
-            result += "<br/>CoordY:" + data.result.point_y;
-            $('#result').html(result);
+            console.log(data);
         });
-
+    }
+    
+    function getAllPointsDOM(point_id) {
+        MAP_APP.getAllPoints(function(data) {
+            console.log(data);
+        });
     }
     
 
@@ -27,6 +29,7 @@
         root.MAP_APP = {};
         root.MAP_APP = {};
     }
-    root.MAP_APP.viewPointDOM = viewPointDOM;
+    root.MAP_APP.getPointDOM = getPointDOM;
+    root.MAP_APP.getAllPointsDOM = getAllPointsDOM;
 
 }).call(this);

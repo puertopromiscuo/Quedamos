@@ -13,7 +13,7 @@ ToroHook::add("404", function() {
 Toro::serve(array( 
     "/" => "services",
     "/getPoint" => "getPoint",
-    "/getAll" => "sign_in",
+    "/getAllPoints" => "getAllPoints",
     "/insert" => "sign_in",
     "/update" => "sign_in",
     "/delete" => "sign_in"
@@ -27,6 +27,11 @@ class services{
 class getPoint{
      function post() {          
        echo Point::getPoint($_POST['point_id']);        
+    }   
+}
+class getAllPoints{
+     function post() {          
+       echo Point::getAllPoints();        
     }   
 }
 ?>
