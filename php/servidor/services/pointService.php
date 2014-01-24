@@ -26,13 +26,7 @@ class services{
 
 class getPoint{
      function post() {          
-        $point = Point::getPoint($_POST['point_id']); 
-        $result = array(
-            'status' => 'success',
-            'message'=> 'punto recuperado',
-            'result'=> $point
-        );
-        echo json_encode($result);
+       echo Point::getPoint($_POST['point_id']);        
     }   
 }
 ?>

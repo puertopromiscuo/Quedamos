@@ -8,11 +8,17 @@
                 dataType: 'json',
                 data:{point_id:point_id}
         }).done(function(data){
-            callback(data);
+            if(data.status =="ok"){
+                callback(data);
+            }else{
+                console.log(data.message);
+            }
         }).fail(function() {                                    
-            console.log("error");            
+            console.log("error getPoint");            
         });        
     }
+    
+    
     if (!root.MAP_APP) {
         root.MAP_APP = {};
     }

@@ -1,5 +1,6 @@
 <?php
 include '../utils/conection.php';
+include '../utils/json.php';
 class Point {
    var $point_id;
    var $point_x;
@@ -9,8 +10,8 @@ class Point {
        $this->point_id = $point_id;
        $this->point_x = $point_x;
        $this->point_y = $point_y;
-   }
-   
+   }   
+  
    static function getPoint($point_id){  
         $query = "SELECT point_id,point_x,point_y from ".SQL_POINTTABLE." where point_id='$point_id'";
         $result = mysql_query($query,getConection());        
@@ -18,9 +19,13 @@ class Point {
             $message  = 'Invalid query: ' . mysql_error() . "\n";    
             die($message);
         }
-        $row = mysql_fetch_assoc($result);        
-        $point = new Point($row['point_id'],$row['point_x'],$row['point_y']);
-        return $point;                
+        if(mysql_num_rows($result)==1){
+            $row = mysql_fetch_assoc($result);        
+            $point = new Point($row['point_id'],$row['point_x'],$row['point_y']);
+            return createJson("ok","punto recuperado",$point);
+        }else{
+            return createJson("error","punto no existe o duplicado",null);
+        }
     }
     static function getAllPoints(){
         $allPoints = array();        
