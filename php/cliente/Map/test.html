@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Map</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <style>
+            html, body, #map-canvas {
+                height: 100%;
+                margin: 0px;
+                padding: 0px
+            }
+            #map-canvas{
+                height: 50%;
+                width: 50%;
+                margin: 0px;
+                padding: 0px
+            }
+        </style>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script src="../lib/jquery-2.0.3.min.js"></script>        
+    </head>
+    <body>
+        <div id="panel">
+            <input id="clearMarkers" type=button value="Hide Markers">
+            <input id="showMarkers" type=button value="Show All Markers">
+            <input id="deleteMarkers" type=button value="Delete Markers">
+        </div>
+        <div id="map-canvas"></div>
+        <p>Click on the map to add markers.</p>
+        
+        <script src="./mapInit.js"></script>
+    </body>
+
+</body>
+</html>
