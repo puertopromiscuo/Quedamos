@@ -1,22 +1,15 @@
 <?php
-    
-    function checkSession() {
-        if(empty($_SESSION['id_user'])){
-            return "false1";
-        }else{
-            return "truesd";
-        }
+
+function checkSession() {
+    if (empty($_SESSION['id'])) {
+        return 0;
+    } else {
+        return $_SESSION['user'];
     }
+}
+
+function endSession() {
     
-    function startSession ($user,$id){
-        session_start();
-        
-        $_SESSION['user']  = $user;
-        $_SESSION['id_user'] = $id;
-    }
-    
-    function endSession (){
-        
-    }
-    
+}
+
 ?>

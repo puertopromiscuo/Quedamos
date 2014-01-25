@@ -7,33 +7,43 @@ require("../dao/sessionDAO.php");
 header('Content-Type: application/json; charset=utf-8');
 
 class InsertUser {
-	function post(){
-            echo insertUser($_POST['name'],$_POST['email'],$_POST['password']);
-        }
+
+    function post() {
+        echo insertUser($_POST['name'], $_POST['email'], $_POST['password']);
+    }
+
 }
 
-class LogUser{
-  function post(){
-    echo logUser($_POST['email'],$_POST['password']);
-  }
+class LogUser {
+
+    function post() {
+        echo logUser($_POST['email'], $_POST['password']);
+    }
+
 }
 
-class ActivateUser{
-  function get($code){
-    activateUser($code);
-  }
+class ActivateUser {
+
+    function get($code) {
+        activateUser($code);
+    }
+
 }
 
-class ForgetPass{
-    function post(){
+class ForgetPass {
+
+    function post() {
         echo forgetPass($_POST['email']);
     }
+
 }
 
-class CheckSession{
-    function post(){
+class CheckSession {
+
+    function post() {
         echo checkSession();
     }
+
 }
 
 Toro::serve(array(
@@ -43,5 +53,4 @@ Toro::serve(array(
     "/forgetPass" => "ForgetPass",
     "/checkSession" => "CheckSession"
 ));
-
 ?>
