@@ -1,5 +1,4 @@
 <?php
-    session_start ();
     
     function checkSession() {
         if(empty($_SESSION['id_user'])){
