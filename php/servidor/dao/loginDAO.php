@@ -1,7 +1,7 @@
 <?php
 	//conexion como global
 	require("../utils/conection.php");
-        require('send_mail.php');
+        require('../utils/sendMail.php');
 
 	$db =  getConection();
 
@@ -18,7 +18,7 @@
                             <a href="http://http://localhost/git/GoogleMaps/Mapa,buscarNombre/activar.html?code=' . $code . '">http://localhost/git/GoogleMaps/Mapa,buscarNombre/activar.html?code=' . $code . '</a>
                             O copia el siguiente link en la barra de direcciones de tu navegador:
                             ' . "\n" . '
-                            http://localhost/github/quedamos/php/servidor/manager/mapToro/activate/' . $code;
+                            http://localhost/github/quedamos/php/servidor/services/loginService/activate/' . $code;
 
                            if(send_mail($email, $cuerpo)){
                                     $query_state_null = "UPDATE " . SQL_USERTABLE . " SET user_state='$code' WHERE user_name='".$name."'";
