@@ -1,5 +1,22 @@
 (function() {
-    var root = this;
+    var root = this;   
+    
+    //OBTENER TODOS LOS PUNTOS
+    function getAllPoints(callback){
+        $.ajax({
+                type: 'POST',
+                url: '../../servidor/services/pointService.php/getAllPoints/',
+                dataType: 'json'                
+        }).done(function(data){
+            if(data.status =="ok"){
+                callback(data.result);
+            }else{
+                console.log(data.message);
+            }
+        }).fail(function() {                                    
+            console.log("error getAllPoints");            
+        });        
+    }
     
     function getPoint(point_id, callback){
         $.ajax({
@@ -15,22 +32,6 @@
             }
         }).fail(function() {                                    
             console.log("error getPoint");            
-        });        
-    }
-    
-    function getAllPoints(callback){
-        $.ajax({
-                type: 'POST',
-                url: '../../servidor/services/pointService.php/getAllPoints/',
-                dataType: 'json'                
-        }).done(function(data){
-            if(data.status =="ok"){
-                callback(data);
-            }else{
-                console.log(data.message);
-            }
-        }).fail(function() {                                    
-            console.log("error getAllPoints");            
         });        
     }
     

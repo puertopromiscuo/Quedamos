@@ -1,14 +1,28 @@
 (function() {
-
+    var root = this;
     $(document).ready(function() {
         
         //CARGAR MAPA 
-        initialize();
-        drop();
-        addMarker1(new google.maps.LatLng(52.517683, 13.394393));
+        //initialize();
+        //drop();
+        //addMarker1(new google.maps.LatLng(52.517683, 13.394393));
+        MAP_APP.getAllEvents();
         
     });
-    var map;
+    
+    function getAllEventsDOM() {
+        MAP_APP.getAllEvents(function(data) {
+            console.log(data);
+        });
+    }
+   
+    if (!root.MAP_APP) {
+        root.MAP_APP = {};
+    }
+    root.MAP_APP.getAllEventsDOM = getAllEventsDOM;    
+}).call(this);
+
+ /*var map;
     var markers = [
         new google.maps.LatLng(52.511467, 13.447179),
         new google.maps.LatLng(52.549061, 13.422975),
@@ -74,5 +88,4 @@
     function deleteMarkers() {
         clearMarkers();
         markers = [];
-    }
-}).call(this);
+    }*/
