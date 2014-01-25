@@ -8,7 +8,7 @@
 
     var map;
     var markers = [];
-
+    
     //Cargar mapa
     function initialize() {
         var center = new google.maps.LatLng(52.520816, 13.410186);
@@ -24,65 +24,21 @@
     //Obtiene todos los puntos en un array
     function getAllEvents() {
         MAP_APP.getAllPoints(function(data) {
-            //markers = data.slice(0);//clona array y lo copia              
             for (var i = 0; i < data.length; i++) {
-                addMarker(data[i].point_id, data[i].point_x, data[i].point_y);
+               var marker = MAP_APP.addMarker(data[i].point_id, data[i].point_x, data[i].point_y,map);
+               markers.push(marker);
             }
         });
-    }
-    var image = new google.maps.MarkerImage(
-            './img/event.png'
-            , new google.maps.Size(40, 53)
-            );
-
-    function addMarker(point_id, point_x, point_y) {
-        var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(point_x, point_y),
-            map: map,
-            icon: image,
-            title: 'soy ' + point_id,
-            animation: google.maps.Animation.DROP,
-            marker_id: point_id
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-            map.setZoom(15);
-            map.setCenter(marker.getPosition());
-            animaMarker(this);
-            attachSecretMessage(this);
-
-            console.log(this.marker_id);
-
-        });
-        markers.push(marker);
-    }
-
-    //Animar marcador onclick
-    function animaMarker(marker) {
-        if (marker.getAnimation() != null) {
-            marker.setAnimation(null);
-        } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
-    }
-    //Mostrar titulo
-    function attachSecretMessage(marker) {
-        var infowindow = new google.maps.InfoWindow({
-            content: '<div class="marker">' + marker.title + '</div>'
-        });
-        infowindow.open(marker.get('map'), marker);
-        console.log(marker.title);
-    }
+    } 
 
     //Oculta marcadores del mapa
     function clearMarkers() {
-        setAllMap(null);
-        console.log("clear");
+        setAllMap(null);        
     }
 
     // Mostrar los marcadores del array
     function showMarkers() {
-        setAllMap(map);
-        console.log("show");
+        setAllMap(map);       
     }
     //Muestra y Oculta marcadores en el mapa
     function setAllMap(map) {
@@ -96,12 +52,10 @@
     if (!root.MAP_APP) {
         root.MAP_APP = {};
     }
-    root.MAP_APP.getAllEvents = getAllEvents;
-    root.MAP_APP.getAllEvents = getAllEvents;
-    root.MAP_APP.getAllEvents = getAllEvents;
-    root.MAP_APP.getAllEvents = getAllEvents;
-    root.MAP_APP.getAllEvents = getAllEvents;
-    root.MAP_APP.getAllEvents = getAllEvents;
+    root.MAP_APP.getAllEvents = getAllEvents;    
+    root.MAP_APP.clearMarkers = clearMarkers;
+    root.MAP_APP.showMarkers = showMarkers;
+    root.MAP_APP.setAllMap = setAllMap;
 
 }).call(this);
 /*

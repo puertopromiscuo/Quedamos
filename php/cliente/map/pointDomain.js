@@ -8,7 +8,7 @@
                 url: 'servidor/services/pointService/getAllPoints/',
                 dataType: 'json'                
         }).done(function(data){
-            if(data.status =="ok"){
+            if(data.status =="ok"){                
                 callback(data.result);
             }else{
                 console.log(data.message);
