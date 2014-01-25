@@ -23,7 +23,7 @@ $(function() {
     function regSend(){
       $.ajax({
         type: 'POST',
-        url: 'php/manager/mapToro/insertUser',
+        url: 'servidor/manager/mapToro/insertUser',
         dataType: 'text',
         data: { 
                 name: formRegister.find('input[name = user-name]').val(), 
@@ -40,7 +40,7 @@ $(function() {
     function logSend(){
       $.ajax({
         type: 'POST',
-        url: 'php/manager/maptoro/logUser',
+        url: 'servidor/manager/maptoro/logUser',
         dataType: 'text',
         data: { 
                 email: formLogin.find('input[name = log-email]').val(),
@@ -121,7 +121,7 @@ $(function() {
     function forgetPass(){
       $.ajax({
         type: 'POST',
-        url: 'php/manager/mapToro/forgetPass',
+        url: 'servidor/manager/mapToro/forgetPass',
         dataType: 'text',
         data: { 
                 email: formRegister.find('input[name = user-email]').val() }

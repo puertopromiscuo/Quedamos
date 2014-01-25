@@ -33,5 +33,5 @@ function send_mail($mail_register, $cuerpo) {
     }
     return true;
 }
-//send_mail('jesusgraficap@gmail.com','eyeysyysysysysy');
+//send_mail('pablillo.es@gmail.com','eyeysyysysysysy');
 ?>

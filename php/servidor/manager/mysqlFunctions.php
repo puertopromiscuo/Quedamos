@@ -1,15 +1,15 @@
 <?php
 	//conexion como global
-	require("../utils/sql/mysqlConection.php");
+	require("../utils/conection.php");
         require('send_mail.php');
 
-	$db = getConnet();
+	$db =  getConection();
 
 	function insertUser($name,$email,$password){
 		global $db;
                 if(mysqli_num_rows(get_data('user_name',$name)) === 0){
                     if(mysqli_num_rows(get_data('user_email',$email)) === 0){
-                        $query = "INSERT into users (user_name,user_email,user_password) values('$name','$email','$password')";
+                        $query = "INSERT into " . SQL_USERTABLE . " (user_name,user_email,user_password) values('$name','$email','$password')";
                         $result = mysqli_query($db,$query);
                         $code = createToken();
                         if ($result) {
@@ -18,10 +18,10 @@
                             <a href="http://http://localhost/git/GoogleMaps/Mapa,buscarNombre/activar.html?code=' . $code . '">http://localhost/git/GoogleMaps/Mapa,buscarNombre/activar.html?code=' . $code . '</a>
                             O copia el siguiente link en la barra de direcciones de tu navegador:
                             ' . "\n" . '
-                            http://localhost/git/quedamos/php/manager/mapToro/activate/' . $code;
+                            http://localhost/github/quedamos/php/servidor/manager/mapToro/activate/' . $code;
 
                            if(send_mail($email, $cuerpo)){
-                                    $query_state_null = "UPDATE users SET user_state='$code' WHERE user_name='".$name."'";
+                                    $query_state_null = "UPDATE " . SQL_USERTABLE . " SET user_state='$code' WHERE user_name='".$name."'";
                                     mysqli_query($db,$query_state_null);
                                     return 1;
                             }else{ 
@@ -40,7 +40,7 @@
 
 	function logUser($email,$password){
 		global $db;
-		$query = "SELECT * FROM users WHERE user_email='$email' and user_password='$password'";
+		$query = "SELECT * FROM " . SQL_USERTABLE . " WHERE user_email='$email' and user_password='$password'";
 		$result = mysqli_query($db,$query);
                 $row = mysqli_fetch_array($result);
                 $user_state = $row['user_state'];
@@ -56,13 +56,13 @@
         
         function activateUser($code){
                 global $db;
-		$query = "SELECT * FROM users WHERE user_state='$code'";
+		$query = "SELECT * FROM " . SQL_USERTABLE . " WHERE user_state='$code'";
 		$result = mysqli_query($db,$query);
                 if($result) 
                     $row = mysqli_fetch_array($result);
-                    $query_state_ok = "UPDATE users SET user_state='activate' WHERE user_name='".$row['user_name']."'";
+                    $query_state_ok = "UPDATE " . SQL_USERTABLE . " SET user_state='activate' WHERE user_name='".$row['user_name']."'";
                     mysqli_query($db,$query_state_ok);
-                    header('Location: /git/quedamos/');
+                    header('Location: /github/quedamos/php/');
                     return $row['user_name']." ha sido activado.";
         }
 
@@ -73,7 +73,7 @@
         
         function get_data($campo,$var_campo){
             global $db;
-            $query = "SELECT * FROM users WHERE $campo='$var_campo'";
+            $query = "SELECT * FROM " . SQL_USERTABLE . " WHERE $campo='$var_campo'";
             $result = mysqli_query($db,$query);
             return $result;
         }
