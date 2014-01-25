@@ -3,9 +3,14 @@ $(function() {
         check_session(function(data) {
             console.log(data);
             if (data != 0) {
+                //Estas logeado
                 viewUser(data);
+                console.log("logeado");
             }else{
+                //No estas logeado
+                console.log("no logeado");
                 $('#login-content').removeClass('hidden');
+                $('#map-canvas').addClass('hidden');
             }
         });
     });
@@ -115,6 +120,8 @@ $(function() {
             $newElement.appendTo('#menu_top');
 
             $('#error-login').addClass('hidden');
+            
+             $('#map-canvas').removeClass('hidden');
         }
     }
 

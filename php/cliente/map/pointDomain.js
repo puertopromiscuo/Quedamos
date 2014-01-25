@@ -5,7 +5,7 @@
     function getAllPoints(callback){
         $.ajax({
                 type: 'POST',
-                url: '../../servidor/services/pointService.php/getAllPoints/',
+                url: 'servidor/services/pointService/getAllPoints/',
                 dataType: 'json'                
         }).done(function(data){
             if(data.status =="ok"){
@@ -21,7 +21,7 @@
     function getPoint(point_id, callback){
         $.ajax({
                 type: 'POST',
-                url: '../../servidor/services/pointService.php/getPoint/',
+                url: 'servidor/services/pointService/getPoint/',
                 dataType: 'json',
                 data:{point_id:point_id}
         }).done(function(data){
