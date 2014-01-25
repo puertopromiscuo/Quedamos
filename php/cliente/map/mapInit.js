@@ -30,12 +30,17 @@
             }
         });
     }
+    var image = new google.maps.MarkerImage(
+            './img/event.png'
+            , new google.maps.Size(40, 53)
+            );
 
     function addMarker(point_id, point_x, point_y) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(point_x, point_y),
             map: map,
-            title: 'Click to zoom',
+            icon: image,
+            title: 'soy ' + point_id,
             animation: google.maps.Animation.DROP,
             marker_id: point_id
         });
@@ -43,12 +48,14 @@
             map.setZoom(15);
             map.setCenter(marker.getPosition());
             animaMarker(this);
+            attachSecretMessage(this);
+
             console.log(this.marker_id);
 
         });
         markers.push(marker);
     }
-    
+
     //Animar marcador onclick
     function animaMarker(marker) {
         if (marker.getAnimation() != null) {
@@ -56,6 +63,14 @@
         } else {
             marker.setAnimation(google.maps.Animation.BOUNCE);
         }
+    }
+    //Mostrar titulo
+    function attachSecretMessage(marker) {
+        var infowindow = new google.maps.InfoWindow({
+            content: '<div class="marker">' + marker.title + '</div>'
+        });
+        infowindow.open(marker.get('map'), marker);
+        console.log(marker.title);
     }
 
     //Oculta marcadores del mapa
