@@ -1,7 +1,7 @@
 <?php
 
 require("../../lib/toro/toro.php");
-require("mysqlFunctions.php");
+require("../dao/loginDAO.php");
 
 header('Content-Type: application/json; charset=utf-8');
 
