@@ -1,10 +1,11 @@
 <?php
-
+    session_start ();
+    
     function checkSession() {
         if(empty($_SESSION['id_user'])){
-            return "false";
+            return "false1";
         }else{
-            return "true";
+            return "truesd";
         }
     }
     

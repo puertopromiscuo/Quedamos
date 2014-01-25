@@ -6,7 +6,8 @@ $(function() {
     function check_session(){
         $.ajax({
             type : 'POST',
-            url: 'servidor/services/loginService/checkSession'
+            url: 'servidor/services/loginService/checkSession',
+            dataType : 'text'
           }).done(function(data) {
             console.log(data);
           }).fail(function() {
