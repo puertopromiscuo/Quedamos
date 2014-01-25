@@ -1,9 +1,7 @@
 (function() {
 
     $(document).ready(function() {
-        $('#clearMarkers').on('click', function() {
-            clearMarkers();
-        });
+        
         //CARGAR MAPA 
         initialize();
         drop();
