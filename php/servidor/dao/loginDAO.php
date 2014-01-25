@@ -45,10 +45,14 @@
                 $row = mysqli_fetch_array($result);
                 $user_state = $row['user_state'];
                 if(mysqli_num_rows($result) != 0){
-                    if($user_state == 'activate')
+                    if($user_state == 'activate'){
+                        session_start ();
+                        $_SESSION['user']  = $row['user_name'];
+                        $_SESSION['id_user'] = $row['user_id'];
                         return "Bienvenido, ".$row['user_name'];
-                    else
+                    }else{
                         return 2;//Error: El usuario no esta activo.
+                    }
                 }else{
                     return 3;//Error: Los datos no son correctos.
                 }

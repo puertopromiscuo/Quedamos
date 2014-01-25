@@ -1,4 +1,20 @@
 $(function() {
+    $(document).ready(function() {
+       check_session(); 
+    });
+    
+    function check_session(){
+        $.ajax({
+            type : 'POST',
+            url: 'servidor/services/loginService/checkSession'
+          }).done(function(data) {
+            console.log(data);
+          }).fail(function() {
+            console.log("error", arguments);
+          });
+    }
+    
+    /***********************ONClick de login y registor******************************/
     var formRegister = $('#register-content');
     var formLogin = $('#login-content');
      $('#login-submit').click(function() {
@@ -54,6 +70,25 @@ $(function() {
       });
     }
    
+   function forgetPass(){
+      $.ajax({
+        type: 'POST',
+        url: 'servidor/services/loginService/forgetPass',
+        dataType: 'text',
+        data: { 
+                email: formRegister.find('input[name = user-email]').val() }
+      }).done(function(data) {
+        $('#error-form').html(data);
+        console.log(data);
+        viewRegUser(data,"forgetPass");
+      }).fail(function() {
+        console.log("error", arguments);
+      });
+    }
+   
+   
+   
+   /*********************Resto de funciones**********************************/
     function viewUser(user_name) {
         console.log(user_name);
         if(user_name == 2){
@@ -116,22 +151,6 @@ $(function() {
         
         $(':input','#register-content').val('');
         formRegister.find('#forget-pass').removeClass('hidden');
-    }
-    
-    function forgetPass(){
-      $.ajax({
-        type: 'POST',
-        url: 'servidor/services/loginService/forgetPass',
-        dataType: 'text',
-        data: { 
-                email: formRegister.find('input[name = user-email]').val() }
-      }).done(function(data) {
-        $('#error-form').html(data);
-        console.log(data);
-        viewRegUser(data,"forgetPass");
-      }).fail(function() {
-        console.log("error", arguments);
-      });
     }
     
     function loadHtml(html){

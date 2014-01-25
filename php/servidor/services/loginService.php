@@ -2,6 +2,7 @@
 
 require("../../lib/toro/toro.php");
 require("../dao/loginDAO.php");
+require("../dao/sessionDAO.php");
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -29,12 +30,18 @@ class ForgetPass{
     }
 }
 
+class CheckSession{
+    function post(){
+        echo checkSession();
+    }
+}
 
 Toro::serve(array(
     "/insertUser" => "InsertUser",
     "/logUser" => "LogUser",
     "/activate/([a-zA-Z0-9-_]+)" => "ActivateUser",
-    "/forgetPass" => "ForgetPass"
+    "/forgetPass" => "ForgetPass",
+    "/checkSession" => "CheckSession"
 ));
 
 ?>
