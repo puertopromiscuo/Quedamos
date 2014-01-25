@@ -2,7 +2,7 @@ body {
     margin: 0px;
     padding: 0px;
 }
-#map_canvas {
+#map-canvas {
   position: absolute;
   top: 0;
   left: 0;
