@@ -41,7 +41,11 @@ class ForgetPass {
 class CheckSession {
 
     function post() {
-        echo checkSession();
+        if(checkSession()){
+            echo dataUser(checkSession());
+        }else{
+            echo checkSession();
+        }
     }
 
 }

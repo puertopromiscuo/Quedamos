@@ -1,14 +1,11 @@
 $(function() {
     $(document).ready(function() {
         check_session(function(data) {
-            console.log(data);
             if (data != 0) {
                 //Estas logeado
                 viewUser(data);
-                console.log("logeado");
-            }else{
+            } else {
                 //No estas logeado
-                console.log("no logeado");
                 $('#login-content').removeClass('hidden');
                 $('#map-canvas').addClass('hidden');
             }
@@ -19,14 +16,15 @@ $(function() {
         $.ajax({
             type: 'POST',
             url: 'servidor/services/loginService/checkSession',
-            dataType: 'text'
+            dataType: 'json'
         }).done(function(data) {
-            //console.log(data);
-            callback(data);
+            console.log(data);
+            callback(data.result);
         }).fail(function() {
             //console.log("error", arguments);
         });
     }
+
 
     /***********************ONClick de login y registor******************************/
     var formRegister = $('#register-content');
@@ -103,25 +101,31 @@ $(function() {
 
 
     /*********************Resto de funciones**********************************/
-    function viewUser(user_name) {
-        if (user_name == 2) {
+    function viewUser(dataUser) {
+        if (dataUser == 2) {
             $('#error-login').html("El usuario no esta activado revise su email.");
             $('#error-login').removeClass('hidden');
-        } else if (user_name == 3) {
+        } else if (dataUser == 3) {
             $('#error-login').html("Los datos introducidos no son correctos.");
             $('#error-login').removeClass('hidden');
 
-        } else if (user_name) {
-            $('#login-content').remove();
-            var $newElement = $('<a/>', {
-                html: user_name,
+        } else if (dataUser) {
+            var $userName = $('<p/>', {
+                html: dataUser.name,
                 href: '#user'
             });
-            $newElement.appendTo('#menu_top');
+            $userName.appendTo('#menu-top');
 
+            $('#login-content').addClass('hidden');
             $('#error-login').addClass('hidden');
-            
-             $('#map-canvas').removeClass('hidden');
+            $('#menu-top').removeClass('hidden');
+
+            $('#map-canvas').removeClass('hidden');
+
+            userProfile();
+            //Si se puede cambiiar el nombre hay que volver a comprobarlo en la base de datos
+            if ($('#profile-content').length > 0) { console.log("true"); } else { console.log("false");}
+           
         }
     }
 
@@ -170,5 +174,13 @@ $(function() {
 
     function loadHtml(html) {
         $('html').load('index.html');
+    }
+
+    function loadDiv(place, item) {
+        $(place).load(item);
+    }
+
+    function userProfile() {
+        loadDiv('#profile', './cliente/html/modal-profile.html');
     }
 });

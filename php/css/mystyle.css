@@ -32,3 +32,6 @@ a {
     color: #47a447;
 }
 
+.ladda-button[data-style=contract-overlay]{
+    width: 100%;
+}

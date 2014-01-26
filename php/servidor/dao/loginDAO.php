@@ -4,6 +4,7 @@ session_start();
 //conexion como global
 require("../utils/conection.php");
 require('../utils/sendMail.php');
+include '../utils/json.php';
 
 $db = getConection();
 
