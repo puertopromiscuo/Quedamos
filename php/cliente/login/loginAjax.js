@@ -1,9 +1,10 @@
 $(function() {
     $(document).ready(function() {
         check_session(function(data) {
-            if (data != 0) {
+            if (data.status === "ok") {
+                debugger;
                 //Estas logeado
-                viewUser(data);
+                viewUser(data.result);
             } else {
                 //No estas logeado
                 $('#login-content').removeClass('hidden');
@@ -18,8 +19,8 @@ $(function() {
             url: 'servidor/services/loginService/checkSession',
             dataType: 'json'
         }).done(function(data) {
-            console.log(data);
-            callback(data.result);
+            console.log(data.status);
+            callback(data);
         }).fail(function() {
             //console.log("error", arguments);
         });

@@ -1,10 +1,10 @@
 <?php
 
 function checkSession() {
-    if (empty($_SESSION['id'])) {
+    if (empty($_SESSION['user_id'])) {
         return 0;
     } else {
-        return $_SESSION['id'];
+        return $_SESSION['user_id'];
     }
 }
 

@@ -48,8 +48,8 @@ function logUser($email, $password) {
     $user_state = $row['user_state'];
     if (mysqli_num_rows($result) != 0) {
         if ($user_state == 'activate') {
-            $_SESSION['user'] = $row['user_name'];
-            $_SESSION['id'] = $row['user_id'];
+            $_SESSION['user_name'] = $row['user_name'];
+            $_SESSION['user_id'] = $row['user_id'];
             return "Bienvenido, " . $row['user_name'];
         } else {
             return 2; //Error: El usuario no esta activo.

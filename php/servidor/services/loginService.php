@@ -41,10 +41,10 @@ class ForgetPass {
 class CheckSession {
 
     function post() {
-        if(checkSession()){
+        if(checkSession() != 0){
             echo dataUser(checkSession());
         }else{
-            echo checkSession();
+            echo createJson("error", "Ningun usuario logeado", "sin usuario");
         }
     }
 
