@@ -1,10 +1,8 @@
 <?php
 
 include '../../lib/toro/toro.php';
-include '../dao/pointDAO.php';
-include '../utils/conection.php';
-include '../dao/pointDAO.php';
-include '../dao/eventDAO.php';
+
+
 
 //POSTMAN
 
