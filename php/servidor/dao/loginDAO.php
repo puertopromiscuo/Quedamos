@@ -6,6 +6,7 @@ session_start();
 //ARCHIVOS REQUERIDOS
 require("../utils/conection.php");
 require('../utils/sendMail.php');
+require('../utils/encrypter.php');
 
 
 //CONEXIÓN COMO GLOBAL
@@ -14,9 +15,10 @@ $db = getConection();
 //FUNCIONES DE USUARIO
 function insertUser($name, $email, $password) {
     global $db;
+    $pass = Encrypter::encrypt($password);
     if (mysqli_num_rows(get_data('user_name', $name)) === 0) {
         if (mysqli_num_rows(get_data('user_email', $email)) === 0) {
-            $query = "INSERT into " . SQL_USERTABLE . " (user_name,user_email,user_password) values('$name','$email','$password')";
+            $query = "INSERT into " . SQL_USERTABLE . " (user_name,user_email,user_password) values('$name','$email','$pass')";
             $result = mysqli_query($db, $query);
             $code = createToken();
             if ($result) {
@@ -46,7 +48,8 @@ function insertUser($name, $email, $password) {
 
 function logUser($email, $password) {
     global $db;
-    $query = "SELECT * FROM " . SQL_USERTABLE . " WHERE user_email='$email' and user_password='$password'";
+    $pass = Encrypter::encrypt($password);
+    $query = "SELECT * FROM " . SQL_USERTABLE . " WHERE user_email='$email' and user_password='$pass'";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_array($result);
 
