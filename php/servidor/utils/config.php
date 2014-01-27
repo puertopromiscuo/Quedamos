@@ -8,4 +8,5 @@ define("SQL_PASS","Jepama@13");
 //CONFIGURACION DE TABLAS
 define("SQL_USERTABLE","users");
 define("SQL_POINTTABLE","points");
+define("SQL_EVENTTABLE","events");
 ?>

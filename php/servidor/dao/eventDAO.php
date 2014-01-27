@@ -1,12 +1,13 @@
 <?php
 
-include '../utils/conection.php';
-$link = getConection();
-define("TABLE", "events");
+include_once '../utils/conection.php';
+if (!$link) {
+    $link = getConection();
+}
 
 function getEvent($event_id) {
     global $link;
-    $query = "SELECT * from " . TABLE . " where event_id='$event_id'";
+    $query = "SELECT * from " . SQL_EVENTTABLE . " where event_id='$event_id'";
     $result = mysqli_query($link, $query);
     if (!$result) {
         $message = 'Invalid query: ' . mysqli_error() . "\n";
@@ -21,7 +22,7 @@ function getEvent($event_id) {
 
 function insertEvent($event_title, $event_description, $event_date, $user_id, $point_id) {
     global $link;
-    $query = "INSERT into " . TABLE . " (event_title,event_description,event_date,user_id,point_id) values ('$event_title','$event_description','$event_date','$user_id','$point_id')";
+    $query = "INSERT into " . SQL_EVENTTABLE . " (event_title,event_description,event_date,user_id,point_id) values ('$event_title','$event_description','$event_date','$user_id','$point_id')";    
     $result = mysqli_query($link, $query);
     if (!$result) {
         $message = 'Invalid query: ' . mysqli_error() . "\n";
@@ -33,6 +34,6 @@ function insertEvent($event_title, $event_description, $event_date, $user_id, $p
 }
 
 /* TEST */
-//var_dump(getPoint(15));
-var_dump(insertEvent("titulo", "descripcion", '2014-12-10', '10', '20'));
+
+//var_dump(insertEvent("titulo", "descripcion", '2014-12-10', '10', '20'));
 ?>

@@ -1,12 +1,13 @@
 <?php
 
-include '../utils/conection.php';
-$link = getConection();
-define("TABLE", "points");
+include_once '../utils/conection.php';
+if (!$link) {
+    $link = getConection();    
+}
 
 function getPoint($point_id) {
     global $link;
-    $query = "SELECT * from " . TABLE . " where point_id='$point_id'";
+    $query = "SELECT * from " . SQL_POINTTABLE . " where point_id='$point_id'";
     $result = mysqli_query($link, $query);
     if (!$result) {
         $message = 'Invalid query: ' . mysqli_error() . "\n";
@@ -21,7 +22,7 @@ function getPoint($point_id) {
 
 function insertPoint($point_x, $point_y) {
     global $link;
-    $query = "INSERT into " . TABLE . " (point_x,point_y) values ('$point_x','$point_x')";
+    $query = "INSERT into " . SQL_POINTTABLE . " (point_x,point_y) values ('$point_x','$point_x')";
     $result = mysqli_query($link, $query);
     if (!$result) {
         $message = 'Invalid query: ' . mysqli_error() . "\n";
@@ -33,7 +34,7 @@ function insertPoint($point_x, $point_y) {
 }
 
 /* TEST */
-//var_dump(getPoint(15));
-var_dump(insertPoint("654654", "546456465"));
+
+//var_dump(insertPoint("654654", "546456465"));
 ?>
 
