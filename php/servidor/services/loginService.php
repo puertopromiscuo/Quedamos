@@ -1,15 +1,14 @@
 <?php
-
+require("../manager/loginManager.php");
 require("../../lib/toro/toro.php");
-require("../dao/loginDAO.php");
-require("../dao/sessionDAO.php");
+
 
 header('Content-Type: application/json; charset=utf-8');
 
 class InsertUser {
 
     function post() {
-        echo insertUser($_POST['name'], $_POST['email'], $_POST['password']);
+        echo insertUserManager ($_POST['name'], $_POST['email'], $_POST['password']);
     }
 
 }
@@ -17,7 +16,7 @@ class InsertUser {
 class LogUser {
 
     function post() {
-        echo logUser($_POST['email'], $_POST['password']);
+        echo logUserManager ($_POST['email'], $_POST['password']);
     }
 
 }
@@ -25,7 +24,7 @@ class LogUser {
 class ActivateUser {
 
     function get($code) {
-        activateUser($code);
+        activateUserManager ($code);
     }
 
 }
@@ -33,7 +32,7 @@ class ActivateUser {
 class ForgetPass {
 
     function post() {
-        echo forgetPass($_POST['email']);
+        echo forgetPassManager($_POST['email']);
     }
 
 }
@@ -41,11 +40,7 @@ class ForgetPass {
 class CheckSession {
 
     function post() {
-        if(checkSession() != 0){
-            echo dataUser(checkSession());
-        }else{
-            echo createJson("error", "Ningun usuario logeado", "sin usuario");
-        }
+        echo checkSessionManager ();
     }
 
 }

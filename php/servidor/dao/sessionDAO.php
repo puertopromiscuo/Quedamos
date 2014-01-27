@@ -2,7 +2,7 @@
 
 function checkSession() {
     if (empty($_SESSION['user_id'])) {
-        return 0;
+        return false;
     } else {
         return $_SESSION['user_id'];
     }
@@ -19,7 +19,7 @@ function dataUser($id) {
         "name" => $row['user_name'],
         "email" => $row['user_email']
     );
-    return createJson("ok", "Información del usuario", $data);
+    return $data;
 }
 
 

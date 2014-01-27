@@ -1,13 +1,17 @@
 <?php
 
+//ESTE ARCHIVO MANEJA LA SESION DEL USUARIO
 session_start();
-//conexion como global
+
+//ARCHIVOS REQUERIDOS
 require("../utils/conection.php");
 require('../utils/sendMail.php');
-include '../utils/json.php';
 
+
+//CONEXIÓN COMO GLOBAL
 $db = getConection();
 
+//FUNCIONES DE USUARIO
 function insertUser($name, $email, $password) {
     global $db;
     if (mysqli_num_rows(get_data('user_name', $name)) === 0) {
@@ -26,7 +30,7 @@ function insertUser($name, $email, $password) {
                 if (send_mail($email, $cuerpo)) {
                     $query_state_null = "UPDATE " . SQL_USERTABLE . " SET user_state='$code' WHERE user_name='" . $name . "'";
                     mysqli_query($db, $query_state_null);
-                    return 1;
+                    return false;
                 } else {
                     return "El email introducido no es válido.";
                 }
@@ -45,17 +49,20 @@ function logUser($email, $password) {
     $query = "SELECT * FROM " . SQL_USERTABLE . " WHERE user_email='$email' and user_password='$password'";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_array($result);
+
     $user_state = $row['user_state'];
+
     if (mysqli_num_rows($result) != 0) {
         if ($user_state == 'activate') {
+            //LOGEADO E INICIO DE LA SESIÓN
             $_SESSION['user_name'] = $row['user_name'];
             $_SESSION['user_id'] = $row['user_id'];
-            return "Bienvenido, " . $row['user_name'];
+            return $row['user_id'];
         } else {
-            return 2; //Error: El usuario no esta activo.
+            return "El usuario no esta activo"; //Error: El usuario no esta activo.
         }
     } else {
-        return 3; //Error: Los datos no son correctos.
+        return "Los datos no son correctos"; //Error: Los datos no son correctos.
     }
 }
 
@@ -63,12 +70,14 @@ function activateUser($code) {
     global $db;
     $query = "SELECT * FROM " . SQL_USERTABLE . " WHERE user_state='$code'";
     $result = mysqli_query($db, $query);
-    if ($result)
+    if ($result) {
         $row = mysqli_fetch_array($result);
-    $query_state_ok = "UPDATE " . SQL_USERTABLE . " SET user_state='activate' WHERE user_name='" . $row['user_name'] . "'";
-    mysqli_query($db, $query_state_ok);
-    header('Location: /github/quedamos/php/');
-    return $row['user_name'] . " ha sido activado.";
+        $query_state_ok = "UPDATE " . SQL_USERTABLE . " SET user_state='activate' WHERE user_name='" . $row['user_name'] . "'";
+        mysqli_query($db, $query_state_ok);
+        //NOS REDIRIGE AL INDEX,Y COMO PARAMETROS MANDAMOS EL USUARIO ACTIVO
+        header('Location: /github/quedamos/php/');
+        return $row['user_name'] . " ha sido activado.";
+    }
 }
 
 function createToken() {
@@ -85,11 +94,12 @@ function get_data($campo, $var_campo) {
 
 function forgetPass($mail) {
     if (mysqli_num_rows(get_data('user_email', $mail)) === 0) {
-        return "No hay ningún usuario registrado con ese email.";
+        return false;
     } else {
         $content_user_data = mysqli_fetch_array(get_data('user_email', $mail));
         $cuerpo = "Hola tu contraseña es" . $content_user_data['user_password'];
         send_mail($mail, $cuerpo);
+        return $content_user_data['user_name'];
     }
 }
 
