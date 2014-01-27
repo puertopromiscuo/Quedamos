@@ -117,16 +117,22 @@ $(function() {
             });
             $userName.appendTo('#menu-top');
 
+            loadDiv('#profile', 'cliente/html/modal-profile.txt');
+
             $('#login-content').addClass('hidden');
             $('#error-login').addClass('hidden');
             $('#menu-top').removeClass('hidden');
 
             $('#map-canvas').removeClass('hidden');
 
-            userProfile();
             //Si se puede cambiiar el nombre hay que volver a comprobarlo en la base de datos
-            if ($('#profile-content').length > 0) { console.log("true"); } else { console.log("false");}
-           
+            if ($('#profile-content').length > 0) {
+                console.log("true");
+            } else {
+                console.log("false");
+            }
+            console.log($('#profile-content').find('input[name = profile-name]'));
+
         }
     }
 
@@ -179,9 +185,5 @@ $(function() {
 
     function loadDiv(place, item) {
         $(place).load(item);
-    }
-
-    function userProfile() {
-        loadDiv('#profile', './cliente/html/modal-profile.html');
     }
 });
