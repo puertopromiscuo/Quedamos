@@ -49,10 +49,70 @@
     root.MAP_APP.getInfoWindow = getInfoWindow;    
 
 }).call(this);
-/*
- * function getPointDOM(point_id) {
- MAP_APP.getPoint(point_id, function(data) {
- console.log(data);
- });
- }
- */
+/*var map;
+    var markers = [
+        new google.maps.LatLng(52.511467, 13.447179),
+        new google.maps.LatLng(52.549061, 13.422975),
+        new google.maps.LatLng(52.497622, 13.396110)        
+    ];
+    var iterator = 0;
+
+    function initialize() {
+        var haightAshbury = new google.maps.LatLng(52.520816, 13.410186);
+        var mapOptions = {
+            zoom: 12,
+            center: haightAshbury,
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
+        map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+    }
+
+    //Añade el marcador al mapa y lo guarda en el array
+    function addMarker1(location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+        markers.push(marker);
+    }
+    
+    function drop() {
+        for (var i = 0; i < markers.length; i++) {
+          setTimeout(function() {
+            addMarker();
+          }, i * 3000);
+        }
+      }
+    function addMarker() {
+        markers.push(new google.maps.Marker({
+          position: markers[iterator],
+          map: map,
+          draggable: false,
+          animation: google.maps.Animation.DROP
+        }));
+        iterator++;
+      }
+
+    //Oculta marcadores del mapa
+    function clearMarkers() {
+        setAllMap(null);
+    }
+
+    // Mostrar los marcadores del array
+    function showMarkers() {
+        setAllMap(map);
+    }
+
+    //Muestra y Oculta marcadores en el mapa
+    function setAllMap(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+
+    // Borra marcadores del mapa y del array
+    function deleteMarkers() {
+        clearMarkers();
+        markers = [];
+    }*/
