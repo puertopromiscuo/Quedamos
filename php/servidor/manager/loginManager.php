@@ -24,7 +24,7 @@ function insertUserManager($name, $email, $password) {
 function logUserManager($email, $password) {
     //SI DEVUELVE UN NUMERO ES CORRECTO YA NOS DEVULVE EL ID, SINO ES UN ERROR
     if (is_numeric(logUser($email, $password))) {
-        return createJson("ok", "Te has logeado correctamente", logUser($email, $password));
+        return createJson("ok", "Te has logeado correctamente",  dataUser(logUser($email, $password)));
     } else {
         return createJson("error", logUser($email, $password), "error");
     }

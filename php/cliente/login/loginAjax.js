@@ -31,7 +31,7 @@ $(function() {
     });
 
     $('#view-forget-pass').click(function() {
-        viewForgetPass();
+        viewFormForgetPass();
     });
 
     $('#forget-pass').click(function() {
@@ -157,7 +157,7 @@ $(function() {
         }
     }
 
-    function viewForgetPass() {
+    function viewFormForgetPass() {
         //Generar nuevo formulario de olvido de contraseña
         $('#modal-title').html('Introduce su email para recuperar la contraseña: ');
 
