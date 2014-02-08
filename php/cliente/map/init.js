@@ -8,6 +8,6 @@ iris.path = {
 };
 
 $(document).ready(function() {
-    iris.baseUri('./');
+    iris.baseUri('./cliente/map/');
     iris.welcome(iris.path.screen.welcome.js);
 });

@@ -13,3 +13,4 @@ html, body, #map-canvas {
     width: 100px;
     height: 100px;
 }
+div{outline:1px black solid;padding: 10px;margin: 10px}
