@@ -2,7 +2,7 @@
     var root = this;
     $(document).ready(function() {
         initialize()
-        getAllEvents();
+        //getAllEvents();
 
     });
 
