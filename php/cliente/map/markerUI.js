@@ -11,7 +11,7 @@
             position: new google.maps.LatLng(point_x, point_y),
             map: map,
             icon: image,
-            title: 'soy ' + point_id,
+            title: ""+point_id,
             animation: google.maps.Animation.DROP,
             marker_id: point_id
         });
