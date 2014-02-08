@@ -20,7 +20,7 @@
             map.setCenter(marker.getPosition());
             animaMarker(this);
             getInfoWindow(this);
-        });
+        });        
        return marker;
     }
 
