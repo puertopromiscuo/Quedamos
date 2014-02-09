@@ -12,6 +12,7 @@ iris.ui(function(self) {
         
         
         self.on("find-address", findAddress);//onblur campo address
+        self.on("create-event", createEvent);//onclick crear evento
     }
 
     function initialize() {    
@@ -41,10 +42,15 @@ iris.ui(function(self) {
                 });
                 markerAux=marker;
             } else {
-                alert('Error al geolocalizar direccion ' + status);
+                alert('Error al geolocalizar direccion: ' + status);
             }
         });
     }
+    
+    function createEvent(data) {   
+        console.log(data);
+    }
+    
     //Obtiene todos los puntos en un array
     function getAllEvents() {
         MAP_APP.getAllPoints(function(data) {
