@@ -1,15 +1,21 @@
 iris.ui(function(self) {
     var map;
-    self.create = function() {
-        console.log("map creado");
+    var markers=[];
+    var markerAux=false;//la ultima direccion buscada
+    
+    self.create = function() {        
         self.tmplMode(self.APPEND);
         self.tmpl(iris.path.ui.map.html);
         initialize();
         getLocalMarkers();
-        showMarkers();        
+        showMarkers();  
+        
+        
+        self.on("find-address", findAddress);//onblur campo address
     }
 
-    function initialize() {        
+    function initialize() {    
+        geocoder = new google.maps.Geocoder();//buscar de direcciones
         var center = new google.maps.LatLng(52.520816, 13.410186);
         var mapOptions = {
             zoom: 12,
@@ -19,18 +25,23 @@ iris.ui(function(self) {
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         map.refresh;       
     }
-
-    function codeAddress() {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
+    
+    /*busca una direccion y crea un marcador*/
+    function findAddress(data) {   
+        if(markerAux){            
+            markerAux.setMap(null);
+        }
+        geocoder.geocode({'address': data.address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
+                map.setZoom(30);
                 var marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
                 });
+                markerAux=marker;
             } else {
-                alert('Geocode was not successful for the following reason: ' + status);
+                alert('Error al geolocalizar direccion ' + status);
             }
         });
     }
@@ -70,7 +81,7 @@ iris.ui(function(self) {
         var i;
         for (i = 0; i < markers.length; i++) {
             markers[i].setMap(map);
-        }
+        }        
     }
 
 
