@@ -3,7 +3,8 @@ iris.path = {
         welcome: {html: "screen/welcome.html", js: "screen/welcome.js"}
     },
     ui: {
-        todo: {html: "ui/map.html", js: "ui/map.js"}
+        map: {html: "ui/map.html", js: "ui/map.js"},
+        panel: {html: "ui/panel.html", js: "ui/panel.js"}
     }
 };
 

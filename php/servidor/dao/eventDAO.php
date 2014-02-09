@@ -33,7 +33,4 @@ function insertEvent($event_title, $event_description, $event_date, $user_id, $p
     return getEvent($event_id);
 }
 
-/* TEST */
-
-//var_dump(insertEvent("titulo", "descripcion", '2014-12-10', '10', '20'));
 ?>
