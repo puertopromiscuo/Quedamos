@@ -6,20 +6,26 @@
             , new google.maps.Size(40, 53)
             );
     
-    function addMarker(point_id, point_x, point_y,map) {
+    function createMarker(event_id, event_title, event_description,event_date,user_id,point_id,point_x,point_y,map) {
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(point_x, point_y),
-            map: map,
-            icon: image,
-            title: ""+point_id,
+            position: new google.maps.LatLng(point_x, point_y),           
+            icon: image,            
             animation: google.maps.Animation.DROP,
-            marker_id: point_id
+            map:map,
+            
+            event_id:event_id.toString(),
+            event_title:event_title.toString(),
+            event_description:event_description.toString(),
+            event_date:event_date.toString(),
+            user_id:user_id.toString(),
+            point_id:point_id.toString(),           
+            
         });
         google.maps.event.addListener(marker, 'click', function() {            
             map.setCenter(marker.getPosition());
             animaMarker(this);
             getInfoWindow(this);
-        });        
+        });       
        return marker;
     }
 
@@ -34,7 +40,7 @@
     //Mostrar titulo
     function getInfoWindow(marker) {
         var infowindow = new google.maps.InfoWindow({
-            content: '<div class="marker">' + marker.title + '</div>'
+            content: '<div class="marker">' + marker.event_title + '</div>'
         });
         infowindow.open(marker.get('map'), marker);        
     }  
@@ -43,8 +49,6 @@
         root.MAP_APP = {};
     }
     
-    root.MAP_APP.addMarker = addMarker;
-    root.MAP_APP.animaMarker = animaMarker;
-    root.MAP_APP.getInfoWindow = getInfoWindow;    
+    root.MAP_APP.createMarker = createMarker;     
 
 }).call(this);

@@ -26,8 +26,7 @@ function getEventManager($event_id){
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         array_push($data, $row);
     }
-    return $data;
-    
+    return $data;    
 }
 
 function getAllEventsManager(){

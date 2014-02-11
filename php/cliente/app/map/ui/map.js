@@ -6,10 +6,8 @@ iris.ui(function(self) {
     self.create = function() {
         self.tmplMode(self.APPEND);
         self.tmpl(iris.path.ui.map.html);
-        initialize();        
-        getAllEvents();  
-
-
+        initialize();
+        getAllEvents();
         self.on("find-address", findAddress);//onblur campo address
         self.on("create-event", createEvent);//onclick crear evento
     }
@@ -23,7 +21,7 @@ iris.ui(function(self) {
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        map.refresh;        
+        map.refresh;
     }
 
     /*busca una direccion y crea un marcador*/
@@ -49,35 +47,17 @@ iris.ui(function(self) {
     function createEvent(data) {
         console.log(data);
     }
-
-
+    
     //Obtiene todos los puntos en un array
     function getAllEvents() {
         MAP_APP.getAllEvents(function(data) {
             for (var i = 0; i < data.length; i++) {
-                var marker = MAP_APP.addMarker(data[i].event_id, data[i].point_x, data[i].point_y, map);
-                markers.push(marker);                           
+                var marker = MAP_APP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].user_id, data[i].point_id, data[i].point_x, data[i].point_y, map);
+                markers.push(marker);               
             }
         });
     }
-
-    /*event_date: "0000-00-00"
-     event_description: "descripcion"
-     event_id: "6"
-     event_title: "titulo"
-     point_id: "20"
-     point_x: "234"
-     point_y: "234"
-     user_id: "10"*/
-
-    /*carga markadores manualmente*/
-    function getLocalMarkers() {
-        markers = [
-            MAP_APP.addMarker(0, 52.511467, 13.447179, map),
-            MAP_APP.addMarker(1, 52.520816, 13.410186, map),
-            MAP_APP.addMarker(2, 52.497622, 13.396110, map)
-        ];
-    }
+    
     // Borra marcadores del mapa y del array
     function deleteMarkers() {
         clearMarkers();
@@ -102,7 +82,6 @@ iris.ui(function(self) {
 
     self.findAddress = findAddress;
     self.createEvent = createEvent;
-
 
 }, iris.path.ui.map.js);
 
