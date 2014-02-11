@@ -28,7 +28,7 @@ iris.ui(function(self) {
     }
     
     /*busca una direccion y crea un marcador*/
-    function findAddress(data) {   
+    function findAddress(data) {          
         if(markerAux){            
             markerAux.setMap(null);
         }
@@ -45,11 +45,12 @@ iris.ui(function(self) {
                 alert('Error al geolocalizar direccion: ' + status);
             }
         });
-    }
+    } 
     
-    function createEvent(data) {   
+    function createEvent(data){
         console.log(data);
     }
+    
     
     //Obtiene todos los puntos en un array
     function getAllEvents() {
@@ -89,6 +90,9 @@ iris.ui(function(self) {
             markers[i].setMap(map);
         }        
     }
+    
+    self.findAddress = findAddress;
+    self.createEvent = createEvent;
 
 
 }, iris.path.ui.map.js);

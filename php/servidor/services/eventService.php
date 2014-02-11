@@ -1,50 +1,30 @@
 <?php
 
 include '../../lib/toro/toro.php';
+include_once './toroErrors.php';
 
-
-
-//POSTMAN
-
-
-ToroHook::add("404", function() {
-    header('HTTP/1.0 404 Not Found');
-    echo "Error enlace no encontrado";
-});
 
 Toro::serve(array(
     "/" => "services",
-    "/getPoint" => "getPoint",
-    "/getAllPoints" => "getAllPoints",
-    "/insert" => "sign_in",
-    "/update" => "sign_in",
-    "/delete" => "sign_in"
+    "/insertEventManager" => "insertEventManager",
 ));
 
 class services {
 
     function get() {
-        echo "Services";
+        echo "Services GET";
+    }
+    function post(){
+        echo "Services POST";
     }
 
 }
-
-class getPoint {
+class insertEventManager {
 
     function post() {
-        echo Point::getPoint($_POST['point_id']);
+        echo "insertEventManager";
     }
 
 }
-
-class getAllPoints {
-
-    function post() {
-        echo Point::getAllPoints();
-    }
-
-}
-
-var_dump(insertEvent("titulo", "descripcion", '2014-12-10', '10', '20'));
-
+//insertEventManager($event_title, $event_description, $event_date, $user_id, $point_x, $point_y)
 ?>

@@ -39,8 +39,5 @@ function getAllEventsManager(){
     }
     return $data;
 }
-
-$data  = getAllEventsManager();
-var_dump($data);
 ?>
 
