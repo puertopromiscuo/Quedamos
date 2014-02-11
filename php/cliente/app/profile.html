@@ -1,0 +1,49 @@
+<div class="modal fade" id="ModalProfile" tabindex="-1" role="dialog" aria-labelledby="ModalProfileLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--Boton cerrar-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 id="modal-title" class="modal-title">Configuración del perfil</h4>
+            </div>
+            <div class="modal-body"> 
+                <!--FORMULARIO--> 
+                <div id="error-form-profile" class="alert alert-danger hidden"></div>
+
+                <!--REGISTRO-->
+                <div class="tab-pane" id="profile-content">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5">
+                            <img src="img/prueba-perfil.jpg" alt="..." class="img-thumbnail img-responsive">
+                        </div>
+                        <div class="col-xs-12 col-md-7">
+                            <div class="input-group">
+                                <span class="input-group-addon "><span class="glyphicon glyphicon-user"></span></span>
+                                <input type="text" name="profile-name"  class="form-control" placeholder="Nombre Usuario">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon "><span class="glyphicon glyphicon-envelope"></span></span>
+                                <input type="password" name="profile-old-password" class="form-control" placeholder="Antigua contraseña">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon "><span class="glyphicon glyphicon-lock"></span></span>
+                                <input type="password" name="profile-new-password" class="form-control" placeholder="Nueva contraseña">
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <span class="input-group-addon "><span class="glyphicon glyphicon-picture"></span></span>
+                                <input type="text" name="profile-img" class="form-control" placeholder="Seleccion archivo...">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <section class="button-demo">
+                        <button id="profile-discar" class="btn btn-danger btn-block">Descartar cambios</button>
+                        <button id="profile-submit" class="ladda-button btn btn-success btn-block" data-style="contract-overlay" style="z-index: 10;">Guardar</button>
+                    </section>
+                </div>
+                <div id="ok-form-profile" class="alert alert-success hidden"></div>
+            </div>
+        </div>
+    </div>     
+</div>

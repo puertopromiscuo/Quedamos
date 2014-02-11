@@ -78,7 +78,7 @@ function activateUser($code) {
         $query_state_ok = "UPDATE " . SQL_USERTABLE . " SET user_state='activate' WHERE user_name='" . $row['user_name'] . "'";
         mysqli_query($db, $query_state_ok);
         //NOS REDIRIGE AL INDEX,Y COMO PARAMETROS MANDAMOS EL USUARIO ACTIVO
-        header('Location: /github/quedamos/php/');
+        header('Location: /github/pruebas/php/#/loged');
         return $row['user_name'] . " ha sido activado.";
     }
 }
