@@ -3,6 +3,7 @@
 include '../dao/eventDAO.php';
 include '../dao/pointDAO.php';
 include_once '../utils/conection.php';
+include_once '../utils/json.php';
 if (!$link) {
     $link = getConection();
 }
@@ -36,8 +37,12 @@ function getAllEventsManager(){
     $data = array();
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         array_push($data, $row);
+    }    
+    if(count($data) > 0){
+        return createJson("ok","eventos recuperados", $data);
+    }else{
+        return createJson("error","no hay eventos", $data);
     }
-    return $data;
 }
 ?>
 
