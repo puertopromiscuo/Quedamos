@@ -17,7 +17,7 @@
         });
         google.maps.event.addListener(marker, 'click', function() {            
             map.setCenter(marker.getPosition());
-            //animaMarker(this);
+            animaMarker(this);
             getInfoWindow(this);
         });        
        return marker;
