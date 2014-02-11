@@ -2,10 +2,10 @@
     var root = this;   
     
     //OBTENER TODOS LOS PUNTOS
-    function getAllPoints(callback){
+    function getAllEvents(callback){
         $.ajax({
                 type: 'POST',
-                url: 'servidor/services/pointService/getAllPoints/',
+                url: 'servidor/services/eventService/getAllEventsManager',
                 dataType: 'json'                
         }).done(function(data){
             if(data.status =="ok"){                
@@ -18,7 +18,7 @@
         });        
     }
     
-    function getPoint(point_id, callback){
+    /*function getPoint(point_id, callback){
         $.ajax({
                 type: 'POST',
                 url: 'servidor/services/pointService/getPoint/',
@@ -33,14 +33,14 @@
         }).fail(function() {                                    
             console.log("error getPoint");            
         });        
-    }
+    }*/
     
     
     if (!root.MAP_APP) {
         root.MAP_APP = {};
     }
-    root.MAP_APP.getPoint = getPoint;
-    root.MAP_APP.getAllPoints = getAllPoints;
+    //root.MAP_APP.getPoint = getPoint;
+    root.MAP_APP.getAllEvents = getAllEvents;
 }).call(this);
 
 

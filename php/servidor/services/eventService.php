@@ -1,12 +1,13 @@
 <?php
-
+include '../manager/eventManager.php';
 include '../../lib/toro/toro.php';
 include_once './toroErrors.php';
 
 
+
 Toro::serve(array(
     "/" => "services",
-    "/insertEventManager" => "insertEventManager",
+    "/getAllEventsManager" => "getAllEventsManager",
 ));
 
 class services {
@@ -19,12 +20,11 @@ class services {
     }
 
 }
-class insertEventManager {
+class getAllEventsManager {
 
     function post() {
-        echo "insertEventManager";
+        echo getAllEventsManager();
     }
 
 }
-//insertEventManager($event_title, $event_description, $event_date, $user_id, $point_x, $point_y)
 ?>
