@@ -18,7 +18,8 @@ iris.screen(function(self) {
             if (data.status === "ok") {
                 iris.navigate("#/loged");
             } else {
-                iris.navigate("#/unloged");
+                iris.navigate("#/loged");
+                //iris.navigate("#/unloged");
             }
         });
     };
@@ -36,7 +37,7 @@ iris.screen(function(self) {
         iris.ajax(settings)
                 .done(function(data)
                 {
-                    console.log(data.status);
+                    console.log(data.status);                    
                     callback(data);
                 })
                 .fail(function() {

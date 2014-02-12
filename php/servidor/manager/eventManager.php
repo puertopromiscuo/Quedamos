@@ -7,7 +7,6 @@ include_once '../utils/json.php';
 if (!$link) {
     $link = getConection();
 }
-
 function insertEventManager($event_title, $event_description, $event_date, $user_id, $point_x, $point_y) {
     
     $point = insertPoint($point_x, $point_y);
@@ -16,7 +15,13 @@ function insertEventManager($event_title, $event_description, $event_date, $user
     $event = insertEvent($event_title, $event_description, $event_date, $user_id, $point_id);
     $event_id = $event[0]['event_id'];
     
-    return getEventManager($event_id);
+    
+    return var_dump(getEventManager($event_id));  
+    if(count($data) == 1){
+        return createJson("ok","evento creado", $data);
+    }else{
+        return createJson("error","error al crear evento", $data);
+    }  
 }
 function getEventManager($event_id){
     global $link;
@@ -25,8 +30,8 @@ function getEventManager($event_id){
     $data = array();
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         array_push($data, $row);
-    }
-    return $data;    
+    }  
+    return $data;
 }
 
 function getAllEventsManager(){
@@ -43,9 +48,6 @@ function getAllEventsManager(){
         return createJson("error","no hay eventos", $data);
     }
 }
-
-
-
 
 ?>
 
