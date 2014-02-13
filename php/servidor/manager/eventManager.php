@@ -14,9 +14,8 @@ function insertEventManager($event_title, $event_description, $event_date, $user
     
     $event = insertEvent($event_title, $event_description, $event_date, $user_id, $point_id);
     $event_id = $event[0]['event_id'];
-    
-    
-    return var_dump(getEventManager($event_id));  
+       
+    $data = getEventManager($event_id);  
     if(count($data) == 1){
         return createJson("ok","evento creado", $data);
     }else{
