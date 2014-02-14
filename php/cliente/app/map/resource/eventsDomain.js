@@ -1,5 +1,5 @@
 (function() {
-    var root = this;   
+    var root = this;    
     
     //OBTENER TODOS LOS PUNTOS
     function getAllEvents(callback){
@@ -9,7 +9,7 @@
                 dataType: 'json'                
         }).done(function(data){
             if(data.status =="ok"){                 
-                callback(data.result);
+                callback(data.result);                
             }else{
                 console.log(data.message);
             }
@@ -33,7 +33,7 @@
                     point_y:point_y
                 }
         }).done(function(data){
-            if(data.status =="ok"){                 
+            if(data.status ==="ok"){                 
                 callback(data.result);
             }else{
                 console.log(data.message);
@@ -43,11 +43,11 @@
         });        
     } 
     
-    if (!root.MAP_APP) {
-        root.MAP_APP = {};
+    if (!root.EVENTS) {
+        root.EVENTS = {};
     }
  
-    root.MAP_APP.getAllEvents = getAllEvents;
+    root.EVENTS.getAllEvents = getAllEvents;
 }).call(this);
 
 

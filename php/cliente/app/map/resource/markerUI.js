@@ -45,10 +45,10 @@
         infowindow.open(marker.get('map'), marker);        
     }  
 
-    if (!root.MAP_APP) {
-        root.MAP_APP = {};
+    if (!root.MAP) {
+        root.MAP = {};
     }
     
-    root.MAP_APP.createMarker = createMarker;     
+    root.MAP.createMarker = createMarker;     
 
 }).call(this);
