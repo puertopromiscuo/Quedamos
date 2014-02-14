@@ -6,7 +6,7 @@
     
     function loadMap() {
         geocoder = new google.maps.Geocoder();//buscar de direcciones
-        var center = new google.maps.LatLng(52.520816, 13.410186);
+        var center = new google.maps.LatLng(52.520816, 13.410186);        
         var mapOptions = {
             zoom: 12,
             center: center,
@@ -35,11 +35,11 @@
     }    
      
     /*busca una direccion y crea un marcador*/
-    function findAddress(data) {
+    function findAddress(address,callback) {
         if (markerAux) {
             markerAux.setMap(null);
         }
-        geocoder.geocode({'address': data.address}, function(results, status) {
+        geocoder.geocode({'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 map.setCenter(results[0].geometry.location);
                 map.setZoom(30);
@@ -48,10 +48,16 @@
                     position: results[0].geometry.location
                 });
                 markerAux = marker;
+                markers.push(markerAux);//para borrar marcador en el render 
+                callback(markerAux.position);
             } else {
-                alert('Direccion no encontrada');
+                callback(false);
             }
         });
+    }
+    function renderMap(){
+        deleteMarkers();
+        loadAllMarkers();
     }
     
     
@@ -62,6 +68,7 @@
     root.MAP.loadAllMarkers=loadAllMarkers; 
     root.MAP.deleteMarkers=deleteMarkers; 
     root.MAP.findAddress=findAddress;
+    root.MAP.renderMap=renderMap;
     
     
 }).call(this);

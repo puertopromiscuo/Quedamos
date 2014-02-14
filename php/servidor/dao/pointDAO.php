@@ -22,7 +22,7 @@ function getPoint($point_id) {
 
 function insertPoint($point_x, $point_y) {
     global $link;
-    $query = "INSERT into " . SQL_POINTTABLE . " (point_x,point_y) values ('$point_x','$point_x')";
+    $query = "INSERT into " . SQL_POINTTABLE . " (point_x,point_y) values ('$point_x','$point_y')";
     $result = mysqli_query($link, $query);
     if (!$result) {
         $message = 'Invalid query: ' . mysqli_error() . "\n";

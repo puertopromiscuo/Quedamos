@@ -1,7 +1,7 @@
 (function() {
     var root = this;    
     
-    //OBTENER TODOS LOS PUNTOS
+    //OBTENER TODOS LOS EVENTOS
     function getAllEvents(callback){
         $.ajax({
                 type: 'POST',
@@ -18,8 +18,8 @@
         });        
     } 
     
-    //OBTENER TODOS LOS PUNTOS
-    function insertEvent(event_title,event_description, event_date, user_id, point_x, point_y,callback){
+    //INSERTAR EVENTO
+    function insertEvent(event_title,event_description, event_date, user_id, point_x, point_y,callback){        
         $.ajax({
                 type: 'POST',
                 url: 'servidor/services/eventService/insertEventManager',
@@ -41,13 +41,14 @@
         }).fail(function() {                                    
             console.log("error insertEvent");            
         });        
-    } 
+    }    
     
     if (!root.EVENTS) {
         root.EVENTS = {};
     }
  
     root.EVENTS.getAllEvents = getAllEvents;
+    root.EVENTS.insertEvent=insertEvent;
 }).call(this);
 
 

@@ -4,14 +4,9 @@ iris.screen(
                 console.log("Loged Screen Created");
 
                 self.tmpl(iris.path.screen.loged.html);
-                self.ui("modal-profile", iris.path.ui.profile.js);
-                var uiMap = self.ui("map-container", iris.path.ui.map.js);
-
-                var uiPanel = self.ui("panel-container", iris.path.ui.panel.js, {
-                    findAddress: uiMap.findAddress, //hacer visible para el uiPanel
-                    createEvent: uiMap.createEvent,
-                });
-
+                self.ui("modal-profile", iris.path.ui.profile.js);                
+                self.ui("map-container", iris.path.ui.map.js);
+                self.ui("panel-container", iris.path.ui.panel.js);
             };
             self.awake = function() {
                 console.log("Loged Screen Awakened");
