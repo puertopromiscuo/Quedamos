@@ -22,15 +22,14 @@
             
         });
         google.maps.event.addListener(marker, 'click', function() {            
-            map.setCenter(marker.getPosition());
-            animaMarker(this);
+            map.setCenter(marker.getPosition());            
             getInfoWindow(this);
         });       
        return marker;
     }
 
     //Animar marcador onclick
-    function animaMarker(marker) {
+    function animateMarker(marker) {
         if (marker.getAnimation() != null) {
             marker.setAnimation(null);
         } else {
@@ -50,5 +49,6 @@
     }
     
     root.MAP.createMarker = createMarker;     
+    root.MAP.animateMarker = animateMarker; 
 
 }).call(this);

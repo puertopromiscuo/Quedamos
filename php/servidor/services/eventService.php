@@ -10,6 +10,8 @@ Toro::serve(array(
     "/" => "services",
     "/getAllEventsManager" => "getAllEventsManager",
     "/insertEventManager" => "insertEventManager",
+    "/getEventsWhereManager" => "getEventsWhereManager",
+    
 ));
 
 class services {
@@ -42,6 +44,15 @@ class insertEventManager {
                 $_POST['user_id'],
                 $_POST['point_x'],
                 $_POST['point_y']               
+             ) ;
+    }
+
+}
+class getEventsWhereManager {
+
+    function post() {
+        echo getEventsWhereManager( 
+                $_POST['where']               
              ) ;
     }
 

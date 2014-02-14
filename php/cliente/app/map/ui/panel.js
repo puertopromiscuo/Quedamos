@@ -4,25 +4,24 @@ iris.ui(function(self) {
 
     self.create = function() {
         self.tmplMode(self.APPEND);
-        self.tmpl(iris.path.ui.panel.html);
-
+        self.tmpl(iris.path.ui.panel.html);        
 
         self.get("address").blur(function() {
             if (this.value != "") {
                 MAP.findAddress(this.value, function(coord) {
-                    if(coord){
+                    if (coord) {
                         panelStatus(true);
                         point_x = coord.d;
                         point_y = coord.e;
-                    }else{
-                       panelStatus(false,"Direccion no encontrada")
+                    } else {
+                        panelStatus(false, "Direccion no encontrada")
                     }
                 })
             }
         });
 
         self.get("create-event").click(function() {
-            if (validatePanel()) {                   
+            if (validatePanel()) {
                 EVENTS.insertEvent(
                         self.get("title").val(),
                         self.get("description").val(),
@@ -32,15 +31,15 @@ iris.ui(function(self) {
                         point_y,
                         function(data) {
                             //console.log(data);
-                            MAP.renderMap();                            
+                            MAP.renderMap();
                         }
-                )                
+                )
                 self.get("title").val("");
                 self.get("description").val("");
                 self.get("address").val("");
-                self.get("date").val("");                                
-            }else{
-                panelStatus(false,"Campos Obligatorios");
+                self.get("date").val("");
+            } else {
+                panelStatus(false, "Campos Obligatorios");
             }
 
         });
@@ -55,10 +54,10 @@ iris.ui(function(self) {
         }
         return true;
     }
-    function panelStatus(status,message){
-        if(status){
+    function panelStatus(status, message) {
+        if (status) {
             self.get("error-panel").addClass("hidden");
-        }else{
+        } else {
             self.get("error-panel").removeClass("hidden").text(message);
         }
     }

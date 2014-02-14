@@ -34,6 +34,7 @@ function getEventManager($event_id){
 }
 
 function getAllEventsManager(){
+    
     global $link;
     $query = "SELECT * from VeventPoint";    
     $result = mysqli_query($link, $query);    
@@ -47,6 +48,24 @@ function getAllEventsManager(){
         return createJson("error","no hay eventos", $data);
     }
 }
+function getEventsWhereManager($where=false){    
+    global $link;
+    $query = "SELECT * from VeventPoint";       
+    if($where){
+        $query .= " where ".$where;        
+    }        
+    $result = mysqli_query($link, $query);    
+    $data = array();
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        array_push($data, $row);
+    }    
+    if(count($data) > 0){
+        return createJson("ok","eventos recuperados", $data);
+    }else{
+        return createJson("error","no hay eventos", $data);
+    }    
+}
+
 
 ?>
 

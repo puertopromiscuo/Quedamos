@@ -18,6 +18,28 @@
         });        
     } 
     
+    //FILTRADO EVENTOS
+    function getEventsWhere(where,callback){          
+        $.ajax({
+                type: 'POST',
+                url: 'servidor/services/eventService/getEventsWhereManager',
+                dataType: 'json',  
+                data: {                    
+                    where:where
+                }
+        }).done(function(data){
+            if(data.status =="ok"){                 
+                callback(data.result);                                                
+            }else{
+                console.log(data.message);
+            }
+        }).fail(function() {                                    
+            console.log("error getEventsWhere");            
+        });        
+    } 
+    
+    
+    
     //INSERTAR EVENTO
     function insertEvent(event_title,event_description, event_date, user_id, point_x, point_y,callback){        
         $.ajax({
@@ -49,6 +71,7 @@
  
     root.EVENTS.getAllEvents = getAllEvents;
     root.EVENTS.insertEvent=insertEvent;
+    root.EVENTS.getEventsWhere=getEventsWhere;
 }).call(this);
 
 

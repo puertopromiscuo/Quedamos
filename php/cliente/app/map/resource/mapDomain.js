@@ -47,6 +47,7 @@
                     map: map,
                     position: results[0].geometry.location
                 });
+                MAP.animateMarker(marker);
                 markerAux = marker;
                 markers.push(markerAux);//para borrar marcador en el render 
                 callback(markerAux.position);
