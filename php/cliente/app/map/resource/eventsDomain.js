@@ -1,7 +1,6 @@
 (function() {
-    var root = this;
-
-    //OBTENER TODOS LOS EVENTOS
+    var root = this;    
+    //OBTENER TODOS LOS EVENTOS    
     function getAllEvents(callback) {
         $.ajax({
             type: 'POST',
@@ -9,6 +8,7 @@
             dataType: 'json'
         }).done(function(data) {
             if (data.status == "ok") {
+                console.log(data)
                 callback(data.result);
             } else {
                 console.log(data.message);
@@ -29,6 +29,7 @@
             }
         }).done(function(data) {
             if (data.status == "ok") {
+                console.log(data)
                 callback(data.result);
             } else {
                 console.log(data.message);
@@ -46,8 +47,9 @@
             data: {
                 where: where
             }
-        }).done(function(data) {
+        }).done(function(data) {            
             if (data.status == "ok") {
+                console.log(data)
                 callback(data.result);
             } else {
                 console.log(data.message);
@@ -73,8 +75,9 @@
                 point_x: point_x,
                 point_y: point_y
             }
-        }).done(function(data) {
+        }).done(function(data) {            
             if (data.status === "ok") {
+                console.log(data)
                 callback(data.result);
             } else {
                 console.log(data.message);
@@ -94,6 +97,7 @@
             }
         }).done(function(data) {
             if (data.status == "ok") {
+                console.log(data)
                 callback(data.result);
             } else {
                 console.log(data.message);
@@ -114,6 +118,7 @@
             }
         }).done(function(data) {
             if (data.status == "ok") {
+                console.log(data)
                 callback(data);
             } else {
                 console.log(data.message);
@@ -135,6 +140,7 @@
             }
         }).done(function(data) {
             if (data.status == "ok") {
+                console.log(data)
                 callback(data);
             } else {
                 console.log(data.message);

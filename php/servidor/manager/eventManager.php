@@ -43,9 +43,9 @@ function getAllEventsManager(){
         array_push($data, $row);
     }    
     if(count($data) > 0){
-        return createJson("ok","eventos recuperados", $data);
+        return createJson("ok","eventos del mapa recuperados", $data);
     }else{
-        return createJson("error","no hay eventos $query", $data);
+        return createJson("error","no hay ningun evento $query", $data);
     }
 }
 function getEventsWhereManager($where=false){    
@@ -62,9 +62,9 @@ function getEventsWhereManager($where=false){
         array_push($data, $row);
     }    
     if(count($data) > 0){
-        return createJson("ok","eventos recuperados", $data);
+        return createJson("ok","eventos del usuario recuperados", $data);
     }else{
-        return createJson("error","no hay eventos $query", null);
+        return createJson("error","no tiene eventos propios $query", null);
     }    
 }
 
@@ -74,7 +74,7 @@ function deleteEventManager($event_id){
     $result = mysqli_query($link, $query);        
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     if(deletePoint($row['point_id']) && deleteEvent($row['event_id'])){
-        return createJson("ok","evento eliminado", $row);
+        return createJson("ok","evento eliminado $event_id", $row);
     }else{
         return createJson("error","error al borra evento $query", null);
     }
@@ -102,7 +102,7 @@ function getRegisterEventManager($where=false){
         array_push($data, $row);
     }    
     if(count($data) > 0){
-        return createJson("ok","eventos registrados recuperados", $data);
+        return createJson("ok","eventos en lo que esta recuperados", $data);
     }else{
         return createJson("error","no esta registrado en eventos $query", null);
     }    

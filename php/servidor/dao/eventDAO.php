@@ -41,10 +41,7 @@ function deleteEvent($event_id) {
         die("error al borrar evento");
     } 
     $query = "DELETE from " . SQL_USEREVENTTABLE . " where event_id='$event_id'";
-    mysqli_query($link, $query);
-    if (mysqli_affected_rows($link)== 0) {        
-        die("error al eliminar usuarios del evento $query");
-    }  
+    mysqli_query($link, $query);    
     return true;    
 }
 

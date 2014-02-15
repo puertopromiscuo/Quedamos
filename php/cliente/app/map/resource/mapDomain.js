@@ -57,8 +57,7 @@
         });
     }
     function registerEvent(event_id){
-        EVENTS.registerEvent(event_id, function(data) {
-            console.log(data);
+        EVENTS.registerEvent(event_id, function(data) {            
         })
     }    
     
