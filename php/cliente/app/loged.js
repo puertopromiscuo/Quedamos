@@ -39,8 +39,7 @@ iris.screen(
             function check_session(callback) {
                 iris.ajax(settings)
                         .done(function(data)
-                        {
-                            console.log(data.status);
+                        {                            
                             callback(data);
                         })
                         .fail(function() {

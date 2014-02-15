@@ -54,9 +54,7 @@
         return contentString;
 
     }
-    function signupEvent(event_id){
-        console.log(event_id);
-    }
+    
 
     if (!root.MAP) {
         root.MAP = {};
@@ -64,6 +62,6 @@
 
     root.MAP.createMarker = createMarker;
     root.MAP.animateMarker = animateMarker;
-    root.MAP.signupEvent=signupEvent;
+    
 
 }).call(this);

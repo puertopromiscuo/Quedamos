@@ -9,4 +9,5 @@ define("SQL_PASS","Jepama@13");
 define("SQL_USERTABLE","users");
 define("SQL_POINTTABLE","points");
 define("SQL_EVENTTABLE","events");
+define("SQL_USEREVENTTABLE","userEvent");
 ?>

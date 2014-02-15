@@ -12,6 +12,7 @@ Toro::serve(array(
     "/insertEventManager" => "insertEventManager",
     "/getEventsWhereManager" => "getEventsWhereManager",
     "/deleteEventManager" => "deleteEventManager",
+    "/singupEventManager" => "singupEventManager",
     
 ));
 
@@ -64,6 +65,17 @@ class deleteEventManager {
     function post() {
         echo deleteEventManager( 
                 $_POST['event_id']               
+             ) ;
+    }
+
+}
+
+class singupEventManager {
+
+    function post() {
+        echo singupEventManager( 
+                $_POST['user_id'],
+                $_POST['event_id']                
              ) ;
     }
 

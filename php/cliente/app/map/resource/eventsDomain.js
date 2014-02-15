@@ -83,7 +83,31 @@
             console.log("error deleteEvent");            
         });        
     } 
+    //APUNTARSE A UN EVENTO
+    function singupEvent(event_id,callback){          
+        $.ajax({
+                type: 'POST',
+                url: 'servidor/services/eventService/singupEventManager',
+                dataType: 'json',  
+                data: {      
+                    user_id:getUserId(),
+                    event_id:event_id
+                }
+        }).done(function(data){
+            if(data.status =="ok"){                 
+                callback(data);                                                
+            }else{
+                console.log(data.message);
+            }
+        }).fail(function() {                                    
+            console.log("error singupEvent");            
+        });        
+    }  
     
+    function getUserId() {
+        return 110;
+    }
+
     
     
     if (!root.EVENTS) {
@@ -94,6 +118,8 @@
     root.EVENTS.insertEvent=insertEvent;
     root.EVENTS.getEventsWhere=getEventsWhere;
     root.EVENTS.deleteEvent=deleteEvent;
+    root.EVENTS.singupEvent=singupEvent;
+    root.EVENTS.getUserId=getUserId;
 }).call(this);
 
 

@@ -57,8 +57,11 @@
         });
     }
     function signupEvent(event_id){
-        console.log(event_id);
-    }
+        EVENTS.singupEvent(event_id, function(data) {
+            console.log(data);
+        })
+    }    
+    
     
     function renderMap(){
         deleteMarkers();

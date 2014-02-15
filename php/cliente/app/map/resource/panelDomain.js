@@ -1,6 +1,6 @@
 (function() {
     var root = this;
-    var whereUserId = "user_id= '" + getUserId() + "'";
+    var whereUserId = "user_id= '" + EVENTS.getUserId() + "'";
 
 
     function loadMyEvents(callback) {
@@ -10,22 +10,21 @@
     }
     
     function deleteEvent(event_id, callback) {
-        deleteEvent(event_id, function(data) {
+        EVENT.deleteEvent(event_id, function(data) {
             callback(data);
         })
-    }
+    }    
+    
 
-
-    function getUserId() {
-        return 110;
-    }
+    
+    
     if (!root.PANEL) {
         root.PANEL = {};
     }
 
     root.PANEL.loadMyEvents = loadMyEvents;
     root.PANEL.deleteEvent = deleteEvent;
-    root.PANEL.getUserId=getUserId;
+    
 
 
 }).call(this);
