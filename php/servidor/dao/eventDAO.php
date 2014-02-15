@@ -33,4 +33,14 @@ function insertEvent($event_title, $event_description, $event_date, $user_id, $p
     return getEvent($event_id);
 }
 
+function deleteEvent($event_id) {
+    global $link;
+    $query = "DELETE from " . SQL_EVENTTABLE . " where event_id='$event_id'";
+    mysqli_query($link, $query);
+    if (mysqli_affected_rows($link)!==1) {        
+        die("error al borrar evento");
+    }    
+    return true;    
+}
+
 ?>

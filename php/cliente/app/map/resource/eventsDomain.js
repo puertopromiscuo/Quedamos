@@ -63,7 +63,28 @@
         }).fail(function() {                                    
             console.log("error insertEvent");            
         });        
-    }    
+    }
+    //BORRAR EVENTO
+    function deleteEvent(event_id,callback){          
+        $.ajax({
+                type: 'POST',
+                url: 'servidor/services/eventService/deleteEventManager',
+                dataType: 'json',  
+                data: {                    
+                    event_id:event_id
+                }
+        }).done(function(data){
+            if(data.status =="ok"){                 
+                callback(data.result);                                                
+            }else{
+                console.log(data.message);
+            }
+        }).fail(function() {                                    
+            console.log("error deleteEvent");            
+        });        
+    } 
+    
+    
     
     if (!root.EVENTS) {
         root.EVENTS = {};
@@ -72,6 +93,7 @@
     root.EVENTS.getAllEvents = getAllEvents;
     root.EVENTS.insertEvent=insertEvent;
     root.EVENTS.getEventsWhere=getEventsWhere;
+    root.EVENTS.deleteEvent=deleteEvent;
 }).call(this);
 
 

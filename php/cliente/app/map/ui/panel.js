@@ -1,25 +1,42 @@
 iris.ui(function(self) {
     var point_x;
     var point_y;
+    eventsList = [];
+
 
     self.create = function() {
         self.tmplMode(self.APPEND);
-        self.tmpl(iris.path.ui.panel.html);        
+        self.tmpl(iris.path.ui.panel.html);
+        renderMyEvents();
+        
+        
 
+
+        //escucha evento de borrado desde myEventList
+        self.on("del-proyect", function(data){            
+            EVENTS.deleteEvent(data.event_id,function(data){
+                renderMyEvents();
+                MAP.renderMap();
+
+            })
+        });
+        
+        //on blur de la direccion crea un marcador en el mapa
         self.get("address").blur(function() {
-            if (this.value != "") {
+            if (this.value !== "") {
                 MAP.findAddress(this.value, function(coord) {
                     if (coord) {
                         panelStatus(true);
                         point_x = coord.d;
                         point_y = coord.e;
                     } else {
-                        panelStatus(false, "Direccion no encontrada")
+                        panelStatus(false, "Direccion no encontrada");
                     }
-                })
+                });
             }
         });
-
+        
+        //crea un evento y rederiza el mapa
         self.get("create-event").click(function() {
             if (validatePanel()) {
                 EVENTS.insertEvent(
@@ -29,8 +46,8 @@ iris.ui(function(self) {
                         "1",
                         point_x,
                         point_y,
-                        function(data) {
-                            //console.log(data);
+                        function(data) {                            
+                            renderMyEvents();
                             MAP.renderMap();
                         }
                 )
@@ -45,6 +62,18 @@ iris.ui(function(self) {
         });
 
     };
+
+    function renderMyEvents(){
+        self.destroyUIs('my-events-list');
+        PANEL.loadMyEvents(function(eventos) {
+            eventsList = eventos.slice();            
+            var i;
+            for (i = 0; i < eventsList.length; i++) {                
+                self.ui("my-events-list", iris.path.ui.myEventUI.js, {event: eventsList[i]});                    
+            }
+        });
+    }
+
     function validatePanel() {
         fields = [self.get("title"), self.get("description"), self.get("address"), self.get("date")]
         for (i = 0; i < fields.length; ++i) {
@@ -61,6 +90,7 @@ iris.ui(function(self) {
             self.get("error-panel").removeClass("hidden").text(message);
         }
     }
+
 }, iris.path.ui.panel.js);
 
 

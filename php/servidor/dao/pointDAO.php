@@ -33,8 +33,16 @@ function insertPoint($point_x, $point_y) {
     return getPoint($point_id);
 }
 
-/* TEST */
+function deletePoint($point_id) {
+    global $link;
+    $query = "DELETE from " . SQL_POINTTABLE . " where point_id='$point_id'";
+    mysqli_query($link, $query);
+    if (mysqli_affected_rows($link)!==1) {        
+        die("error al borrar punto");
+    }    
+    return true;    
+}
 
-//var_dump(insertPoint("654654", "546456465"));
+
 ?>
 

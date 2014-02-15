@@ -11,6 +11,7 @@ Toro::serve(array(
     "/getAllEventsManager" => "getAllEventsManager",
     "/insertEventManager" => "insertEventManager",
     "/getEventsWhereManager" => "getEventsWhereManager",
+    "/deleteEventManager" => "deleteEventManager",
     
 ));
 
@@ -53,6 +54,16 @@ class getEventsWhereManager {
     function post() {
         echo getEventsWhereManager( 
                 $_POST['where']               
+             ) ;
+    }
+
+}
+
+class deleteEventManager {
+
+    function post() {
+        echo deleteEventManager( 
+                $_POST['event_id']               
              ) ;
     }
 

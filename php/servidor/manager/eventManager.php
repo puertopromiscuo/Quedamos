@@ -52,8 +52,10 @@ function getEventsWhereManager($where=false){
     global $link;
     $query = "SELECT * from VeventPoint";       
     if($where){
-        $query .= " where ".$where;        
-    }        
+        $query .= " where ".$where;                
+    } 
+    $query .= " order by event_date desc ";        
+    
     $result = mysqli_query($link, $query);    
     $data = array();
     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -66,6 +68,16 @@ function getEventsWhereManager($where=false){
     }    
 }
 
-
+function deleteEventManager($event_id){
+    global $link;
+    $query = "SELECT * from VeventPoint where event_id='$event_id'";    
+    $result = mysqli_query($link, $query);        
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    if(deletePoint($row['point_id']) && deleteEvent($row['event_id'])){
+        return createJson("ok","evento eliminado", $row);
+    }else{
+        return createJson("error","error al borra evento", null);
+    }
+}
 ?>
 

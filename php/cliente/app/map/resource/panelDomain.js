@@ -1,22 +1,30 @@
 (function() {
     var root = this;
-    var myEvents = [];
+    var userId = "user_id= '" + getUserId() + "'";
 
-    function loadMyEvents(where,callback) {        
-        EVENTS.getEventsWhere(where, function(events) {
+
+    function loadMyEvents(callback) {
+        EVENTS.getEventsWhere(userId, function(events) {
             callback(events);
         })
     }
-    loadMyEvents("event_id > '2'",function(events){
-        console.log(events)
-    });
+    
+    function deleteEvent(event_id, callback) {
+        deleteEvent(event_id, function(data) {
+            callback(data);
+        })
+    }
 
 
-
+    function getUserId() {
+        return 1;
+    }
     if (!root.PANEL) {
         root.PANEL = {};
     }
+
     root.PANEL.loadMyEvents = loadMyEvents;
+    root.PANEL.deleteEvent = deleteEvent;
 
 
 }).call(this);

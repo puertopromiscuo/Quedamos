@@ -8,7 +8,7 @@
         geocoder = new google.maps.Geocoder();//buscar de direcciones
         var center = new google.maps.LatLng(52.520816, 13.410186);        
         var mapOptions = {
-            zoom: 12,
+            zoom: 3,
             center: center,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
@@ -25,7 +25,7 @@
         });        
     }
     
-        // Borra marcadores del mapa y del array
+     // Borra marcadores del mapa y del array
     function deleteMarkers() {
         var i;
         for (i = 0; i < markers.length; i++) {
