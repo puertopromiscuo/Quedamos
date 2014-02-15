@@ -45,7 +45,7 @@ function getAllEventsManager(){
     if(count($data) > 0){
         return createJson("ok","eventos recuperados", $data);
     }else{
-        return createJson("error","no hay eventos", $data);
+        return createJson("error","no hay eventos $query", $data);
     }
 }
 function getEventsWhereManager($where=false){    
@@ -64,7 +64,7 @@ function getEventsWhereManager($where=false){
     if(count($data) > 0){
         return createJson("ok","eventos recuperados", $data);
     }else{
-        return createJson("error","no hay eventos", $data);
+        return createJson("error","no hay eventos $query", null);
     }    
 }
 
@@ -76,7 +76,7 @@ function deleteEventManager($event_id){
     if(deletePoint($row['point_id']) && deleteEvent($row['event_id'])){
         return createJson("ok","evento eliminado", $row);
     }else{
-        return createJson("error","error al borra evento", null);
+        return createJson("error","error al borra evento $query", null);
     }
 }
 ?>

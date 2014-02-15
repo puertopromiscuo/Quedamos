@@ -56,10 +56,15 @@
             }
         });
     }
+    function signupEvent(event_id){
+        console.log(event_id);
+    }
+    
     function renderMap(){
         deleteMarkers();
         loadAllMarkers();
     }
+    
     
     
     if (!root.MAP) {
@@ -70,6 +75,7 @@
     root.MAP.deleteMarkers=deleteMarkers; 
     root.MAP.findAddress=findAddress;
     root.MAP.renderMap=renderMap;
+    root.MAP.signupEvent=signupEvent;
     
     
 }).call(this);
