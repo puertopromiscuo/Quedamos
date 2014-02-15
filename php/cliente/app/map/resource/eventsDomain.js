@@ -122,6 +122,27 @@
             console.log("error registerEvent");
         });
     }
+    
+    //DESAPUNTARSE DE UN EVENTO
+    function deleteregisterEvent(event_id, callback) {
+        $.ajax({
+            type: 'POST',
+            url: 'servidor/services/eventService/deleteregisterEventManager',
+            dataType: 'json',
+            data: {
+                user_id: getUserId(),
+                event_id: event_id
+            }
+        }).done(function(data) {
+            if (data.status == "ok") {
+                callback(data);
+            } else {
+                console.log(data.message);
+            }
+        }).fail(function() {
+            console.log("error deleteregisterEvent");
+        });
+    }
 
     function getUserId() {
         return 110;
@@ -140,6 +161,7 @@
     root.EVENTS.deleteEvent = deleteEvent;
     root.EVENTS.registerEvent = registerEvent;
     root.EVENTS.getUserId = getUserId;
+    root.EVENTS.deleteregisterEvent=deleteregisterEvent;
 }).call(this);
 
 

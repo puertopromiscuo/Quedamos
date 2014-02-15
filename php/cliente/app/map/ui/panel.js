@@ -2,7 +2,7 @@ iris.ui(function(self) {
     var point_x;
     var point_y;
     eventsList = [];
-    registerEventList=[];
+    registerEventList = [];
 
 
     self.create = function() {
@@ -10,29 +10,27 @@ iris.ui(function(self) {
         self.tmpl(iris.path.ui.panel.html);
         renderMyEvents();
         renderRegisterEvent()
-        
-        
-        
+
+
+
 
 
         //escucha evento de borrado desde myEventList
-        self.on("del-my-event", function(data){            
-            EVENTS.deleteEvent(data.event_id,function(data){
+        self.on("del-my-event", function(data) {
+            EVENTS.deleteEvent(data.event_id, function(data) {
                 renderMyEvents();
                 MAP.renderMap();
 
             })
         });
-        
+
         //escucha evento de borrado desde registerEventList
-        self.on("del-register-event", function(data){            
-                console.log(data);
-               /* renderMyEvents();
-                MAP.renderMap();
-            /*EVENTS.deleteEvent(data.event_id,function(data){
-            })*/
+        self.on("del-register-event", function(data) {
+            EVENTS.deleteregisterEvent(data.event_id, function(data) {
+                renderRegisterEvent();
+            })
         });
-        
+
         //on blur de la direccion crea un marcador en el mapa
         self.get("address").blur(function() {
             if (this.value !== "") {
@@ -47,7 +45,7 @@ iris.ui(function(self) {
                 });
             }
         });
-        
+
         //crea un evento y rederiza el mapa
         self.get("create-event").click(function() {
             if (validatePanel()) {
@@ -58,7 +56,7 @@ iris.ui(function(self) {
                         EVENTS.getUserId(),
                         point_x,
                         point_y,
-                        function(data) {                            
+                        function(data) {
                             renderMyEvents();
                             MAP.renderMap();
                         }
@@ -75,28 +73,28 @@ iris.ui(function(self) {
 
     };
 
-    function renderMyEvents(){
+    function renderMyEvents() {
         self.destroyUIs('my-events-list');
         PANEL.loadMyEvents(function(eventos) {
-            eventsList = eventos.slice();            
+            eventsList = eventos.slice();
             var i;
-            for (i = 0; i < eventsList.length; i++) {   
-                self.ui("my-events-list", iris.path.ui.myEventUI.js, {event: eventsList[i]});                 
+            for (i = 0; i < eventsList.length; i++) {
+                self.ui("my-events-list", iris.path.ui.myEventUI.js, {event: eventsList[i]});
             }
         });
     }
-    
-    function renderRegisterEvent(){
+
+    function renderRegisterEvent() {
         self.destroyUIs('register-events-list');
         PANEL.loadRegisterEvent(function(eventos) {
-            registerEventList = eventos.slice();            
+            registerEventList = eventos.slice();
             var i;
-            for (i = 0; i < registerEventList.length; i++) {   
-                self.ui("register-events-list", iris.path.ui.registerEventUI.js, {event: registerEventList[i]});                   
+            for (i = 0; i < registerEventList.length; i++) {
+                self.ui("register-events-list", iris.path.ui.registerEventUI.js, {event: registerEventList[i]});
             }
         });
-    }   
-    
+    }
+
 
     function validatePanel() {
         fields = [self.get("title"), self.get("description"), self.get("address"), self.get("date")]

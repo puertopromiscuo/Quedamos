@@ -108,5 +108,13 @@ function getRegisterEventManager($where=false){
     }    
 }
 
+function deleteregisterEventManager($user_id,$event_id){
+    if(deleteregisterEvent($user_id,$event_id )){
+        return createJson("ok","registro de evento eliminado",['event_id'=>$event_id]);
+    }else{
+        return createJson("error","error eliminar registro de evento", null);
+    }  
+}
+
 ?>
 

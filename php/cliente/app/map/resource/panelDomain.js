@@ -20,6 +20,14 @@
             callback(data);
         })
     }
+    
+    function deleteregisterEvent(event_id, callback) {
+        EVENT.deleteregisterEvent(event_id, function(data) {
+            callback(data);
+        })
+    }
+    
+    deleteregisterEvent
 
 
 

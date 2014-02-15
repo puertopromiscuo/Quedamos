@@ -14,6 +14,8 @@ Toro::serve(array(
     "/deleteEventManager" => "deleteEventManager",
     "/registerEventManager" => "registerEventManager",
     "/getRegisterEventManager" => "getRegisterEventManager",
+    "/deleteregisterEventManager" => "deleteregisterEventManager",
+    
     
 ));
 
@@ -81,6 +83,19 @@ class registerEventManager {
     }
 
 }
+
+class deleteregisterEventManager {
+
+    function post() {
+        echo deleteregisterEventManager( 
+                $_POST['user_id'],
+                $_POST['event_id']                
+             ) ;
+    }
+
+}
+
+
 
 class getRegisterEventManager {
 
