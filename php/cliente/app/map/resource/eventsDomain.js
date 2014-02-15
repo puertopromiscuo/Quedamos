@@ -38,10 +38,10 @@
         });
     }
     //FILTRADO EVENTOS APUNTADOS
-    function getSignupEvent(where, callback) {
+    function getRegisterEvent(where, callback) {
         $.ajax({
             type: 'POST',
-            url: 'servidor/services/eventService/getSignupEventManager',
+            url: 'servidor/services/eventService/getRegisterEventManager',
             dataType: 'json',
             data: {
                 where: where
@@ -53,9 +53,9 @@
                 console.log(data.message);
             }
         }).fail(function() {
-            console.log("error getSignupEvent");
+            console.log("error getRegisterEvent");
         });
-    }  
+    }     
 
 
 
@@ -136,7 +136,7 @@
     root.EVENTS.getAllEvents = getAllEvents;
     root.EVENTS.insertEvent = insertEvent;
     root.EVENTS.getEventsWhere = getEventsWhere;
-    root.EVENTS.getSignupEvent=getSignupEvent;
+    root.EVENTS.getRegisterEvent=getRegisterEvent;
     root.EVENTS.deleteEvent = deleteEvent;
     root.EVENTS.registerEvent = registerEvent;
     root.EVENTS.getUserId = getUserId;

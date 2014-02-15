@@ -10,6 +10,6 @@ iris.path = {
       map: {html: "map/ui/map.html", js: "map/ui/map.js"},
       panel: {html: "map/ui/panel.html", js: "map/ui/panel.js"},
       myEventUI: {html: "map/ui/myEventUI.html", js: "map/ui/myEventUI.js"},
-      signupEventUI: {html: "map/ui/signupEventUI.html", js: "map/ui/signupEventUI.js"}      
+      registerEventUI: {html: "map/ui/registerEventUI.html", js: "map/ui/registerEventUI.js"}      
   }
 };

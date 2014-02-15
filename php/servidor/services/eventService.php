@@ -13,7 +13,7 @@ Toro::serve(array(
     "/getEventsWhereManager" => "getEventsWhereManager",
     "/deleteEventManager" => "deleteEventManager",
     "/registerEventManager" => "registerEventManager",
-    "/getSignupEventManager" => "getSignupEventManager",
+    "/getRegisterEventManager" => "getRegisterEventManager",
     
 ));
 
@@ -82,10 +82,10 @@ class registerEventManager {
 
 }
 
-class getSignupEventManager {
+class getRegisterEventManager {
 
     function post() {
-        echo getSignupEventManager( 
+        echo getRegisterEventManager( 
                 $_POST['where']                
              ) ;
     }

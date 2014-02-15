@@ -2,14 +2,14 @@ iris.ui(function(self) {
     var point_x;
     var point_y;
     eventsList = [];
-    signupEventList=[];
+    registerEventList=[];
 
 
     self.create = function() {
         self.tmplMode(self.APPEND);
         self.tmpl(iris.path.ui.panel.html);
         renderMyEvents();
-        renderSignupEvent()
+        renderRegisterEvent()
         
         
         
@@ -24,10 +24,10 @@ iris.ui(function(self) {
             })
         });
         
-        //escucha evento de borrado desde signupEventList
-        self.on("del-signup-event", function(data){            
+        //escucha evento de borrado desde registerEventList
+        self.on("del-register-event", function(data){            
                 console.log(data);
-                renderMyEvents();
+               /* renderMyEvents();
                 MAP.renderMap();
             /*EVENTS.deleteEvent(data.event_id,function(data){
             })*/
@@ -86,17 +86,16 @@ iris.ui(function(self) {
         });
     }
     
-    function renderSignupEvent(){
-        self.destroyUIs('signup-events-list');
-        PANEL.loadSignupEvent(function(eventos) {
-            signupEventList = eventos.slice();            
+    function renderRegisterEvent(){
+        self.destroyUIs('register-events-list');
+        PANEL.loadRegisterEvent(function(eventos) {
+            registerEventList = eventos.slice();            
             var i;
-            for (i = 0; i < signupEventList.length; i++) {   
-                self.ui("signup-events-list", iris.path.ui.signupEventUI.js, {event: signupEventList[i]});                   
+            for (i = 0; i < registerEventList.length; i++) {   
+                self.ui("register-events-list", iris.path.ui.registerEventUI.js, {event: registerEventList[i]});                   
             }
         });
-    }
-    
+    }   
     
 
     function validatePanel() {

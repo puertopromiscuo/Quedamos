@@ -9,11 +9,11 @@
         })
     }   
 
-    function loadSignupEvent(callback) {
-        EVENTS.getSignupEvent(whereUserId, function(data) {
+    function loadRegisterEvent(callback) {
+        EVENTS.getRegisterEvent(whereUserId, function(data) {
             callback(data);
         })
-    }  
+    }      
 
     function deleteEvent(event_id, callback) {
         EVENT.deleteEvent(event_id, function(data) {
@@ -29,7 +29,7 @@
     }
 
     root.PANEL.loadMyEvents = loadMyEvents;
-    root.PANEL.loadSignupEvent=loadSignupEvent;
+    root.PANEL.loadRegisterEvent=loadRegisterEvent;
     root.PANEL.deleteEvent = deleteEvent;
 
 

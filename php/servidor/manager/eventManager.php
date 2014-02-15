@@ -88,7 +88,7 @@ function registerEventManager($user_id,$event_id) {
     }  
 }
 
-function getSignupEventManager($where=false){    
+function getRegisterEventManager($where=false){    
     global $link;
     $query = "SELECT * from VuserEvent";       
     if($where){
@@ -102,9 +102,9 @@ function getSignupEventManager($where=false){
         array_push($data, $row);
     }    
     if(count($data) > 0){
-        return createJson("ok","eventos apuntados recuperados$query", $data);
+        return createJson("ok","eventos registrados recuperados", $data);
     }else{
-        return createJson("error","no esta apuntado a eventos $query", null);
+        return createJson("error","no esta registrado en eventos $query", null);
     }    
 }
 
