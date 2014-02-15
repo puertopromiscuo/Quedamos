@@ -43,7 +43,7 @@ iris.ui(function(self) {
                         self.get("title").val(),
                         self.get("description").val(),
                         self.get("date").val(),
-                        "1",
+                        PANEL.getUserId(),
                         point_x,
                         point_y,
                         function(data) {                            

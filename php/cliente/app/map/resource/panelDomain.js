@@ -1,10 +1,10 @@
 (function() {
     var root = this;
-    var userId = "user_id= '" + getUserId() + "'";
+    var whereUserId = "user_id= '" + getUserId() + "'";
 
 
     function loadMyEvents(callback) {
-        EVENTS.getEventsWhere(userId, function(events) {
+        EVENTS.getEventsWhere(whereUserId, function(events) {
             callback(events);
         })
     }
@@ -17,7 +17,7 @@
 
 
     function getUserId() {
-        return 1;
+        return 110;
     }
     if (!root.PANEL) {
         root.PANEL = {};
@@ -25,6 +25,7 @@
 
     root.PANEL.loadMyEvents = loadMyEvents;
     root.PANEL.deleteEvent = deleteEvent;
+    root.PANEL.getUserId=getUserId;
 
 
 }).call(this);
