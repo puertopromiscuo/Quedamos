@@ -79,9 +79,9 @@ function deleteEventManager($event_id){
         return createJson("error","error al borra evento $query", null);
     }
 }
-function singupEventManager($user_id,$event_id) {
+function registerEventManager($user_id,$event_id) {
     
-    if(singupEvent($user_id,$event_id )){
+    if(registerEvent($user_id,$event_id )){
         return createJson("ok","usuario apuntado",['event_id'=>$event_id]);
     }else{
         return createJson("error","error al crear evento", null);

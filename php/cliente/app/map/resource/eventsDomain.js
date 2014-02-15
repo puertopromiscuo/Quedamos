@@ -103,10 +103,10 @@
         });
     }
     //APUNTARSE A UN EVENTO
-    function singupEvent(event_id, callback) {
+    function registerEvent(event_id, callback) {
         $.ajax({
             type: 'POST',
-            url: 'servidor/services/eventService/singupEventManager',
+            url: 'servidor/services/eventService/registerEventManager',
             dataType: 'json',
             data: {
                 user_id: getUserId(),
@@ -119,7 +119,7 @@
                 console.log(data.message);
             }
         }).fail(function() {
-            console.log("error singupEvent");
+            console.log("error registerEvent");
         });
     }
 
@@ -138,7 +138,7 @@
     root.EVENTS.getEventsWhere = getEventsWhere;
     root.EVENTS.getSignupEvent=getSignupEvent;
     root.EVENTS.deleteEvent = deleteEvent;
-    root.EVENTS.singupEvent = singupEvent;
+    root.EVENTS.registerEvent = registerEvent;
     root.EVENTS.getUserId = getUserId;
 }).call(this);
 

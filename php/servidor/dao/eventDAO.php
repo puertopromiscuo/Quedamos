@@ -43,7 +43,7 @@ function deleteEvent($event_id) {
     return true;    
 }
 
-function singupEvent($user_id,$event_id) {    
+function registerEvent($user_id,$event_id) {    
    global $link;
     $query = "INSERT into " . SQL_USEREVENTTABLE . " (user_id,event_id) values ('$user_id','$event_id')";    
     $result = mysqli_query($link, $query);

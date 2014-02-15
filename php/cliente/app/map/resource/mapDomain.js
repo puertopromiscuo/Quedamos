@@ -56,8 +56,8 @@
             }
         });
     }
-    function signupEvent(event_id){
-        EVENTS.singupEvent(event_id, function(data) {
+    function registerEvent(event_id){
+        EVENTS.registerEvent(event_id, function(data) {
             console.log(data);
         })
     }    
@@ -78,7 +78,7 @@
     root.MAP.deleteMarkers=deleteMarkers; 
     root.MAP.findAddress=findAddress;
     root.MAP.renderMap=renderMap;
-    root.MAP.signupEvent=signupEvent;
+    root.MAP.registerEvent=registerEvent;
     
     
 }).call(this);

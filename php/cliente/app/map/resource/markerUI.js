@@ -49,7 +49,7 @@
                 '<div class="secondHeadingInfo">>'+marker.event_date+'</div>' +
                 '<div class="bodyContentInfo">' +
                 '<p>'+marker.event_description+'</p>' +
-                '<button class="glyphicon glyphicon-plus btn btn-success" onclick="MAP.signupEvent('+marker.event_id+');"> Me apunto</button>'+                
+                '<button class="glyphicon glyphicon-plus btn btn-success" onclick="MAP.registerEvent('+marker.event_id+');"> Me apunto</button>'+                
                 '</div>';                
         return contentString;
 
