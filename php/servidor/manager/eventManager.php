@@ -79,7 +79,6 @@ function deleteEventManager($event_id){
         return createJson("error","error al borra evento $query", null);
     }
 }
-
 function singupEventManager($user_id,$event_id) {
     
     if(singupEvent($user_id,$event_id )){
@@ -88,5 +87,26 @@ function singupEventManager($user_id,$event_id) {
         return createJson("error","error al crear evento", null);
     }  
 }
+
+function getSignupEventManager($where=false){    
+    global $link;
+    $query = "SELECT * from VuserEvent";       
+    if($where){
+        $query .= " where ".$where;                
+    } 
+    $query .= " order by event_date desc ";        
+    
+    $result = mysqli_query($link, $query);    
+    $data = array();
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        array_push($data, $row);
+    }    
+    if(count($data) > 0){
+        return createJson("ok","eventos apuntados recuperados$query", $data);
+    }else{
+        return createJson("error","no esta apuntado a eventos $query", null);
+    }    
+}
+
 ?>
 
