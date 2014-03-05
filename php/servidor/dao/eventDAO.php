@@ -1,72 +1,63 @@
 <?php
 
-include_once '../utils/conection.php';
-if (!$link) {
-    $link = getConection();
-}
+include_once '../utils/sqlFunctions.php';
 
-function getEvent($event_id) {
-    global $link;
+/*MAPA*/
+function getEvent($event_id) {    
     $query = "SELECT * from " . SQL_EVENTTABLE . " where event_id='$event_id'";
-    $result = mysqli_query($link, $query);
-    if (!$result) {
-        $message = 'Invalid query: ' . mysqli_error() . "\n $query";
-        die($message);
-    }
-    $data = array();
-    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-        array_push($data, $row);
-    }
-    return $data;
+    return sqlSelect($query);    
 }
 
-function insertEvent($event_title, $event_description, $event_date, $user_id, $point_id) {
-    global $link;
-    $query = "INSERT into " . SQL_EVENTTABLE . " (event_title,event_description,event_date,user_id,point_id) values ('$event_title','$event_description','$event_date','$user_id','$point_id')";    
-    $result = mysqli_query($link, $query);
-    if (!$result) {
-        $message = 'Invalid query: ' . mysqli_error() . "\n $query";
-        die($message);
-    }
-    /* retornar el ultimo insertado */
-    $event_id = mysqli_insert_id($link);
-    return getEvent($event_id);
+function getAllEvents(){
+    $query = "SELECT * from " . SQL_EVENTTABLE;
+    return sqlSelect($query);    
 }
 
-function deleteEvent($event_id) {
-    global $link;
+function insertEvent($event_title, $event_description, $event_date, $event_userid,$event_x,$event_y) {
+    $query = "INSERT into " . SQL_EVENTTABLE . " (event_title,event_description,event_date,event_userid,event_x,event_y) "
+            . "values ('$event_title','$event_description','$event_date','$event_userid','$event_x','$event_y')";    
+    return sqlInsert($query);    
+}
+
+function deleteEvent($event_id) {    
     $query = "DELETE from " . SQL_EVENTTABLE . " where event_id='$event_id'";
-    mysqli_query($link, $query);
-    if (mysqli_affected_rows($link)== 0) {        
-        die("error al borrar evento");
-    } 
-    $query = "DELETE from " . SQL_USEREVENTTABLE . " where event_id='$event_id'";
-    mysqli_query($link, $query);    
-    return true;    
+    return sqlDelete($query);    
 }
 
-function registerEvent($user_id,$event_id) {    
-   global $link;
+/*APUNTARSE*/
+function insertUserEvent($user_id,$event_id) {    
     $query = "INSERT into " . SQL_USEREVENTTABLE . " (user_id,event_id) values ('$user_id','$event_id')";    
-    $result = mysqli_query($link, $query);
-    if (!$result) {
-        $message = 'Invalid query: ' . mysqli_error() . "\n $query";
-        die($message);
-    }    
-    return true;    
+    sqlInsert($query); 
+    return 1;
 }
-
-function deleteregisterEvent($user_id,$event_id) {    
-   global $link;
+function deleteUserEvent($user_id,$event_id) {    
     $query = "DELETE from " . SQL_USEREVENTTABLE . " where event_id='$event_id' and user_id='$user_id'";
-    mysqli_query($link, $query);
-    if (mysqli_affected_rows($link) == 0) {        
-        die("error al eliminar usuarios del evento $query");
-    }  
-    return true;     
+    return sqlDelete($query);     
+}
+
+function ifExistUserEvent($user_id,$event_id){
+    $query = "SELECT * from " . SQL_USEREVENTTABLE . " where event_id='$event_id' and user_id='$user_id'";
+    $rows = sqlCount($query);
+    if($rows){
+        return true;
+    }else{
+        return false;
+    }
+}
+/*MI EVENTOS*/
+function getMyEvent($user_id) {    
+    $query = "SELECT * from " . SQL_EVENTTABLE . " where event_id='$event_id'";
+    return sqlSelect($query);    
 }
 
 
+//var_dump(sqlCount("select * from events"));
+//var_dump(getEvent(167));
+//var_dump(insertEvent("titulo", "descripbion", "2012-10-19", "3", "2", "4"));
+//var_dump(deleteEvent(161));
+//var_dump(insertUserEvent(110,166));
+//var_dump(deleteregisterEvent(1,162));
+//var_dump(ifExistUserEvent(1,165));
 
 
 ?>
