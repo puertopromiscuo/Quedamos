@@ -4,13 +4,13 @@
 session_start();
 
 //ARCHIVOS REQUERIDOS
-require("../utils/conection.php");
+require("../utils/sqlFunctions.php");
 require('../utils/sendMail.php');
 require('../utils/encrypter.php');
 
 
 //CONEXIÓN COMO GLOBAL
-$db = getConection();
+$db = getConnection();
 
 //FUNCIONES DE USUARIO
 function insertUser($name, $email, $password) {
@@ -18,6 +18,7 @@ function insertUser($name, $email, $password) {
     $pass = Encrypter::encrypt($password);
     if (mysqli_num_rows(get_data('user_name', $name)) === 0) {
         if (mysqli_num_rows(get_data('user_email', $email)) === 0) {
+            //help
             $query = "INSERT into " . SQL_USERTABLE . " (user_name,user_email,user_password) values('$name','$email','$pass')";
             $result = mysqli_query($db, $query);
             $code = createToken();
@@ -106,4 +107,7 @@ function forgetPass($mail) {
     }
 }
 
+
+//var_dump(insertUser(1, "jesusgraficap@gmail.com" ,1));
+//var_dump(activateUser("944e0ae6cacc5f9b71a28bcb8463efcaa7fd8ae3"));
 ?>

@@ -49,3 +49,5 @@ function checkSessionManager() {
         return createJson("error", "No hay ninguna sesión iniciada", "error");
     }
 }
+
+//var_dump(checkSessionManager());

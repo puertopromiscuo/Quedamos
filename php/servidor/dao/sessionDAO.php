@@ -22,5 +22,6 @@ function dataUser($id) {
     return $data;
 }
 
+//var_dump(checkSession());
 
 ?>

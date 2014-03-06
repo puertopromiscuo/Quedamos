@@ -18,8 +18,8 @@ iris.screen(function(self) {
             if (data.status === "ok") {
                 iris.navigate("#/loged");
             } else {
-                iris.navigate("#/loged");
-                //iris.navigate("#/unloged");
+                //Cambiar para evitar la session = iris.navigate("#/loged");
+                iris.navigate("#/unloged");
             }
         });
     };

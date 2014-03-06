@@ -62,7 +62,7 @@
 
 
     //INSERTAR EVENTO
-    function insertEvent(event_title, event_description, event_date, user_id, point_x, point_y, callback) {
+    function insertEvent(event_title, event_description, event_date, event_userid, event_x, event_y, callback) {
         $.ajax({
             type: 'POST',
             url: 'servidor/services/eventService/insertEventManager',
@@ -71,9 +71,9 @@
                 event_title: event_title,
                 event_description: event_description,
                 event_date: event_date,
-                user_id: user_id,
-                point_x: point_x,
-                point_y: point_y
+                event_userid: event_userid,
+                event_x: event_x,
+                event_y: event_y
             }
         }).done(function(data) {            
             if (data.status === "ok") {
@@ -113,7 +113,7 @@
             url: 'servidor/services/eventService/registerEventManager',
             dataType: 'json',
             data: {
-                user_id: getUserId(),
+                event_userid: getUserId(),
                 event_id: event_id
             }
         }).done(function(data) {
@@ -152,7 +152,7 @@
 
     function getUserId() {
         return 110;
-    }
+    };
 
 
 

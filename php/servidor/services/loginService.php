@@ -40,7 +40,7 @@ class ForgetPass {
 class CheckSession {
 
     function post() {
-        echo checkSessionManager ();
+        echo checkSessionManager();
     }
 
 }

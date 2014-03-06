@@ -7,9 +7,9 @@
             );
 
 
-    function createMarker(event_id, event_title, event_description, event_date, user_id, point_id, point_x, point_y, map) {
+    function createMarker(event_id, event_title, event_description, event_date, event_userid ,event_x, event_y, map) {
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(point_x, point_y),
+            position: new google.maps.LatLng(event_x, event_y),
             icon: image,
             animation: google.maps.Animation.DROP,
             map: map,
@@ -17,15 +17,14 @@
             event_title: event_title.toString(),
             event_description: event_description.toString(),
             event_date: event_date.toString(),
-            user_id: user_id.toString(),
-            point_id: point_id.toString(),
+            event_userid: event_userid.toString()            
         });
         google.maps.event.addListener(marker, 'click', function() {
             map.setCenter(marker.getPosition());
             getInfoWindow(this);
         });
         return marker;
-    }
+    }    
 
     //Animar marcador onclick
     function animateMarker(marker) {

@@ -3,7 +3,7 @@
     var map;
     var markers = [];
     var markerAux = false;
-    
+        
     function loadMap() {
         geocoder = new google.maps.Geocoder();//buscar de direcciones
         var center = new google.maps.LatLng(52.520816, 13.410186);        
@@ -12,15 +12,15 @@
             center: center,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);  
-        
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        //MAP.createMarker("1","titulo","descripcion","2012-12-10","110","52.520816","13.410186",map);
     }
     
     function loadAllMarkers(){
         EVENTS.getAllEvents(function(data){
-            for (var i = 0; i < data.length; i++) {
-                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].user_id, data[i].point_id, data[i].point_x, data[i].point_y, map);
-                markers.push(marker);               
+            for (var i = 0; i < data.length; i++) {                
+                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, map);
+                markers.push(marker);                   
             }
         });        
     }
@@ -69,6 +69,8 @@
     
     
     
+    
+    
     if (!root.MAP) {
         root.MAP = {};
     } 
@@ -78,6 +80,7 @@
     root.MAP.findAddress=findAddress;
     root.MAP.renderMap=renderMap;
     root.MAP.registerEvent=registerEvent;
+       
     
     
 }).call(this);

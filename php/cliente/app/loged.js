@@ -4,9 +4,9 @@ iris.screen(
                 console.log("Loged Screen Created");
 
                 self.tmpl(iris.path.screen.loged.html);
-                self.ui("modal-profile", iris.path.ui.profile.js);                
+                //self.ui("modal-profile", iris.path.ui.profile.js);                
                 self.ui("map-container", iris.path.ui.map.js);
-                self.ui("panel-container", iris.path.ui.panel.js);
+                //self.ui("panel-container", iris.path.ui.panel.js);
             };
             self.awake = function() {
                 console.log("Loged Screen Awakened");
@@ -15,8 +15,7 @@ iris.screen(
                          self.get("menu-top").text(data.result.name);
                          self.get("id-prueba").text(data.result.id);
                     } else {
-                        iris.navigate("#/loged");
-                        //iris.navigate("#/unloged");
+                        iris.navigate("#/unloged");
                     }
                 });
             };
