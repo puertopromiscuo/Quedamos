@@ -7,38 +7,17 @@ include_once './toroErrors.php';
 
 
 Toro::serve(array(
-    "/" => "services",
-    "/getAllEventsManager" => "getAllEventsManager",
     "/insertEventManager" => "insertEventManager",
-    "/getEventsWhereManager" => "getEventsWhereManager",
+    "/getEventManager" => "getEventManager",
+    "/getAllEventsManager" => "getAllEventsManager",
     "/deleteEventManager" => "deleteEventManager",
-    "/registerEventManager" => "registerEventManager",
-    "/getRegisterEventManager" => "getRegisterEventManager",
-    "/deleteregisterEventManager" => "deleteregisterEventManager",
-    
-    
+    "/insertUserEventManager" => "insertUserEventManager",
+    "/deleteUserEventManager" => "deleteUserEventManager",
+    "/getMyEventsManager" => "getMyEventsManager",
+    "/getFilterAllEventsManager" => "getFilterAllEventsManager"
 ));
 
-class services {
-
-    function get() {
-        echo "Services GET";
-    }
-
-    function post() {
-        echo "Services POST";
-    }
-
-}
-
-class getAllEventsManager {
-
-    function post() {
-        echo getAllEventsManager();
-    }
-
-}
-
+/* MAPA */
 class insertEventManager {
 
     function post() {
@@ -46,19 +25,26 @@ class insertEventManager {
                 $_POST['event_title'],
                 $_POST['event_description'],
                 $_POST['event_date'],
-                $_POST['user_id'],
-                $_POST['point_x'],
-                $_POST['point_y']               
+                $_POST['event_userid'],
+                $_POST['event_x'],
+                $_POST['event_y']               
              ) ;
     }
 
 }
-class getEventsWhereManager {
+
+class getEventManager{
+    function post(){
+        echo getEventManager(
+                    $_POST['event_id']
+                ); 
+    }
+}
+
+class getAllEventsManager {
 
     function post() {
-        echo getEventsWhereManager( 
-                $_POST['where']               
-             ) ;
+        echo getAllEventsManager();
     }
 
 }
@@ -73,10 +59,11 @@ class deleteEventManager {
 
 }
 
-class registerEventManager {
+/* APUNTARSE */
+class insertUserEventManager {
 
     function post() {
-        echo registerEventManager( 
+        echo insertUserEventManager( 
                 $_POST['user_id'],
                 $_POST['event_id']                
              ) ;
@@ -84,10 +71,10 @@ class registerEventManager {
 
 }
 
-class deleteregisterEventManager {
+class deleteUserEventManager {
 
     function post() {
-        echo deleteregisterEventManager( 
+        echo deleteUserEventManager( 
                 $_POST['user_id'],
                 $_POST['event_id']                
              ) ;
@@ -95,12 +82,25 @@ class deleteregisterEventManager {
 
 }
 
+/* MY EVENTS */ 
 
-
-class getRegisterEventManager {
+class getMyEventsManager {
 
     function post() {
-        echo getRegisterEventManager( 
+        echo getMyEventsManager( 
+                $_POST['user_id']              
+             ) ;
+    }
+
+}
+
+
+
+/* FILTROS */
+class getFilterAllEventsManager {
+
+    function post() {
+        echo getFilterAllEventsManager( 
                 $_POST['where']                
              ) ;
     }

@@ -45,19 +45,38 @@ function ifExistUserEvent($user_id,$event_id){
     }
 }
 /*MI EVENTOS*/
-function getMyEvent($user_id) {    
-    $query = "SELECT * from " . SQL_EVENTTABLE . " where event_id='$event_id'";
+function getMyEvents($user_id) {    
+    $query = "SELECT * from " . SQL_EVENTTABLE . " where event_userid='$user_id'";
     return sqlSelect($query);    
 }
 
+function getUsersEnroll($event_id){
+    $query ="SELECT ue.user_id,ue.event_id,user_name FROM "
+            .SQL_USEREVENTTABLE." ue ,"
+            .SQL_USERTABLE." u "
+            ."where ue.user_id = u.user_id "
+            ."and ue.event_id = '$event_id'";
+    return sqlSelect($query);
+}
+
+//FILTROS
+function getFilterAllEvents($where){    
+    $query = "SELECT * from " . SQL_EVENTTABLE ." $where";
+    return sqlSelect($query);    
+}    
+
+
+
 
 //var_dump(sqlCount("select * from events"));
-//var_dump(getEvent(167));
-//var_dump(insertEvent("titulo", "descripbion", "2012-10-19", "3", "2", "4"));
-//var_dump(deleteEvent(161));
+//var_dump(getEvent(169));
+//var_dump(insertEvent("titulo", "descripbion", "2012-10-19", "110", "2", "4"));
+//var_dump(deleteEvent(169));
 //var_dump(insertUserEvent(110,166));
-//var_dump(deleteregisterEvent(1,162));
+//var_dump(deleteUserEvent(110,166));
 //var_dump(ifExistUserEvent(1,165));
-
+//var_dump(getMyEvents(3));
+//var_dump(getUsersEnroll(166));
+//var_dump(getFilterAllEvents("where event_date = '2012-10-19'"));
 
 ?>
