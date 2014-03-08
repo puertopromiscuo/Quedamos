@@ -108,6 +108,6 @@ function forgetPass($mail) {
 }
 
 
-//var_dump(insertUser(1, "jesusgraficap@gmail.com" ,1));
-//var_dump(activateUser("944e0ae6cacc5f9b71a28bcb8463efcaa7fd8ae3"));
+//var_dump(insertUser(2, "jesusgraficap@gmail.com" ,2));
+//var_dump(activateUser("627d79a86b13815ef5fb9731c491f400348151e7"));
 ?>

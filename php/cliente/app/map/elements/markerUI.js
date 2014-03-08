@@ -7,7 +7,7 @@
             );
 
 
-    function createMarker(event_id, event_title, event_description, event_date, event_userid ,event_x, event_y, map) {
+    function createMarker(event_id, event_title, event_description, event_date, event_userid ,event_x, event_y,event_users, map) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(event_x, event_y),
             icon: image,
@@ -17,14 +17,17 @@
             event_title: event_title.toString(),
             event_description: event_description.toString(),
             event_date: event_date.toString(),
-            event_userid: event_userid.toString()            
-        });
+            event_userid: event_userid.toString(), 
+            event_users:EVENTS.arrayUsersToString(event_users)            
+        });        
         google.maps.event.addListener(marker, 'click', function() {
             map.setCenter(marker.getPosition());
             getInfoWindow(this);
         });
         return marker;
-    }    
+    }  
+    
+   
 
     //Animar marcador onclick
     function animateMarker(marker) {
@@ -47,7 +50,8 @@
                 '<div class="firstHeadingInfo">'+marker.event_title+'</div>' +
                 '<div class="secondHeadingInfo">>'+marker.event_date+'</div>' +
                 '<div class="bodyContentInfo">' +
-                '<p>'+marker.event_description+'</p>' +
+                '<p>Descripcion:'+marker.event_description+'</p>' +                
+                '<p>Apuntados:'+marker.event_users+'</p>' + 
                 '<button class="glyphicon glyphicon-plus btn btn-success" onclick="MAP.registerEvent('+marker.event_id+');"> Me apunto</button>'+                
                 '</div>';                
         return contentString;

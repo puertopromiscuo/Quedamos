@@ -1,6 +1,4 @@
-iris.ui(function(self) {
-    var point_x;
-    var point_y;
+iris.ui(function(self) {  
     eventsList = [];
     registerEventList = [];
 
@@ -9,14 +7,16 @@ iris.ui(function(self) {
         self.tmplMode(self.APPEND);
         self.tmpl(iris.path.ui.panel.html);
         renderMyEvents();
-        renderRegisterEvent()
+        //renderRegisterEvent()
 
 
 
+        self.get("date")
+                .val(PANEL.getToday())
+                .attr("min", PANEL.getToday());
 
-
-        //escucha evento de borrado desde myEventList
-        self.on("del-my-event", function(data) {
+        
+        /*self.on("del-my-event", function(data) {
             EVENTS.deleteEvent(data.event_id, function(data) {
                 renderMyEvents();
                 MAP.renderMap();
@@ -33,18 +33,18 @@ iris.ui(function(self) {
 
         //on blur de la direccion crea un marcador en el mapa
         self.get("address").blur(function() {
-            if (this.value !== "") {
-                MAP.findAddress(this.value, function(coord) {
-                    if (coord) {
-                        panelStatus(true);
-                        point_x = coord.d;
-                        point_y = coord.e;
-                    } else {
-                        panelStatus(false, "Direccion no encontrada");
+                    if (this.value !== "") {
+                        MAP.findAddress(this.value, function(coord) {
+                            if (coord) {
+                                panelStatus(true);
+                                point_x = coord.d;
+                                point_y = coord.e;
+                            } else {
+                                panelStatus(false, "Direccion no encontrada");
+                            }
+                        });
                     }
                 });
-            }
-        });
 
         //crea un evento y rederiza el mapa
         self.get("create-event").click(function() {
@@ -69,20 +69,23 @@ iris.ui(function(self) {
                 panelStatus(false, "Campos Obligatorios");
             }
 
-        });
+        });*/
 
     };
 
     function renderMyEvents() {
-        self.destroyUIs('my-events-list');
-        PANEL.loadMyEvents(function(eventos) {
-            eventsList = eventos.slice();
-            var i;
-            for (i = 0; i < eventsList.length; i++) {
-                self.ui("my-events-list", iris.path.ui.myEventUI.js, {event: eventsList[i]});
+        self.get("my-events-list").html("");        
+        PANEL.loadMyEvents(function(eventos) {            
+            for (var i = 0; i < eventos.length; i++) {
+                
             }
+        
         });
     }
+                //console.log(eventos)
+                /*self.ui("my-events-list", iris.path.ui.myEventUI.js, {event: eventsList[i]});       
+                boton = MYEVENT.createMyEvent("hola","a","b");
+                self.get("my-events-list").html(boton);*/
 
     function renderRegisterEvent() {
         self.destroyUIs('register-events-list');

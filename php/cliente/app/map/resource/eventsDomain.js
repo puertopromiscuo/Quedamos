@@ -1,5 +1,6 @@
 (function() {
-    var root = this;    
+    var root = this;  
+    var userId = 118;
     //OBTENER TODOS LOS EVENTOS    
     function getAllEvents(callback) {
         $.ajax({
@@ -7,8 +8,7 @@
             url: 'servidor/services/eventService/getAllEventsManager',
             dataType: 'json'
         }).done(function(data) {
-            if (data.status == "ok") {
-                console.log(data)
+            if (data.status == "ok") {               
                 callback(data.result);
             } else {
                 console.log(data.message);
@@ -17,49 +17,6 @@
             console.log("error getAllEvents");
         });
     }
-
-    //FILTRADO EVENTOS
-    function getEventsWhere(where, callback) {
-        $.ajax({
-            type: 'POST',
-            url: 'servidor/services/eventService/getEventsWhereManager',
-            dataType: 'json',
-            data: {
-                where: where
-            }
-        }).done(function(data) {
-            if (data.status == "ok") {
-                console.log(data)
-                callback(data.result);
-            } else {
-                console.log(data.message);
-            }
-        }).fail(function() {
-            console.log("error getEventsWhere");
-        });
-    }
-    //FILTRADO EVENTOS APUNTADOS
-    function getRegisterEvent(where, callback) {
-        $.ajax({
-            type: 'POST',
-            url: 'servidor/services/eventService/getRegisterEventManager',
-            dataType: 'json',
-            data: {
-                where: where
-            }
-        }).done(function(data) {            
-            if (data.status == "ok") {
-                console.log(data)
-                callback(data.result);
-            } else {
-                console.log(data.message);
-            }
-        }).fail(function() {
-            console.log("error getRegisterEvent");
-        });
-    }     
-
-
 
     //INSERTAR EVENTO
     function insertEvent(event_title, event_description, event_date, event_userid, event_x, event_y, callback) {
@@ -107,10 +64,10 @@
         });
     }
     //APUNTARSE A UN EVENTO
-    function registerEvent(event_id, callback) {
+    function insertUserEvent(event_id, callback) {
         $.ajax({
             type: 'POST',
-            url: 'servidor/services/eventService/registerEventManager',
+            url: 'servidor/services/eventService/insertUserEventManager',
             dataType: 'json',
             data: {
                 event_userid: getUserId(),
@@ -129,10 +86,10 @@
     }
     
     //DESAPUNTARSE DE UN EVENTO
-    function deleteregisterEvent(event_id, callback) {
+    function deleteUserEvent(event_id, callback) {
         $.ajax({
             type: 'POST',
-            url: 'servidor/services/eventService/deleteregisterEventManager',
+            url: 'servidor/services/eventService/deleteUserEventManager',
             dataType: 'json',
             data: {
                 user_id: getUserId(),
@@ -150,11 +107,34 @@
         });
     }
 
-    function getUserId() {
-        return 110;
-    };
-
-
+            
+   function checkSession(callback) {
+               $.ajax({
+                   type: 'POST',
+                   url: 'servidor/services/loginService/checkSession',
+                   dataType: 'json'
+                   }).done(function(data){                       
+                      callback(data.result);
+                   }).fail(function() {
+                   console.log("Error usuario no existente");
+               })
+           };
+    
+    function getUserId(){
+        return userId;
+    }
+    
+     function arrayUsersToString(users){
+        var usersString ="";
+        if(users.length){   
+            users.forEach(function(usuario){               
+                usersString += usuario.user_name+"/";
+            })            
+        }
+        return usersString;
+    }
+    
+     
 
     if (!root.EVENTS) {
         root.EVENTS = {};
@@ -162,12 +142,15 @@
 
     root.EVENTS.getAllEvents = getAllEvents;
     root.EVENTS.insertEvent = insertEvent;
-    root.EVENTS.getEventsWhere = getEventsWhere;
-    root.EVENTS.getRegisterEvent=getRegisterEvent;
     root.EVENTS.deleteEvent = deleteEvent;
-    root.EVENTS.registerEvent = registerEvent;
-    root.EVENTS.getUserId = getUserId;
-    root.EVENTS.deleteregisterEvent=deleteregisterEvent;
+    root.EVENTS.insertUserEvent = insertUserEvent;    
+    root.EVENTS.deleteUserEvent = deleteUserEvent;
+    root.EVENTS.getUserId = getUserId; 
+    root.EVENTS.arrayUsersToString = arrayUsersToString; 
+    
+
+
+    
 }).call(this);
 
 

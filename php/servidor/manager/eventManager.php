@@ -4,31 +4,12 @@ include '../dao/eventDAO.php';
 include_once '../utils/json.php';
 
 /* MAPA */
-
 function insertEventManager($event_title, $event_description, $event_date, $event_userid, $event_x, $event_y) {
     $data = insertEvent($event_title, $event_description, $event_date, $event_userid, $event_x, $event_y);
     if (count($data)) {
         return createJson("ok", "evento creado", $data);
     } else {
         return createJson("error", "error al crear evento", null);
-    }
-}
-
-function getEventManager($event_id) {
-    $data = getEvent($event_id);
-    if (count($data)) {
-        return createJson("ok", "evento recuperado", $data);
-    } else {
-        return createJson("error", "error evento no encontrado:$event_id", null);
-    }
-}
-
-function getAllEventsManager() {
-    $data = getAllEvents();
-    if (count($data)) {
-        return createJson("ok", "eventos del mapa recuperados", $data);
-    } else {
-        return createJson("error", "no hay ningun evento del mapa", null);
     }
 }
 
@@ -59,37 +40,27 @@ function deleteUserEventManager($user_id, $event_id) {
     }
 }
 
-//MY EVENTS
-function getMyEventsManager($user_id) {
-    $myEvents = getMyEvents($user_id);
-    foreach ($myEvents as $event) {
+/*TODO*/
+function getAllEventsManager() {
+    $arrayAux = array();
+    $allEvents = getAllEvents();
+    foreach ($allEvents as $event) {
         $event['users'] = getUsersEnroll($event['event_id']);
-        array_push($myEvents, $event);
+        array_push($arrayAux, $event);
     }
-    if (count($myEvents)) {
-        return createJson("ok", "eventos del usuario recuperados", $myEvents);
+    if (count($arrayAux)) {
+        return createJson("ok", "eventos recuperados", $arrayAux);
     } else {
-        return createJson("error", "este usuario no tiene eventos", null);
+        return createJson("error", "error no hay eventos", null);
     }
 }
 
-//FILTROS
 
-function getFilterAllEventsManager($where) {
-    $data = getFilterAllEvents($where);
-    if (count($data)) {
-        return createJson("ok", "eventos filtrados", $data);
-    } else {
-        return createJson("error", "no hay eventos con este filtro $where", null);
-    }
-}
-
-//var_dump(getEventManager(170));
 //var_dump(insertEventManager("titulo", "descripbion", "2014-03-06", "110", "2", "4"));
-//var_dump(getAllEventsManager());
 //var_dump(deleteEventManager(170));
-//var_dump(insertUserEventManager(111,174));
-//var_dump(getMyEventsManager(110));$kk = getMyEventsManager(110);var_dump($kk[3]['users']);
-//var_dump(getFilterAllEventsManager("WHERE event_date = '2014-03-06'"));
+//var_dump(insertUserEventManager(119,185));
+//var_dump(getAllEventsManager());
+
+
 ?>
 

@@ -12,14 +12,15 @@
             center: center,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        //MAP.createMarker("1","titulo","descripcion","2012-12-10","110","52.520816","13.410186",map);
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);        
     }
     
     function loadAllMarkers(){
-        EVENTS.getAllEvents(function(data){
+        EVENTS.getAllEvents(function(data){   
+            console.log("Cargando eventos del Mapa");
+            console.log(data);
             for (var i = 0; i < data.length; i++) {                
-                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, map);
+                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y,data[i].users, map);
                 markers.push(marker);                   
             }
         });        

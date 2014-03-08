@@ -12,9 +12,7 @@ Toro::serve(array(
     "/getAllEventsManager" => "getAllEventsManager",
     "/deleteEventManager" => "deleteEventManager",
     "/insertUserEventManager" => "insertUserEventManager",
-    "/deleteUserEventManager" => "deleteUserEventManager",
-    "/getMyEventsManager" => "getMyEventsManager",
-    "/getFilterAllEventsManager" => "getFilterAllEventsManager"
+    "/deleteUserEventManager" => "deleteUserEventManager"    
 ));
 
 /* MAPA */
@@ -81,32 +79,5 @@ class deleteUserEventManager {
     }
 
 }
-
-/* MY EVENTS */ 
-
-class getMyEventsManager {
-
-    function post() {
-        echo getMyEventsManager( 
-                $_POST['user_id']              
-             ) ;
-    }
-
-}
-
-
-
-/* FILTROS */
-class getFilterAllEventsManager {
-
-    function post() {
-        echo getFilterAllEventsManager( 
-                $_POST['where']                
-             ) ;
-    }
-
-}
-
-
 
 ?>
