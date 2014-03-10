@@ -1,4 +1,4 @@
-iris.ui(function(self) {  
+iris.ui(function(self) {
     eventsList = [];
     registerEventList = [];
 
@@ -15,77 +15,78 @@ iris.ui(function(self) {
                 .val(PANEL.getToday())
                 .attr("min", PANEL.getToday());
 
-        
+
         /*self.on("del-my-event", function(data) {
-            EVENTS.deleteEvent(data.event_id, function(data) {
-                renderMyEvents();
-                MAP.renderMap();
-
-            })
-        });
-
-        //escucha evento de borrado desde registerEventList
-        self.on("del-register-event", function(data) {
-            EVENTS.deleteregisterEvent(data.event_id, function(data) {
-                renderRegisterEvent();
-            })
-        });
-
-        //on blur de la direccion crea un marcador en el mapa
-        self.get("address").blur(function() {
-                    if (this.value !== "") {
-                        MAP.findAddress(this.value, function(coord) {
-                            if (coord) {
-                                panelStatus(true);
-                                point_x = coord.d;
-                                point_y = coord.e;
-                            } else {
-                                panelStatus(false, "Direccion no encontrada");
-                            }
-                        });
-                    }
-                });
-
-        //crea un evento y rederiza el mapa
-        self.get("create-event").click(function() {
-            if (validatePanel()) {
-                EVENTS.insertEvent(
-                        self.get("title").val(),
-                        self.get("description").val(),
-                        self.get("date").val(),
-                        EVENTS.getUserId(),
-                        point_x,
-                        point_y,
-                        function(data) {
-                            renderMyEvents();
-                            MAP.renderMap();
-                        }
-                )
-                self.get("title").val("");
-                self.get("description").val("");
-                self.get("address").val("");
-                self.get("date").val("");
-            } else {
-                panelStatus(false, "Campos Obligatorios");
-            }
-
-        });*/
+         EVENTS.deleteEvent(data.event_id, function(data) {
+         renderMyEvents();
+         MAP.renderMap();
+         
+         })
+         });
+         
+         //escucha evento de borrado desde registerEventList
+         self.on("del-register-event", function(data) {
+         EVENTS.deleteregisterEvent(data.event_id, function(data) {
+         renderRegisterEvent();
+         })
+         });
+         
+         //on blur de la direccion crea un marcador en el mapa
+         self.get("address").blur(function() {
+         if (this.value !== "") {
+         MAP.findAddress(this.value, function(coord) {
+         if (coord) {
+         panelStatus(true);
+         point_x = coord.d;
+         point_y = coord.e;
+         } else {
+         panelStatus(false, "Direccion no encontrada");
+         }
+         });
+         }
+         });
+         
+         //crea un evento y rederiza el mapa
+         self.get("create-event").click(function() {
+         if (validatePanel()) {
+         EVENTS.insertEvent(
+         self.get("title").val(),
+         self.get("description").val(),
+         self.get("date").val(),
+         EVENTS.getUserId(),
+         point_x,
+         point_y,
+         function(data) {
+         renderMyEvents();
+         MAP.renderMap();
+         }
+         )
+         self.get("title").val("");
+         self.get("description").val("");
+         self.get("address").val("");
+         self.get("date").val("");
+         } else {
+         panelStatus(false, "Campos Obligatorios");
+         }
+         
+         });*/
 
     };
 
     function renderMyEvents() {
-        self.get("my-events-list").html("");        
-        PANEL.loadMyEvents(function(eventos) {            
-            for (var i = 0; i < eventos.length; i++) {
-                
-            }
-        
-        });
+        self.get("my-events-list").html("");
+        PANEL.loadMyEvents(function(data) {
+            console.log("Cargando mis eventos");
+            console.log(data);
+            var myEvent;
+            var users;
+            data.forEach(function(event) {                
+                myEvent = MYEVENT.createMyEvent(event.event_id,event.event_title, event.event_date,event.users)
+                self.get("my-events-list").append(myEvent);
+            })
+        })
     }
-                //console.log(eventos)
-                /*self.ui("my-events-list", iris.path.ui.myEventUI.js, {event: eventsList[i]});       
-                boton = MYEVENT.createMyEvent("hola","a","b");
-                self.get("my-events-list").html(boton);*/
+
 
     function renderRegisterEvent() {
         self.destroyUIs('register-events-list');

@@ -3,17 +3,16 @@
     
 
 
-    function loadMyEvents(callback) {
-        EVENTS.getAllEvents(function(events) {
-            console.log("Cargando mis eventos");
+    function loadMyEvents(callback) {        
+        EVENTS.getAllEvents(callback,function(data) {            
             var myEventList=[];
-            events.forEach(function(event){
+            data.forEach(function(event){
                 if(event.event_userid == EVENTS.getUserId()){
                     myEventList(event);
                 }                
             })
             
-           // console.log(myEventList)
+           callback(myEventList)
         })
     }
 
