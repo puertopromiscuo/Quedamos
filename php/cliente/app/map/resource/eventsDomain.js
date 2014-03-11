@@ -64,13 +64,14 @@
         });
     }
     //APUNTARSE A UN EVENTO
-    function insertUserEvent(event_id, callback) {
+
+    function insertUserEvent(event_id, user_id,callback) {
         $.ajax({
             type: 'POST',
             url: 'servidor/services/eventService/insertUserEventManager',
             dataType: 'json',
             data: {
-                event_userid: getUserId(),
+                user_id: user_id,
                 event_id: event_id
             }
         }).done(function(data) {

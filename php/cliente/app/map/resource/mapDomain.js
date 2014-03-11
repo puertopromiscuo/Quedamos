@@ -4,6 +4,7 @@
     var markers = [];
     var markerAux = false;
 
+
     function loadMap() {
         geocoder = new google.maps.Geocoder();//buscar de direcciones
         var center = new google.maps.LatLng(52.520816, 13.410186);
@@ -59,12 +60,13 @@
             }
         });
     }
-    function registerEvent(event_id) {
-        EVENTS.registerEvent(event_id, function(data) {
+    function registerUserEvent(event_id) {
+        EVENTS.insertUserEvent(event_id,EVENTS.getUserId(), function(data) {
+            console.log(data.result);
         })
     }
 
-
+    
     function renderMap() {
         deleteMarkers();
         loadAllMarkers();
@@ -82,7 +84,7 @@
     root.MAP.deleteMarkers = deleteMarkers;
     root.MAP.findAddress = findAddress;
     root.MAP.renderMap = renderMap;
-    root.MAP.registerEvent = registerEvent;
+    root.MAP.registerUserEvent = registerUserEvent;
 
 
 

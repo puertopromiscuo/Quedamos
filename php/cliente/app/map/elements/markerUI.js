@@ -58,7 +58,7 @@
                 '<div class="bodyContentInfo">' +
                 '<p>Descripcion:' + marker.event_description + '</p>' +
                 '<p>Apuntados:' + marker.event_users + '</p>' +
-                '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerEvent(' + marker.event_id + ');"> Me apunto</button>' +
+                '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + marker.event_id + ');"> Me apunto</button>' +
                 '</div>';
         
         return contentString;
