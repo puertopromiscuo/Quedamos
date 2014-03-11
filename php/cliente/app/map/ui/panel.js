@@ -30,46 +30,46 @@ iris.ui(function(self) {
          renderRegisterEvent();
          })
          });
-         
+         */
          //on blur de la direccion crea un marcador en el mapa
          self.get("address").blur(function() {
-         if (this.value !== "") {
-         MAP.findAddress(this.value, function(coord) {
-         if (coord) {
-         panelStatus(true);
-         point_x = coord.d;
-         point_y = coord.e;
-         } else {
-         panelStatus(false, "Direccion no encontrada");
-         }
-         });
-         }
+            if (this.value !== "") {
+                MAP.findAddress(this.value, function(coord) {
+                    if (coord) {
+                        panelStatus(true);
+                        point_x = coord.d;
+                        point_y = coord.e;
+                    } else {
+                        panelStatus(false, "Direccion no encontrada");
+                    }
+                });
+            }
          });
          
-         //crea un evento y rederiza el mapa
-         self.get("create-event").click(function() {
-         if (validatePanel()) {
-         EVENTS.insertEvent(
-         self.get("title").val(),
-         self.get("description").val(),
-         self.get("date").val(),
-         EVENTS.getUserId(),
-         point_x,
-         point_y,
-         function(data) {
-         renderMyEvents();
-         MAP.renderMap();
-         }
-         )
-         self.get("title").val("");
-         self.get("description").val("");
-         self.get("address").val("");
-         self.get("date").val("");
-         } else {
-         panelStatus(false, "Campos Obligatorios");
-         }
-         
-         });*/
+        //crea un evento y rederiza el mapa
+        self.get("create-event").click(function() {
+            if (validatePanel()) {
+                EVENTS.insertEvent(
+                        self.get("title").val(),
+                        self.get("description").val(),
+                        self.get("date").val(),
+                        EVENTS.getUserId(),
+                        point_x,
+                        point_y,
+                        function(data) {
+                            renderMyEvents();
+                            MAP.renderMap();
+                        }
+                )
+                self.get("title").val("");
+                self.get("description").val("");
+                self.get("address").val("");
+                self.get("date").val("");
+            } else {
+                panelStatus(false, "Campos Obligatorios");
+            }
+
+        });
 
     };
 
@@ -80,8 +80,8 @@ iris.ui(function(self) {
             console.log(data);
             var myEvent;
             var users;
-            data.forEach(function(event) {                
-                myEvent = MYEVENT.createMyEvent(event.event_id,event.event_title, event.event_date,event.users)
+            data.forEach(function(event) {
+                myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
                 self.get("my-events-list").append(myEvent);
             })
         })

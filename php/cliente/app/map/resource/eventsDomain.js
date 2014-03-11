@@ -121,7 +121,7 @@
            };
     
     function getUserId(){
-        return userId;
+        return 118;
     }
     
      function arrayUsersToString(users){
