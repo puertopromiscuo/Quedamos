@@ -18,7 +18,7 @@
             event_description: event_description.toString(),
             event_date: event_date.toString(),
             event_userid: event_userid.toString(),
-            event_users: EVENTS.arrayUsersToString(event_users)
+            event_users: event_users
         });
         
         google.maps.event.addListener(marker, 'click', function() {
@@ -26,7 +26,6 @@
             getInfoWindow(this);
         });
        
-        
         return marker;
     }
 
@@ -51,15 +50,30 @@
 
 
     function createInfo(marker) {
+        var userIndicate = false;
+        for(var i in marker.event_users){
+           if(marker.event_users[i].user_id == EVENTS.getUserId()) {
+               userIndicate = true;
+           }
+        }
+  
         var contentString = '' +
                 '<div class="contentInfo" id="contentWindow">' +
                 '<div class="firstHeadingInfo">' + marker.event_title + '</div>' +
-                '<div class="secondHeadingInfo">>' + marker.event_date + '</div>' +
+                '<div class="secondHeadingInfo">' + marker.event_date + '</div>' +
                 '<div class="bodyContentInfo">' +
                 '<p>Descripcion:' + marker.event_description + '</p>' +
-                '<p>Apuntados:' + marker.event_users + '</p>' +
+                '<p>Apuntados:' + EVENTS.arrayUsersToString(marker.event_users) + '</p>';
+        
+        if(userIndicate){
+            contentString = contentString +
+                '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + marker.event_id + ');"> Desapuntarte</button>' +
+                '</div>';
+        }else{
+            contentString = contentString +
                 '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + marker.event_id + ');"> Me apunto</button>' +
                 '</div>';
+        }
         
         return contentString;
 

@@ -65,13 +65,13 @@
     }
     //APUNTARSE A UN EVENTO
 
-    function insertUserEvent(event_id, user_id,callback) {
+    function insertUserEvent(event_id,callback) {
         $.ajax({
             type: 'POST',
             url: 'servidor/services/eventService/insertUserEventManager',
             dataType: 'json',
             data: {
-                user_id: user_id,
+                user_id: getUserId(),
                 event_id: event_id
             }
         }).done(function(data) {

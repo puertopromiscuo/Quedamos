@@ -26,9 +26,8 @@
             }
            
         });
-
     }
-
+    
     // Borra marcadores del mapa y del array
     function deleteMarkers() {
         var i;
@@ -61,18 +60,21 @@
         });
     }
     function registerUserEvent(event_id) {
-        EVENTS.insertUserEvent(event_id,EVENTS.getUserId(), function(data) {
+        EVENTS.insertUserEvent(event_id, function(data) {
             console.log(data.result);
         })
     }
 
+    function delUserEvent(event_id) {
+        EVENTS.deleteUserEvent(event_id, function(data) {
+            console.log(data.result);
+        })
+    }
     
     function renderMap() {
         deleteMarkers();
         loadAllMarkers();
     }
-
-
 
 
 
@@ -85,6 +87,7 @@
     root.MAP.findAddress = findAddress;
     root.MAP.renderMap = renderMap;
     root.MAP.registerUserEvent = registerUserEvent;
+    root.MAP.deleteUserEvent = delUserEvent;
 
 
 
