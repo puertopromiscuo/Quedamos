@@ -77,7 +77,6 @@ iris.ui(function(self) {
         self.get("my-events-list").html("");
         PANEL.loadMyEvents(function(data) {
             console.log("Cargando mis eventos");
-            console.log(data);
             var myEvent;
             var users;
             data.forEach(function(event) {

@@ -52,7 +52,7 @@
     function createInfo(marker) {
         var userIndicate = false;
         for(var i in marker.event_users){
-           if(marker.event_users[i].user_id == EVENTS.getUserId()) {
+           if(marker.event_users[i].user_id === EVENTS.getUserId()) {
                userIndicate = true;
            }
         }

@@ -135,7 +135,28 @@
         return usersString;
     }
     
-     
+    function countEvents(callback){
+        getAllEvents(function(data){
+            var countProjectCome = 0;
+            var countMyProject = 0;
+            for(var i in data){
+                for(var j in data[i].users){
+                    if(data[i].users[j].user_id == getUserId()){
+                        countProjectCome++;
+                    }
+                }
+                if(data[i].event_userid == getUserId()){
+                    countMyProject++;
+                }
+            }
+            data= {
+                eventsCome: countProjectCome,
+                eventsMy: countMyProject
+            };
+            callback(data);
+        });
+    }
+    
 
     if (!root.EVENTS) {
         root.EVENTS = {};
@@ -147,7 +168,8 @@
     root.EVENTS.insertUserEvent = insertUserEvent;    
     root.EVENTS.deleteUserEvent = deleteUserEvent;
     root.EVENTS.getUserId = getUserId; 
-    root.EVENTS.arrayUsersToString = arrayUsersToString; 
+    root.EVENTS.arrayUsersToString = arrayUsersToString;
+    root.EVENTS.countEvents = countEvents;
     
 
 
