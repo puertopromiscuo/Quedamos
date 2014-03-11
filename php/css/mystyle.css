@@ -46,3 +46,9 @@ a {
 .panel-group {
     margin-top: 50px;
 }
+
+.contentInfo {
+    width: 200px;
+    height: 200px;
+		
+}

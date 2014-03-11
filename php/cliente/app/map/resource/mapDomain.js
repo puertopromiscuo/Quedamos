@@ -1,42 +1,43 @@
 (function() {
-    var root = this; 
+    var root = this;
     var map;
     var markers = [];
     var markerAux = false;
-        
+
     function loadMap() {
         geocoder = new google.maps.Geocoder();//buscar de direcciones
-        var center = new google.maps.LatLng(52.520816, 13.410186);        
+        var center = new google.maps.LatLng(52.520816, 13.410186);
         var mapOptions = {
             zoom: 3,
             center: center,
             mapTypeId: google.maps.MapTypeId.TERRAIN
         };
-        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);        
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     }
-    
-    function loadAllMarkers(){
-        EVENTS.getAllEvents(function(data){   
+
+    function loadAllMarkers() {
+        EVENTS.getAllEvents(function(data) {
             console.log("Cargando eventos del Mapa");
             console.log(data);
-            for (var i = 0; i < data.length; i++) {                
-                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y,data[i].users, map);
-                markers.push(marker);                   
+            for (var i = 0; i < data.length; i++) {
+                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, data[i].users, map);
+                markers.push(marker);
             }
-        });        
+            
+        });
     }
-    
-     // Borra marcadores del mapa y del array
+
+    // Borra marcadores del mapa y del array
     function deleteMarkers() {
         var i;
         for (i = 0; i < markers.length; i++) {
             markers[i].setMap(null);
         }
-        markers = [];        
-    }    
-     
+        markers = [];
+    }
+
     /*busca una direccion y crea un marcador*/
-    function findAddress(address,callback) {
+    function findAddress(address, callback) {
         if (markerAux) {
             markerAux.setMap(null);
         }
@@ -57,31 +58,31 @@
             }
         });
     }
-    function registerEvent(event_id){
-        EVENTS.registerEvent(event_id, function(data) {            
+    function registerEvent(event_id) {
+        EVENTS.registerEvent(event_id, function(data) {
         })
-    }    
-    
-    
-    function renderMap(){
+    }
+
+
+    function renderMap() {
         deleteMarkers();
         loadAllMarkers();
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     if (!root.MAP) {
         root.MAP = {};
-    } 
-    root.MAP.loadMap=loadMap; 
-    root.MAP.loadAllMarkers=loadAllMarkers; 
-    root.MAP.deleteMarkers=deleteMarkers; 
-    root.MAP.findAddress=findAddress;
-    root.MAP.renderMap=renderMap;
-    root.MAP.registerEvent=registerEvent;
-       
-    
-    
+    }
+    root.MAP.loadMap = loadMap;
+    root.MAP.loadAllMarkers = loadAllMarkers;
+    root.MAP.deleteMarkers = deleteMarkers;
+    root.MAP.findAddress = findAddress;
+    root.MAP.renderMap = renderMap;
+    root.MAP.registerEvent = registerEvent;
+
+
+
 }).call(this);
