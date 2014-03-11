@@ -45,10 +45,34 @@ a {
 
 .panel-group {
     margin-top: 50px;
+   
 }
 
 .contentInfo {
     width: 200px;
     height: 200px;
-		
+
+}
+.padding1{
+    padding: 2em;
+}
+.panel {
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+#formulario > input,#formulario > textarea{
+    color: white;
+    margin: 0.5em;
+    background-color: rgba(26, 126, 30, 0.3);
+    border: 1px solid transparent;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+#formulario > button{
+    border-radius: 0px;
 }

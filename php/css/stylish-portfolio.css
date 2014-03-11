@@ -42,7 +42,7 @@ body {
 
 #sidebar-wrapper-2 {
     //right: 0;
-    background: #37414E;
+    background: rgba(1,1,1,0.7);
     position: fixed;
     height: 95%;
     overflow-y: auto;
@@ -52,10 +52,29 @@ body {
     -ms-transition: all 0.4s ease 0s;
     -o-transition: all 0.4s ease 0s;
     transition: all 0.4s ease 0s;
-    margin: 2em;
     
 }
 
+.contenedor {
+    top: 0px;
+    position: fixed;
+    z-index: 999;
+    padding: 2em;
+}
+#sidebar-wrapper-2 h5{
+    color: white;
+    font-size: 2em;
+}
+
+#sidebar-wrapper-2 .nameUser{
+    color: white;
+    font-size: 1.2em;
+}
+
+#sidebar-wrapper-2 .other{
+    color: white;
+    font-size: 0.7em;
+}
 .sidebar-nav {
     position: absolute;
     top: 0;
