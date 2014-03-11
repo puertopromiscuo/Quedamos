@@ -63,12 +63,14 @@
         EVENTS.insertUserEvent(event_id, function(data) {
             console.log(data.result);
         })
+        renderMap();
     }
 
     function delUserEvent(event_id) {
         EVENTS.deleteUserEvent(event_id, function(data) {
             console.log(data.result);
         })
+        renderMap();
     }
     
     function renderMap() {
