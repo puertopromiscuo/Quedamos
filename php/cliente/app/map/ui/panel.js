@@ -37,12 +37,10 @@ iris.ui(function(self) {
          self.get("address").blur(function() {
             if (this.value !== "") {
                 MAP.findAddress(this.value, function(coord) {
-                    alert(coord);
                     if (coord) {
                         panelStatus(true);
                         event_x = coord.lat();
                         event_y = coord.lng();
-                        alert(event_x);
                     } else {
                         panelStatus(false, "Direccion no encontrada");
                     }
