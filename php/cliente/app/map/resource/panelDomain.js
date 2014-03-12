@@ -3,22 +3,17 @@
     
 
 
-    function loadMyEvents(callback) {        
+    function loadEvents(callback) {        
         EVENTS.getAllEvents(callback,function(data) {            
             var myEventList=[];
             data.forEach(function(event){
+                alert(event);
                 if(event.event_userid == EVENTS.getUserId()){
                     myEventList(event);
                 }                
             })
             
            callback(myEventList)
-        })
-    }
-
-    function loadRegisterEvent(callback) {
-        EVENTS.getRegisterEvent(whereUserId, function(data) {
-            callback(data);
         })
     }
 
@@ -51,8 +46,7 @@
         root.PANEL = {};
     }
 
-    root.PANEL.loadMyEvents = loadMyEvents;
-    root.PANEL.loadRegisterEvent = loadRegisterEvent;
+    root.PANEL.loadEvents = loadEvents;
     root.PANEL.deleteEvent = deleteEvent;
     root.PANEL.getToday = getToday;
 

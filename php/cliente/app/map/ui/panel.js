@@ -9,7 +9,7 @@ iris.ui(function(self) {
         self.tmplMode(self.APPEND);
         self.tmpl(iris.path.ui.panel.html);
         renderMyEvents();
-        //renderRegisterEvent()
+        renderRegisterEvent()
 
 
 
@@ -77,7 +77,7 @@ iris.ui(function(self) {
 
     function renderMyEvents() {
         self.get("my-events-list").html("");
-        PANEL.loadMyEvents(function(data) {
+        PANEL.loadEvents(function(data) {
             console.log("Cargando mis eventos");
             var myEvent;
             var users;
@@ -93,12 +93,16 @@ iris.ui(function(self) {
 
     function renderRegisterEvent() {
         self.destroyUIs('register-events-list');
-        PANEL.loadRegisterEvent(function(eventos) {
-            registerEventList = eventos.slice();
-            var i;
-            for (i = 0; i < registerEventList.length; i++) {
-                self.ui("register-events-list", iris.path.ui.registerEventUI.js, {event: registerEventList[i]});
-            }
+        PANEL.loadEvents(function(data) {
+            data.forEach(function(event) {
+                console.log(event.users);
+                for (var i = 0; i < event.users.length; i++) {
+                    if (event.users[i].user_id == EVENTS.getUserId()) {
+                        myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
+                        self.get("register-events-list").append(myEvent);
+                    }
+                }
+            })
         });
     }
 

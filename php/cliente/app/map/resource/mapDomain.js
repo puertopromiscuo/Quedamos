@@ -19,7 +19,6 @@
     function loadAllMarkers() {
         EVENTS.getAllEvents(function(data) {
             console.log("Cargando eventos del Mapa");
-            console.log(data);
             for (var i = 0; i < data.length; i++) {
                 var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, data[i].users, map);
                 markers.push(marker);
