@@ -1,8 +1,8 @@
 iris.ui(function(self) {
     eventsList = [];
     registerEventList = [];
-    var point_x;
-    var point_y;
+    var event_x;
+    var event_y;
 
 
     self.create = function() {
@@ -40,8 +40,9 @@ iris.ui(function(self) {
                     alert(coord);
                     if (coord) {
                         panelStatus(true);
-                        point_x = coord.d;
-                        point_y = coord.e;
+                        event_x = coord.lat();
+                        event_y = coord.lng();
+                        alert(event_x);
                     } else {
                         panelStatus(false, "Direccion no encontrada");
                     }
@@ -57,8 +58,8 @@ iris.ui(function(self) {
                         self.get("description").val(),
                         self.get("date").val(),
                         EVENTS.getUserId(),
-                        point_x,
-                        point_y,
+                        event_x,
+                        event_y,
                         function(data) {
                             renderMyEvents();
                             MAP.renderMap();
