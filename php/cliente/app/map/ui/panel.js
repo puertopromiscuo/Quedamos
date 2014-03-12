@@ -23,6 +23,8 @@ iris.ui(function(self) {
             if (e.keyCode === 13 && this.value.trim() !== "") {
                 var name = this.value;
                 var count = 0;
+                //Vaciar panel de busqueda
+                self.get("search-event-list").html("");
                 PANEL.loadEvents(function(data) {
                     console.log("Cargando mis eventos");
                     var myEvent;
