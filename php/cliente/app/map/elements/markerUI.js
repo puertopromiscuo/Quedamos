@@ -66,11 +66,15 @@
                 '<p>Apuntados:' + EVENTS.arrayUsersToString(marker.event_users) + '</p>';
         if(userIndicate){
             contentString = contentString +
+                '<div id="come">' +
                 '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + marker.event_id + ');"> Desapuntarte</button>' +
+                '</div>' +
                 '</div>';
         }else{
             contentString = contentString +
+                '<div id="come">'+
                 '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + marker.event_id + ');"> Me apunto</button>' +
+                '</div>'+
                 '</div>';
         }
         

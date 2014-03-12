@@ -63,14 +63,20 @@
         EVENTS.insertUserEvent(event_id, function(data) {
             console.log(data.result);
         })
-        renderMap();
+        come = '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + event_id + ');"> Desapuntarte</button>';
+        $('#come').children().remove();
+        $('#come').append(come);
+         
     }
 
     function delUserEvent(event_id) {
         EVENTS.deleteUserEvent(event_id, function(data) {
             console.log(data.result);
         })
-        renderMap();
+        come = '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + event_id + ');"> Me apunto</button>';
+        $('#come').children().remove();
+        $('#come').append(come);
+       
     }
     
     function renderMap() {
