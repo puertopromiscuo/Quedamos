@@ -52,7 +52,7 @@
     function createInfo(marker) {
         var userIndicate = false;
         for(var i in marker.event_users){
-           if(marker.event_users[i].user_id === EVENTS.getUserId()) {
+           if(marker.event_users[i].user_id == EVENTS.getUserId()) {
                userIndicate = true;
            }
         }
@@ -64,7 +64,6 @@
                 '<div class="bodyContentInfo">' +
                 '<p>Descripcion:' + marker.event_description + '</p>' +
                 '<p>Apuntados:' + EVENTS.arrayUsersToString(marker.event_users) + '</p>';
-        
         if(userIndicate){
             contentString = contentString +
                 '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + marker.event_id + ');"> Desapuntarte</button>' +

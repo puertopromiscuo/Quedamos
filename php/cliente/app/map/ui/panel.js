@@ -40,9 +40,8 @@ iris.ui(function(self) {
                     alert(coord);
                     if (coord) {
                         panelStatus(true);
-                        point_x = 21;
-                        point_y = 22;
-                        alert(coord.d,point_y);
+                        point_x = coord.d;
+                        point_y = coord.e;
                     } else {
                         panelStatus(false, "Direccion no encontrada");
                     }

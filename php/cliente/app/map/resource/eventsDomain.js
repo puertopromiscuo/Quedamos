@@ -119,7 +119,7 @@
                    }).fail(function() {
                    console.log("Error usuario no existente");
                })
-           };
+           }
     
     function getUserId(){
         return 118;
