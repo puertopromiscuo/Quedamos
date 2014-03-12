@@ -6,13 +6,16 @@
                 <ul class="nav nav-tabs nav-stacked" id="myTab">
                     <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                             Crear Evento
-                        </a>
+                        </a></li>
                     <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                             Estoy apuntado
-                        </a>
-                    <li class="active"><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        </a></li>
+                    <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                             Mis eventos
-                        </a>
+                        </a></li>
+                    <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                            Buscar eventos
+                        </a></li>
                 </ul>
                 <div class="panel-group" id="accordion">
                     <div class="panel panel-default">
@@ -37,12 +40,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="collapseThree" class="panel-collapse collapse in">
+                        <div id="collapseThree" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <div data-id="my-events-list">                         
                                 </div>
                             </div>
                         </div>
+                        <div id="collapseFour" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <input type="text" data-id="search" class="form-control" placeholder="Nombre del evento...">
+                            </div>
+                                <ul data-id="search-event-list">                         
+                                </ul>
+                        </div>
+
 
                     </div>
 

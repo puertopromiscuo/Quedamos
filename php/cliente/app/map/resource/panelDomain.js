@@ -1,19 +1,19 @@
 (function() {
     var root = this;
-    
 
 
-    function loadEvents(callback) {        
-        EVENTS.getAllEvents(callback,function(data) {            
-            var myEventList=[];
-            data.forEach(function(event){
+
+    function loadEvents(callback) {
+        EVENTS.getAllEvents(callback, function(data) {
+            var myEventList = [];
+            data.forEach(function(event) {
                 alert(event);
-                if(event.event_userid == EVENTS.getUserId()){
+                if (event.event_userid == EVENTS.getUserId()) {
                     myEventList(event);
-                }                
+                }
             })
-            
-           callback(myEventList)
+
+            callback(myEventList)
         })
     }
 
@@ -29,7 +29,9 @@
         })
     }
 
-    function getToday() {
+ 
+
+        function getToday() {
         var now = new Date();
         var month = (now.getMonth() + 1);
         var day = now.getDate();
@@ -39,8 +41,8 @@
             day = "0" + day;
         var today = now.getFullYear() + '-' + month + '-' + day;
         return today;
-    }    
-    
+    }
+
 
     if (!root.PANEL) {
         root.PANEL = {};

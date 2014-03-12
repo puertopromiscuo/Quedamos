@@ -18,6 +18,36 @@ iris.ui(function(self) {
                 .attr("min", PANEL.getToday());
 
 
+        //BUSCAR
+        self.get("search").on("keyup", function(e) {
+            if (e.keyCode === 13 && this.value.trim() !== "") {
+                var name = this.value;
+                var count = 0;
+                PANEL.loadEvents(function(data) {
+                    console.log("Cargando mis eventos");
+                    var myEvent;
+                    data.forEach(function(event) {
+                        console.log(event);
+                        console.log(name);
+                        if (event.event_title == name) {
+                            myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
+                            self.get("search-event-list").append(myEvent);
+                            count++;
+                        }
+                    })
+                    if(!count){
+                            self.get("search-event-list").html("No se han encontrado coincidencias");
+                            console.log("No se han encontrado coincidencias");
+                    }
+                })
+                this.value = "";
+            }
+        });
+
+
+
+
+
         /*self.on("del-my-event", function(data) {
          EVENTS.deleteEvent(data.event_id, function(data) {
          renderMyEvents();
@@ -95,7 +125,6 @@ iris.ui(function(self) {
         self.destroyUIs('register-events-list');
         PANEL.loadEvents(function(data) {
             data.forEach(function(event) {
-                console.log(event.users);
                 for (var i = 0; i < event.users.length; i++) {
                     if (event.users[i].user_id == EVENTS.getUserId()) {
                         myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
