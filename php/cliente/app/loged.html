@@ -4,15 +4,29 @@
             <div class="row w">
                 <div class="col-xs-12">
                     <a href=""  data-toggle="modal" data-target="#ModalProfile"><img src="img/prueba-perfil.jpg" alt="" class="img-responsive "></a>
-                    
+
                     <div class="row">
                         <div class="col-xs-12 padding1">
-                            <span class="nameUser">Nombre: 
-                                <span class="nameUser" data-id="menu-top"></span> <button class="btn btn-link" data-id="log-out">Cerrar sesión</button><br><small class="other">(UserId: <span data-id="id-prueba"></span>)</small>
-                            <br>
-                            <span class="label label-primary" data-id="count-my-events" title="Eventos creados"></span>
-                            <span class="label label-success" data-id="count-my-events-come" title="Eventos en los que has participado"></span>
-                            </span>
+                            <div class="nameUser">Nombre: 
+                                <span class="nameUser" data-id="menu-top"></span>  
+
+                                <span class="dropdown">
+                                    <button class="btn btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                         <span class="glyphicon glyphicon-cog"></span>
+                                         <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#ModalProfile">Perfil</a></li>
+                                        <li role="presentation" class="divider"></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" data-id="log-out">Cerrar sesión</a></li>
+                                    </ul>
+                                </span>
+                            </div>
+                            
+                                <br><small class="other">(UserId: <span data-id="id-prueba"></span>)</small>
+                                <br>
+                                <span class="label label-primary" data-id="count-my-events" title="Eventos creados"></span>
+                                <span class="label label-success" data-id="count-my-events-come" title="Eventos en los que has participado"></span>
                         </div>
                     </div>
                 </div>
