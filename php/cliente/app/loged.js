@@ -7,7 +7,16 @@ iris.screen(
                 self.ui("modal-profile", iris.path.ui.profile.js);                
                 self.ui("map-container", iris.path.ui.map.js);
                 self.ui("panel-container", iris.path.ui.panel.js);
+                
+                
+                self.get('log-out').click(function(){
+                    EVENTS.closeSession(function(data){
+                        console.log(data.message);
+                    });
+                    iris.navigate("#/unloged");
+                });
             };
+            
             self.awake = function() {
                 console.log("Loged Screen Awakened");
                 check_session(function(data) {

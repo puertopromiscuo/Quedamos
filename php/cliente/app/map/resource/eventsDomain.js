@@ -1,5 +1,5 @@
 (function() {
-    var root = this;  
+    var root = this;
     var userId = 118;
     //OBTENER TODOS LOS EVENTOS    
     function getAllEvents(callback) {
@@ -8,7 +8,7 @@
             url: 'servidor/services/eventService/getAllEventsManager',
             dataType: 'json'
         }).done(function(data) {
-            if (data.status == "ok") {               
+            if (data.status == "ok") {
                 callback(data.result);
             } else {
                 console.log(data.message);
@@ -32,7 +32,7 @@
                 event_x: event_x,
                 event_y: event_y
             }
-        }).done(function(data) {            
+        }).done(function(data) {
             if (data.status === "ok") {
                 console.log(data)
                 callback(data.result);
@@ -65,7 +65,7 @@
     }
     //APUNTARSE A UN EVENTO
 
-    function insertUserEvent(event_id,callback) {
+    function insertUserEvent(event_id, callback) {
         $.ajax({
             type: 'POST',
             url: 'servidor/services/eventService/insertUserEventManager',
@@ -85,7 +85,7 @@
             console.log("error registerEvent");
         });
     }
-    
+
     //DESAPUNTARSE DE UN EVENTO
     function deleteUserEvent(event_id, callback) {
         $.ajax({
@@ -108,55 +108,67 @@
         });
     }
 
-            
-   function checkSession(callback) {
-               $.ajax({
-                   type: 'POST',
-                   url: 'servidor/services/loginService/checkSession',
-                   dataType: 'json'
-                   }).done(function(data){                       
-                      callback(data.result);
-                   }).fail(function() {
-                   console.log("Error usuario no existente");
-               })
-           }
-    
-    function getUserId(){
+
+    function checkSession(callback) {
+        $.ajax({
+            type: 'POST',
+            url: 'servidor/services/loginService/checkSession',
+            dataType: 'json'
+        }).done(function(data) {
+            callback(data.result);
+        }).fail(function() {
+            console.log("Error usuario no existente");
+        })
+    }
+
+    function closeSession(callback) {
+        $.ajax({
+            type: 'POST',
+            url: 'servidor/services/loginService/logOut',
+            dataType: 'json'
+        }).done(function(data) {
+            callback(data);
+        }).fail(function() {
+            console.log("Error usuario no existente");
+        })
+    }
+
+    function getUserId() {
         return 118;
     }
-    
-     function arrayUsersToString(users){
-        var usersString ="";
-        if(users.length){   
-            users.forEach(function(usuario){               
-                usersString += usuario.user_name+"/";
-            })            
+
+    function arrayUsersToString(users) {
+        var usersString = "";
+        if (users.length) {
+            users.forEach(function(usuario) {
+                usersString += usuario.user_name + "/";
+            })
         }
         return usersString;
     }
-    
-    function countEvents(callback){
-        getAllEvents(function(data){
+
+    function countEvents(callback) {
+        getAllEvents(function(data) {
             var countProjectCome = 0;
             var countMyProject = 0;
-            for(var i in data){
-                for(var j in data[i].users){
-                    if(data[i].users[j].user_id == getUserId()){
+            for (var i in data) {
+                for (var j in data[i].users) {
+                    if (data[i].users[j].user_id == getUserId()) {
                         countProjectCome++;
                     }
                 }
-                if(data[i].event_userid == getUserId()){
+                if (data[i].event_userid == getUserId()) {
                     countMyProject++;
                 }
             }
-            data= {
+            data = {
                 eventsCome: countProjectCome,
                 eventsMy: countMyProject
             };
             callback(data);
         });
     }
-    
+
 
     if (!root.EVENTS) {
         root.EVENTS = {};
@@ -165,15 +177,16 @@
     root.EVENTS.getAllEvents = getAllEvents;
     root.EVENTS.insertEvent = insertEvent;
     root.EVENTS.deleteEvent = deleteEvent;
-    root.EVENTS.insertUserEvent = insertUserEvent;    
+    root.EVENTS.insertUserEvent = insertUserEvent;
     root.EVENTS.deleteUserEvent = deleteUserEvent;
-    root.EVENTS.getUserId = getUserId; 
+    root.EVENTS.getUserId = getUserId;
     root.EVENTS.arrayUsersToString = arrayUsersToString;
     root.EVENTS.countEvents = countEvents;
-    
+    root.EVENTS.closeSession = closeSession;
 
 
-    
+
+
 }).call(this);
 
 

@@ -45,11 +45,18 @@ class CheckSession {
 
 }
 
+class LogOut{
+    function post(){
+        echo logOutManager();
+    }
+}
+
 Toro::serve(array(
     "/insertUser" => "InsertUser",
     "/logUser" => "LogUser",
     "/activate/([a-zA-Z0-9-_]+)" => "ActivateUser",
     "/forgetPass" => "ForgetPass",
-    "/checkSession" => "CheckSession"
+    "/checkSession" => "CheckSession",
+    "/logOut" => "LogOut",
 ));
 ?>

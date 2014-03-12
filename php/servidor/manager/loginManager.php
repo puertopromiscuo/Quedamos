@@ -50,4 +50,12 @@ function checkSessionManager() {
     }
 }
 
+
+function logOutManager() {
+    if (logOut()) {
+        return createJson("ok", "Session terminada","ok" );
+    } else {
+        return createJson("error", "No hay ninguna sesión iniciada", "error");
+    }
+}
 //var_dump(checkSessionManager());

@@ -22,6 +22,13 @@ function dataUser($id) {
     return $data;
 }
 
+function logOut(){
+    if(checkSession()){
+        return session_destroy();
+    }else{
+        return false;
+    }
+}
 //var_dump(checkSession());
 
 ?>
