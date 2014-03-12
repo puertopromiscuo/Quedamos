@@ -27,6 +27,11 @@
         });
     }
     
+    function loadMap2(position) {
+        map.setCenter(position.position);
+        map.setZoom(5);
+    }
+    
     // Borra marcadores del mapa y del array
     function deleteMarkers() {
         var i;
@@ -95,6 +100,9 @@
     root.MAP.renderMap = renderMap;
     root.MAP.registerUserEvent = registerUserEvent;
     root.MAP.deleteUserEvent = delUserEvent;
+    //prueba
+    root.MAP.markers = markers;
+    root.MAP.loadMap2 = loadMap2;
 
 
 

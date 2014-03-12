@@ -10,9 +10,18 @@
         })
         
 
-        title = $('<div class="col-xs-8"><span>' + event_title + '</span><br><span>' + event_date + '</span></div>');
+        title = $('<button class="col-xs-8"><span>' + event_title + '</span><br><span>' + event_date + '</span></button>');
+        title.on("click", function() {
+            console.log(MAP.markers);
+            for(i=0;i< MAP.markers.length;i++){
+                if(MAP.markers[i].event_id == event_id){
+                    alert("yes");
+                    MAP.loadMap2(MAP.markers[i]);
+                }
+            }
+        })
         container.append(title);
-
+        
         /*date = $('<div class="col-xs-3"><span>' + event_date + '</span></div>');
         container.append(date);*/
         
