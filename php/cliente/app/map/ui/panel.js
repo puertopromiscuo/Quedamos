@@ -1,6 +1,8 @@
 iris.ui(function(self) {
     eventsList = [];
     registerEventList = [];
+    var point_x;
+    var point_y;
 
 
     self.create = function() {
@@ -35,10 +37,12 @@ iris.ui(function(self) {
          self.get("address").blur(function() {
             if (this.value !== "") {
                 MAP.findAddress(this.value, function(coord) {
+                    alert(coord);
                     if (coord) {
                         panelStatus(true);
-                        point_x = coord.d;
-                        point_y = coord.e;
+                        point_x = 21;
+                        point_y = 22;
+                        alert(coord.d,point_y);
                     } else {
                         panelStatus(false, "Direccion no encontrada");
                     }
