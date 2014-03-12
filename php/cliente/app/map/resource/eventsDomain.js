@@ -108,7 +108,7 @@
         });
     }
 
-
+    //USUARIO
     function checkSession(callback) {
         $.ajax({
             type: 'POST',
@@ -129,7 +129,21 @@
         }).done(function(data) {
             callback(data);
         }).fail(function() {
-            console.log("Error usuario no existente");
+            console.log("Error CERRAR SESSION");
+        })
+    }
+    function updateProfile(imagen,callback) {
+        $.ajax({
+            type: 'POST',
+            url: 'servidor/services/loginService/updateProfile',
+            dataType: 'json',
+            data: {
+                image: imagen
+            }
+        }).done(function(data) {
+            callback(data);
+        }).fail(function() {
+            console.log("Error UPDATE PERFIL");
         })
     }
 
@@ -183,6 +197,8 @@
     root.EVENTS.arrayUsersToString = arrayUsersToString;
     root.EVENTS.countEvents = countEvents;
     root.EVENTS.closeSession = closeSession;
+    root.EVENTS.checkSession = checkSession;
+    root.EVENTS.updateProfile = updateProfile;
 
 
 

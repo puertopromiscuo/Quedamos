@@ -33,8 +33,8 @@ iris.ui(function(self) {
          })
          });
          */
-         //on blur de la direccion crea un marcador en el mapa
-         self.get("address").blur(function() {
+        //on blur de la direccion crea un marcador en el mapa
+        self.get("address").blur(function() {
             if (this.value !== "") {
                 MAP.findAddress(this.value, function(coord) {
                     if (coord) {
@@ -46,8 +46,8 @@ iris.ui(function(self) {
                     }
                 });
             }
-         });
-         
+        });
+
         //crea un evento y rederiza el mapa
         self.get("create-event").click(function() {
             if (validatePanel()) {
@@ -82,8 +82,10 @@ iris.ui(function(self) {
             var myEvent;
             var users;
             data.forEach(function(event) {
-                myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
-                self.get("my-events-list").append(myEvent);
+                if (event.event_userid == EVENTS.getUserId()) {
+                    myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
+                    self.get("my-events-list").append(myEvent);
+                }
             })
         })
     }

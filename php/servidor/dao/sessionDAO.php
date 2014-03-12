@@ -22,13 +22,53 @@ function dataUser($id) {
     return $data;
 }
 
-function logOut(){
-    if(checkSession()){
+function logOut() {
+    if (checkSession()) {
         return session_destroy();
-    }else{
+    } else {
         return false;
     }
 }
-//var_dump(checkSession());
+function updateDataUser($img) {
+    $i= checkSession();
+    $id = empty($i) ? null : $i;
+    if ($img) {
+        if ($id) {
+            $nombre = $img['archivo']['name'];
+            $nombre_tmp = $img['archivo']['tmp_name'];
+            $tipo = $img['archivo']['type'];
+            $tamano = $img['archivo']['size'];
 
+            $ext_permitidas = array('jpg', 'jpeg', 'gif', 'png');
+            $partes_nombre = explode('.', $nombre);
+            $extension = end($partes_nombre);
+            $ext_correcta = in_array($extension, $ext_permitidas);
+
+            $tipo_correcto = preg_match('/^image\/(pjpeg|jpeg|gif|png)$/', $tipo);
+
+            $limite = 2500000;
+
+            if ($ext_correcta && $tipo_correcto && $tamano <= $limite) {
+                if ($img['archivo']['error'] > 0) {
+                        return false;
+                } else {
+                    if (file_exists('../../img/userImage/' . $nombre)) {
+                        return false;
+                    } else {
+                        move_uploaded_file($nombre_tmp, "../../img/userImage/" . $id);
+                        return true;
+                    }
+                }
+            } else {
+                echo false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+//var_dump(checkSession());
 ?>

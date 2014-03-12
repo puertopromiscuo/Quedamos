@@ -258,7 +258,7 @@ i.scroll:hover {
 }
 
 .dark {
-    background-color: #3C4C5C;
+    background-color: rgba(38, 158, 81, 0.26);
 }
 .btn-circle {
     width: 70px;

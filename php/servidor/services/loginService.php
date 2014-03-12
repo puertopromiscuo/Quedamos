@@ -51,6 +51,12 @@ class LogOut{
     }
 }
 
+class UpdateProfile{
+    function post(){
+        updateProfileManager($_POST['archivo']);
+    }
+}
+
 Toro::serve(array(
     "/insertUser" => "InsertUser",
     "/logUser" => "LogUser",
@@ -58,5 +64,8 @@ Toro::serve(array(
     "/forgetPass" => "ForgetPass",
     "/checkSession" => "CheckSession",
     "/logOut" => "LogOut",
+    "/updateProfile" => "UpdateProfile"
 ));
+
+
 ?>

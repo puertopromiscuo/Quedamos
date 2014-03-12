@@ -58,4 +58,15 @@ function logOutManager() {
         return createJson("error", "No hay ninguna sesión iniciada", "error");
     }
 }
+
+
+function updateProfileManager($img){
+    if (updateDataUser($img)) {
+        return createJson("ok", "Imagen actualizada","ok" );
+    } else {
+        return createJson("error", "Error al actualizar el eperfil", "error");
+    }
+}
+
+
 //var_dump(checkSessionManager());
