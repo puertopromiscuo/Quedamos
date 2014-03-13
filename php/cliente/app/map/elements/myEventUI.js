@@ -23,7 +23,7 @@
         container.append(users);
 
         if (admin) {
-            conf = $('<button id="conf-my-event" class="glyphicon glyphicon-edit btn btn-danger btn-sm"> </button>');
+            conf = $('<button id="conf-my-event" class="glyphicon glyphicon-edit btn btn-warning btn-sm" role="menuitem" tabindex="-1" event-id="' + $(this).parent().parent().data("eventid") + '" data-toggle="modal" data-target="#customEvent"></button>');
             conf.on("click", function() {
                 console.log($(this).parent().parent().data("eventid"));
             })
