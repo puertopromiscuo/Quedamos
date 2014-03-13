@@ -10,13 +10,13 @@ iris.ui(function(self) {
         self.tmpl(iris.path.ui.panel.html);
         renderMyEvents();
         renderRegisterEvent();
-        
-        
-        
+
+
+
         self.get("date")
                 .val(PANEL.getToday())
                 .attr("min", PANEL.getToday());
-        
+
         //BUSCAR
         self.get("search").on("keyup", function(e) {
             if (e.keyCode === 13 && this.value.trim() !== "") {
@@ -24,21 +24,19 @@ iris.ui(function(self) {
                 var count = 0;
                 //Vaciar panel de busqueda
                 self.get("search-event-list").html("");
-                PANEL.loadEvents(function(data) {
-                    console.log("Cargando mis eventos");
+                EVENTS.getAllEvents(function(data) {
+                    console.log("Buscando eventos");
                     var myEvent;
-                    data.forEach(function(event) {
-                        console.log(event);
-                        console.log(name);
+                    data.forEach(function(event) {                                                
                         if (event.event_title == name) {
                             myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
                             self.get("search-event-list").append(myEvent);
                             count++;
                         }
                     })
-                    if(!count){
-                            self.get("search-event-list").html("No se han encontrado coincidencias");
-                            console.log("No se han encontrado coincidencias");
+                    if (!count) {
+                        self.get("search-event-list").html("No se han encontrado coincidencias");
+                        iris.notify("alertError","No se han encontrado coincidencias");
                     }
                 })
                 this.value = "";
@@ -65,14 +63,14 @@ iris.ui(function(self) {
          });
          */
         //on blur de la direccion crea un marcador en el mapa
-        self.get("address").blur(function() {            
+        self.get("address").blur(function() {
             if (this.value !== "") {
                 MAP.findAddress(this.value, function(coord) {
-                    if (coord) {                        
+                    if (coord) {
                         event_x = coord.lat();
                         event_y = coord.lng();
                     } else {
-                        iris.notify("alertError","Direccion no encontrada");
+                        iris.notify("alertError", "Direccion no encontrada");
                     }
                 });
             }
@@ -84,15 +82,15 @@ iris.ui(function(self) {
                 EVENTS.insertEvent(
                         self.get("title").val(),
                         self.get("description").val(),
-                        self.get("date").val(),                        
+                        self.get("date").val(),
                         EVENTS.getUserId(),
                         event_x,
                         event_y,
                         self.get("type").val(),
-                        function(data) {                           
+                        function(data) {
                             renderMyEvents();
                             MAP.renderMap();
-                            iris.notify("alertSuccess","Evento creado");
+                            iris.notify("alertSuccess", "Evento creado");
                         }
                 )
                 self.get("title").val("");
@@ -100,12 +98,12 @@ iris.ui(function(self) {
                 self.get("address").val("");
                 self.get("date").val("");
                 self.get("date")
-                .val(PANEL.getToday())
-                .attr("min", PANEL.getToday());
-            } else {                
-                 iris.notify("alertError","Rellene todos los campos");
+                        .val(PANEL.getToday())
+                        .attr("min", PANEL.getToday());
+            } else {
+                iris.notify("alertError", "Rellene todos los campos");
             }
-            
+
 
         });
 
@@ -113,15 +111,11 @@ iris.ui(function(self) {
 
     function renderMyEvents() {
         self.get("my-events-list").html("");
-        PANEL.loadEvents(function(data) {
-            console.log("Cargando mis eventos");
+        PANEL.loadMyEvents(function(data) {
             var myEvent;
-            var users;
             data.forEach(function(event) {
-                if (event.event_userid == EVENTS.getUserId()) {
-                    myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
-                    self.get("my-events-list").append(myEvent);
-                }
+                myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
+                self.get("my-events-list").append(myEvent);
             })
         })
     }
@@ -129,14 +123,10 @@ iris.ui(function(self) {
 
     function renderRegisterEvent() {
         self.destroyUIs('register-events-list');
-        PANEL.loadEvents(function(data) {
+        PANEL.loadMyRegisterEvents(function(data) {
             data.forEach(function(event) {
-                for (var i = 0; i < event.users.length; i++) {
-                    if (event.users[i].user_id == EVENTS.getUserId()) {
-                        myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
-                        self.get("register-events-list").append(myEvent);
-                    }
-                }
+                myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
+                self.get("register-events-list").append(myEvent);
             })
         });
     }
@@ -145,13 +135,13 @@ iris.ui(function(self) {
     function validatePanel() {
         fields = [self.get("title"), self.get("description"), self.get("address"), self.get("date")]
         for (i = 0; i < fields.length; ++i) {
-            if (!fields[i].val()) {                
+            if (!fields[i].val()) {
                 return false;
             }
         }
         return true;
     }
-    
+
 
 }, iris.path.ui.panel.js);
 

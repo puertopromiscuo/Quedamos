@@ -3,19 +3,38 @@
 
 
 
-    function loadEvents(callback) {
-        EVENTS.getAllEvents(callback, function(data) {
-            var myEventList = [];
+    function loadMyEvents(callback) {
+        var eventList = [];
+        EVENTS.getAllEvents(function(data) {
+            console.log("Cargando mis eventos");                        
+            for (var i = 0; i < data.length; i++) {                                
+                if (data[i].event_userid == EVENTS.getUserId()) {                                         
+                    eventList.push(data[i]);
+                }
+            }
+            console.log(eventList);            
+            callback(eventList);            
+        })
+    }   
+    
+    function loadMyRegisterEvents(callback) {
+        var eventList = [];
+        EVENTS.getAllEvents(function(data) {
+            console.log("Cargando mis eventos apuntados");                        
             data.forEach(function(event) {
-                alert(event);
-                if (event.event_userid == EVENTS.getUserId()) {
-                    myEventList(event);
+                for (var i = 0; i < event.users.length; i++) {
+                    if (event.users[i].user_id == EVENTS.getUserId()) {               
+                        eventList.push(event);                   
+                    }
                 }
             })
-
-            callback(myEventList)
+            console.log(eventList);            
+            callback(eventList);            
         })
-    }
+    }   
+    
+    
+
 
     function deleteEvent(event_id, callback) {
         EVENT.deleteEvent(event_id, function(data) {
@@ -48,9 +67,10 @@
         root.PANEL = {};
     }
 
-    root.PANEL.loadEvents = loadEvents;
+    root.PANEL.loadMyEvents = loadMyEvents;
     root.PANEL.deleteEvent = deleteEvent;
     root.PANEL.getToday = getToday;
+    root.PANEL.loadMyRegisterEvents=loadMyRegisterEvents;
 
 
 
