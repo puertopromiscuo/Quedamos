@@ -9,7 +9,7 @@ function getEvent($event_id) {
 }
 
 function getAllEvents(){
-    $query = "SELECT * from " . SQL_EVENTTABLE;
+    $query = "SELECT * from " . SQL_EVENTTABLE . " WHERE event_date= CURDATE()";
     return sqlSelect($query);    
 }
 
