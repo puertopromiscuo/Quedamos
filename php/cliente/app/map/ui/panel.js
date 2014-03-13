@@ -8,8 +8,7 @@ iris.ui(function(self) {
     self.create = function() {
         self.tmplMode(self.APPEND);
         self.tmpl(iris.path.ui.panel.html);
-        renderMyEvents();
-        renderRegisterEvent();
+        render(false);
 
 
 
@@ -129,6 +128,14 @@ iris.ui(function(self) {
                 self.get("register-events-list").append(myEvent);
             })
         });
+    }
+    
+    function render(map) {
+        renderMyEvents();
+        renderRegisterEvent();
+        if (map) {
+            MAP.renderMap();
+        }
     }
 
 
