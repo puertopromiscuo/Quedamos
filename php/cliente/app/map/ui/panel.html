@@ -51,6 +51,14 @@
                         <div id="collapseFour" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <input type="text" data-id="search" class="form-control" placeholder="Nombre del evento...">
+                                <button id="vertical-toolbar">asa</button>
+                                <div id="user-toolbar-options" class="sr-only">
+                                    <a href="#"><i class="icon-user"></i></a>
+                                    <a href="#"><i class="icon-star"></i></a>
+                                    <a href="#"><i class="icon-edit"></i></a>
+                                    <a href="#"><i class="icon-delete"></i></a>
+                                    <a href="#"><i class="icon-ban"></i></a>
+                                </div>	
                             </div>
                                 <ul data-id="search-event-list">                         
                                 </ul>
@@ -70,7 +78,12 @@
           $(this).parent().parent().find('.active').removeClass('active');
 	  $(this).parent().addClass('active');
           
-	})	
+	});
+        
+        $('#vertical-toolbar').toolbar({
+            content: '#user-toolbar-options',
+            position: 'right'
+        });
     </script>
     </div>
 </div>

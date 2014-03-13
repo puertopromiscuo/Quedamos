@@ -54,6 +54,11 @@ iris.ui(
                 }).fail(function() {
                     stop();
                     console.log(arguments);
+                    data= {
+                        status: "error",
+                        message: "Email no existente."
+                    }
+                    viewRegister(data);
                 });
             }
 

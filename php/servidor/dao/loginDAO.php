@@ -18,28 +18,22 @@ function insertUser($name, $email, $password) {
     $pass = Encrypter::encrypt($password);
     if (mysqli_num_rows(get_data('user_name', $name)) === 0) {
         if (mysqli_num_rows(get_data('user_email', $email)) === 0) {
-            //help
-            $query = "INSERT into " . SQL_USERTABLE . " (user_name,user_email,user_password) values('$name','$email','$pass')";
-            $result = mysqli_query($db, $query);
             $code = createToken();
-            if ($result) {
-                $cuerpo = 'Hola ' . $name . ', para activar tu cuenta haz click en el siguiente link:
+            $cuerpo = 'Hola ' . $name . ', para activar tu cuenta haz click en el siguiente link:
                             ' . "\n" . '
                             <a href="http://http://localhost/git/GoogleMaps/Mapa,buscarNombre/activar.html?code=' . $code . '">http://localhost/git/GoogleMaps/Mapa,buscarNombre/activar.html?code=' . $code . '</a>
                             O copia el siguiente link en la barra de direcciones de tu navegador:
                             ' . "\n" . '
                             http://localhost/github/quedamos/php/servidor/services/loginService/activate/' . $code;
 
-                if (send_mail($email, $cuerpo)) {
-                    $query_state_null = "UPDATE " . SQL_USERTABLE . " SET user_state='$code' WHERE user_name='" . $name . "'";
-                    mysqli_query($db, $query_state_null);
-                    return false;
-                } else {
-                    return "El email introducido no es válido.";
-                }
-            } else
-                return "Error en el insert";
-        }else {
+            if (send_mail($email, $cuerpo)) {
+                $query = "INSERT into " . SQL_USERTABLE . " (user_name,user_email,user_password,user_state) values('$name','$email','$pass','$code')";
+                $result = mysqli_query($db, $query);
+                return false;
+            } else {
+                return "El email introducido no es válido.";
+            }
+        } else {
             return "El email ya esta en uso";
         }
     } else {
@@ -106,7 +100,6 @@ function forgetPass($mail) {
         return $content_user_data['user_name'];
     }
 }
-
 
 //var_dump(insertUser(2, "jesusgraficap@gmail.com" ,2));
 //var_dump(activateUser("627d79a86b13815ef5fb9731c491f400348151e7"));
