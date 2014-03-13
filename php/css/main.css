@@ -108,14 +108,27 @@ hr {
     
 }
 
-.nav-tabs > li > a {
+.nav-tabs > li > a,.nav-tabs > li {
     color: white;
     margin-bottom: 5px;
     border-radius: 0 0 0 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.3);
+    display: inline-flex;
+}
+.nav-tabs button {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.1);
+    border:0;
+}
+.nav-tabs button .red{
+    padding: 0px; 
 }
 
+.nav-tabs .row{
+    width: 100%;
+    margin-bottom: 16px;
+}
 .tab-content {
     //background-color: #ffffff;
     padding-left: 15px;
