@@ -6,7 +6,8 @@
         
         del = $('<button id="del-my-event"  class="glyphicon glyphicon-remove btn btn-danger"> </button>');
         del.on("click", function() {
-            console.log($(this).parent().parent().data("eventid"));
+            EVENTS.deleteEvent($(this).parent().parent().data("eventid"));
+            iris.notify("render",true);            
         })
         
 
@@ -18,10 +19,7 @@
                 }
             }
         })
-        container.append(title);
-        
-        /*date = $('<div class="col-xs-3"><span>' + event_date + '</span></div>');
-        container.append(date);*/
+        container.append(title);        
         
         users = $('<div class="col-xs-2"><span class="badge">' + event_users.length + '</span></div>');
         container.append(users);  
