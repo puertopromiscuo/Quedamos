@@ -13,9 +13,9 @@ function getAllEvents(){
     return sqlSelect($query);    
 }
 
-function insertEvent($event_title, $event_description, $event_date, $event_userid,$event_x,$event_y) {
-    $query = "INSERT into " . SQL_EVENTTABLE . " (event_title,event_description,event_date,event_userid,event_x,event_y) "
-            . "values ('$event_title','$event_description','$event_date','$event_userid','$event_x','$event_y')";    
+function insertEvent($event_title, $event_description, $event_date, $event_userid,$event_x,$event_y,$event_type) {
+    $query = "INSERT into " . SQL_EVENTTABLE . " (event_title,event_description,event_date,event_userid,event_x,event_y,event_type) "
+            . "values ('$event_title','$event_description','$event_date','$event_userid','$event_x','$event_y','$event_type')";    
     return sqlInsert($query);    
 }
 

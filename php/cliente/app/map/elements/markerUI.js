@@ -1,16 +1,19 @@
 (function() {
     var root = this;
-
-    var image = new google.maps.MarkerImage(
-            './img/event.png'
+    
+    function getIcon(type){
+        var image = new google.maps.MarkerImage(
+            './img/'+type+'.png'
             , new google.maps.Size(40, 53)
-            );
+            );            
+        return image;
+    }
 
 
-    function createMarker(event_id, event_title, event_description, event_date, event_userid, event_x, event_y, event_users, map) {
+    function createMarker(event_id, event_title, event_description, event_date, event_userid, event_x, event_y, event_users,event_type, map) {        
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(event_x, event_y),
-            icon: image,
+            icon: getIcon(event_type),
             animation: google.maps.Animation.DROP,
             map: map,
             event_id: event_id.toString(),
