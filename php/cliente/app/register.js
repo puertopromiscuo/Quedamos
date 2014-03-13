@@ -38,6 +38,7 @@ iris.ui(
 
             function sendRegister() {
                 var formRegister = $('#register-content');
+                play();
                 $.ajax({
                     type: 'POST',
                     url: 'servidor/services/loginService/insertUser',
@@ -48,8 +49,10 @@ iris.ui(
                         password: formRegister.find('input[name = user-password]').val()}
                 }).done(function(data) {
                     viewRegister(data);
+                    stop();
                     console.log(data);
                 }).fail(function() {
+                    stop();
                     console.log(arguments);
                 });
             }
@@ -122,6 +125,37 @@ iris.ui(
                     });
                     $userName.appendTo('#menu-top');
                 }
+            }
+            function loaged() {
+                var circle = new Sonic({
+                    width: 50,
+                    height: 50,
+                    padding: 50,
+                    strokeColor: '#000',
+                    pointDistance: .01,
+                    stepsPerFrame: 3,
+                    trailLength: .7,
+                    step: 'fader',
+                    setup: function() {
+                        this._.lineWidth = 5;
+                    },
+                    path: [
+                        ['arc', 25, 25, 25, 0, 360]
+                    ]
+
+                });
+                return circle;
+                
+            }
+            function play(){
+                var circle = loaged();
+                circle.play();
+                $('#load-loaded').append(circle.canvas);
+            }
+            function stop(){
+                var circle = loaged();
+                circle.stop();
+                $('#load-loaded').html("");
             }
         },
         iris.path.ui.register.js

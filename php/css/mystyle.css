@@ -79,3 +79,6 @@ a {
 .myAlert{
     margin-top: 1em;
 }
+.load{
+    z-index: 1001;
+}
