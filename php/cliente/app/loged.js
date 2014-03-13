@@ -38,10 +38,7 @@ iris.screen(
                         iris.navigate("#/unloged");
                     }
                 });
-                EVENTS.countEvents(function(data) {
-                    self.get("count-my-events-come").text("+" + data.eventsCome);
-                    self.get("count-my-events").text("+" + data.eventsMy);
-                });
+                
             };
 
             self.sleep = function() {
