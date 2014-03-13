@@ -16,7 +16,7 @@ iris.screen(
                 iris.on("alertSuccess", function(message) {
                     self.get("success-panel").show().removeClass("hidden").text(message).fadeOut(5000);
                     console.log("event alertSuccess")
-                });
+                });                
 
 
                 self.get('log-out').click(function() {
