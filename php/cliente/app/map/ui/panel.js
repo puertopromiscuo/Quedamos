@@ -9,11 +9,11 @@ iris.ui(function(self) {
         self.tmplMode(self.APPEND);
         self.tmpl(iris.path.ui.panel.html);
         render(false);
-        
+
         iris.on("render", function(map) {
-                    render(map);
-                    console.log("event render panel")
-                });
+            render(map);
+            console.log("event render panel")
+        });
 
 
         self.get("date")
@@ -30,7 +30,7 @@ iris.ui(function(self) {
                 EVENTS.getAllEvents(function(data) {
                     console.log("Buscando eventos");
                     var myEvent;
-                    data.forEach(function(event) {                                                
+                    data.forEach(function(event) {
                         if (event.event_title == name) {
                             myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
                             self.get("search-event-list").append(myEvent);
@@ -39,7 +39,7 @@ iris.ui(function(self) {
                     })
                     if (!count) {
                         self.get("search-event-list").html("No se han encontrado coincidencias");
-                        iris.notify("alertError","No se han encontrado coincidencias");
+                        iris.notify("alertError", "No se han encontrado coincidencias");
                     }
                 })
                 this.value = "";
@@ -112,7 +112,7 @@ iris.ui(function(self) {
 
     };
 
-    function renderMyEvents() {        
+    function renderMyEvents() {
         self.get("my-events-list").html("");
         PANEL.loadMyEvents(function(data) {
             var myEvent;
@@ -124,8 +124,8 @@ iris.ui(function(self) {
     }
 
 
-    function renderRegisterEvent() {        
-        self.get("register-events-list").html("");        
+    function renderRegisterEvent() {
+        self.get("register-events-list").html("");
         PANEL.loadMyRegisterEvents(function(data) {
             data.forEach(function(event) {
                 myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
@@ -133,13 +133,15 @@ iris.ui(function(self) {
             })
         });
     }
-    function rederHeadPanel(){
+    function rederHeadPanel() {
         EVENTS.countEvents(function(data) {
-                    self.get("count-my-events-come").text("+" + data.eventsCome);
-                    self.get("count-my-events").text("+" + data.eventsMy);
-                });
+            self.get("count-my-events-come").text("+" + data.eventsCome);
+            self.get("count-my-events").text("+" + data.eventsMy);
+        });
+        self.get("menu-top").text(iris.userName);
+        self.get("id-prueba").text(iris.userId);
     }
-    
+
     function render(map) {
         renderMyEvents();
         renderRegisterEvent();

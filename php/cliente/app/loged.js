@@ -25,18 +25,18 @@ iris.screen(
                     });
                     iris.navigate("#/unloged");
                 });
+                
             };
 
             self.awake = function() {
                 console.log("Loged Screen Awakened");
                 check_session(function(data) {
                     iris.userId = data.result.id;
-                    if (data.status === "ok") {
-                        self.get("menu-top").text(data.result.name);
-                        self.get("id-prueba").text(data.result.id);
-                    } else {
+                    iris.userName = data.result.name;
+                    if (data.status !== "ok") {
                         iris.navigate("#/unloged");
                     }
+                    iris.notify("render",false);
                 });
                 
             };
