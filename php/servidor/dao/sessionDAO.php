@@ -17,7 +17,8 @@ function dataUser($id) {
     $data = array(
         "id" => $row['user_id'],
         "name" => $row['user_name'],
-        "email" => $row['user_email']
+        "email" => $row['user_email'],
+        "image" => $row['user_image']
     );
     return $data;
 }

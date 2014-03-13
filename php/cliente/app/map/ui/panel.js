@@ -14,10 +14,11 @@ iris.ui(function(self) {
             console.log("event render panel")
         });
 
-
         self.get("date")
                 .val(PANEL.getToday())
                 .attr("min", PANEL.getToday());
+        
+        
 
         //BUSCAR
         self.get("search").on("keyup", function(e) {
@@ -128,6 +129,8 @@ iris.ui(function(self) {
         });
         self.get("menu-top").text(iris.userName);
         self.get("id-prueba").text(iris.userId);
+        self.get("user-image").attr("src","img/userImage/"+iris.userImage+".png");        
+        console.log(iris.userImage);
     }
 
     function render(map) {

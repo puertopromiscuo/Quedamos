@@ -27,7 +27,8 @@ function insertUser($name, $email, $password) {
                             http://localhost/github/quedamos/php/servidor/services/loginService/activate/' . $code;
 
             if (send_mail($email, $cuerpo)) {
-                $query = "INSERT into " . SQL_USERTABLE . " (user_name,user_email,user_password,user_state) values('$name','$email','$pass','$code')";
+                $user_image = rand(1,10);
+                $query = "INSERT into " . SQL_USERTABLE . " (user_name,user_email,user_password,user_state,user_image) values('$name','$email','$pass','$code','$user_image')";
                 $result = mysqli_query($db, $query);
                 return false;
             } else {

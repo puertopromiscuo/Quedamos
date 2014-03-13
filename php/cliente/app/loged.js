@@ -33,6 +33,7 @@ iris.screen(
                 check_session(function(data) {
                     iris.userId = data.result.id;
                     iris.userName = data.result.name;
+                    iris.userImage = data.result.image;
                     if (data.status !== "ok") {
                         iris.navigate("#/unloged");
                     }
