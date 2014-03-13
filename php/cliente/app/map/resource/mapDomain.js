@@ -69,8 +69,8 @@
             console.log(data.result);
         })
         come = '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + event_id + ');"> Desapuntarte</button>';
-        $('#come').children().remove();
-        $('#come').append(come);
+        $('#come'+event_id).children().remove();
+        $('#come'+event_id).append(come);
          
     }
 
@@ -79,8 +79,8 @@
             console.log(data.result);
         })
         come = '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + event_id + ');"> Me apunto</button>';
-        $('#come').children().remove();
-        $('#come').append(come);
+        $('#come'+event_id).children().remove();
+        $('#come'+event_id).append(come);
        
     }
     
