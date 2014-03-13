@@ -1,89 +1,115 @@
 <div>
-  
-        <div class="col-xs-12">
-            <div class="tab-content">
-                <span class="nameUser" data-id="menu-top"></span><span data-id="id-prueba"></span>
-                <ul class="nav nav-tabs nav-stacked" id="myTab">
-                    <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            Crear Evento
-                        </a></li>
-                    <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                            Estoy apuntado
-                        </a></li>
-                    <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                            Mis eventos
-                        </a></li>
-                    <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                            Buscar eventos
-                        </a></li>
-                </ul>
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">                     
-                        <div id="collapseOne" class="panel-collapse collapse ">
-                            <div class="panel-body">
-                                <form id="formulario">                                
-                                    <input type="text" data-id="title" class="form-control"   placeholder="Titulo" >
-                                    <input type="text" data-id="address" class="form-control" id="address"  placeholder="Lugar">
-                                    <textarea data-id="description" class="form-control" rows="3" placeholder="Descripcion: actividad, hora, duracion,etc.."></textarea>                                    
-                                    <input data-id="date" type="date" class="form-control">   
-                                     <select data-id="type" class="form-control">                               
-                                        <option value="event">General</option>
-                                        <option value="sport">Deporte</option>
-                                        <option value="party">Fiesta</option>
-                                    </select>
-                                    <button type="button" data-id="create-event" id="btn_grabar" class="btn btn-success">Crear</button>                                
+    <div class="row w">
+        <div class="col-xs-4">
+            <a href=""  data-toggle="modal" data-target="#ModalProfile"><img src="img/prueba-perfil.jpg" alt="" class="img-responsive "></a>
+        </div>
+        <div class="col-xs-7 padding1">
+            <div class="nameUser">Nombre: 
+                <span class="nameUser" data-id="menu-top"></span>  
 
-                                </form>
-                            </div>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div data-id="register-events-list">                         
-                                </div>
-                            </div>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div data-id="my-events-list">                         
-                                </div>
-                            </div>
-                        </div>
-                        <div id="collapseFour" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <input type="text" data-id="search" class="form-control" placeholder="Nombre del evento...">
-                                <button id="vertical-toolbar">asa</button>
-                                <div id="user-toolbar-options" class="sr-only">
-                                    <a href="#"><i class="icon-user"></i></a>
-                                    <a href="#"><i class="icon-star"></i></a>
-                                    <a href="#"><i class="icon-edit"></i></a>
-                                    <a href="#"><i class="icon-delete"></i></a>
-                                    <a href="#"><i class="icon-ban"></i></a>
-                                </div>	
-                            </div>
-                                <ul data-id="search-event-list">                         
-                                </ul>
-                        </div>
+                <span class="dropdown">
+                    <button class="btn btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-cog"></span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#ModalProfile">Perfil</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" data-id="log-out">Cerrar sesión</a></li>
+                    </ul>
+                </span>
+            </div>
 
+            <br><small class="other">(UserId: <span data-id="id-prueba"></span>)</small>
+            <br>
+            <span class="label label-primary" data-id="count-my-events" title="Eventos creados"></span>
+            <span class="label label-success" data-id="count-my-events-come" title="Eventos en los que has participado"></span>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="tab-content">
+            <span class="nameUser" data-id="menu-top"></span><span data-id="id-prueba"></span>
+            <ul class="nav nav-tabs nav-stacked" id="myTab">
+                <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Crear Evento
+                    </a></li>
+                <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        Estoy apuntado
+                    </a></li>
+                <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        Mis eventos
+                    </a></li>
+                <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                        Buscar eventos
+                    </a></li>
+            </ul>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">                     
+                    <div id="collapseOne" class="panel-collapse collapse ">
+                        <div class="panel-body">
+                            <form id="formulario">                                
+                                <input type="text" data-id="title" class="form-control"   placeholder="Titulo" >
+                                <input type="text" data-id="address" class="form-control" id="address"  placeholder="Lugar">
+                                <textarea data-id="description" class="form-control" rows="3" placeholder="Descripcion: actividad, hora, duracion,etc.."></textarea>                                    
+                                <input data-id="date" type="date" class="form-control">   
+                                <select data-id="type" class="form-control">                               
+                                    <option value="event">General</option>
+                                    <option value="sport">Deporte</option>
+                                    <option value="party">Fiesta</option>
+                                </select>
+                                <button type="button" data-id="create-event" id="btn_grabar" class="btn btn-success">Crear</button>                                
 
+                            </form>
+                        </div>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div data-id="register-events-list">                         
+                            </div>
+                        </div>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div data-id="my-events-list">                         
+                            </div>
+                        </div>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <input type="text" data-id="search" class="form-control" placeholder="Nombre del evento...">
+                            <button id="vertical-toolbar">asa</button>
+                            <div id="user-toolbar-options" class="sr-only">
+                                <a href="#"><i class="icon-user"></i></a>
+                                <a href="#"><i class="icon-star"></i></a>
+                                <a href="#"><i class="icon-edit"></i></a>
+                                <a href="#"><i class="icon-delete"></i></a>
+                                <a href="#"><i class="icon-ban"></i></a>
+                            </div>	
+                        </div>
+                        <ul data-id="search-event-list">                         
+                        </ul>
                     </div>
 
-                </div><!-- Tab Content -->
 
-            </div><!-- col-md-8 -->
+                </div>
+
+            </div><!-- Tab Content -->
+
+        </div><!-- col-md-8 -->
 
         <script>
-	$('#myTab a').click(function (e) {
-	  //e.preventDefault()
-          //$(this).parent().parent().find('active').removeClass('active');
-          $(this).parent().parent().find('.active').removeClass('active');
-	  $(this).parent().addClass('active');
-          
-	});
-        
-        $('#vertical-toolbar').toolbar({
-            content: '#user-toolbar-options',
-            position: 'right'
-        });
-    </script>
+            $('#myTab a').click(function(e) {
+                //e.preventDefault()
+                //$(this).parent().parent().find('active').removeClass('active');
+                $(this).parent().parent().find('.active').removeClass('active');
+                $(this).parent().addClass('active');
+
+            });
+
+            $('#vertical-toolbar').toolbar({
+                content: '#user-toolbar-options',
+                position: 'right'
+            });
+        </script>
     </div>
 </div>

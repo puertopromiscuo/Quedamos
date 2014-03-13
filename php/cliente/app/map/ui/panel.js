@@ -133,10 +133,17 @@ iris.ui(function(self) {
             })
         });
     }
+    function rederHeadPanel(){
+        EVENTS.countEvents(function(data) {
+                    self.get("count-my-events-come").text("+" + data.eventsCome);
+                    self.get("count-my-events").text("+" + data.eventsMy);
+                });
+    }
     
     function render(map) {
         renderMyEvents();
         renderRegisterEvent();
+        rederHeadPanel();
         if (map) {
             MAP.renderMap();
         }
