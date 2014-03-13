@@ -106,7 +106,7 @@ iris.ui(function(self) {
         PANEL.loadMyEvents(function(data) {
             var myEvent;
             data.forEach(function(event) {
-                myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)
+                myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users,true)
                 self.get("my-events-list").append(myEvent);
             })
         })
