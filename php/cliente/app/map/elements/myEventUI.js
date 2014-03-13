@@ -6,8 +6,11 @@
         
         del = $('<button id="del-my-event"  class="glyphicon glyphicon-remove btn btn-danger"> </button>');
         del.on("click", function() {
-            EVENTS.deleteEvent($(this).parent().parent().data("eventid"));
-            iris.notify("render",true);            
+            EVENTS.deleteEvent($(this).parent().parent().data("eventid"),function(data){
+                iris.notify("render",true);            
+                iris.notify("alertSuccess","Evento borrado");
+            });
+            
         })
         
 
