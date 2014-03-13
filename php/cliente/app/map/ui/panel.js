@@ -84,10 +84,11 @@ iris.ui(function(self) {
                 EVENTS.insertEvent(
                         self.get("title").val(),
                         self.get("description").val(),
-                        self.get("date").val(),
+                        self.get("date").val(),                        
                         EVENTS.getUserId(),
                         event_x,
                         event_y,
+                        self.get("type").val(),
                         function(data) {                           
                             renderMyEvents();
                             MAP.renderMap();
@@ -98,9 +99,13 @@ iris.ui(function(self) {
                 self.get("description").val("");
                 self.get("address").val("");
                 self.get("date").val("");
+                self.get("date")
+                .val(PANEL.getToday())
+                .attr("min", PANEL.getToday());
             } else {                
                  iris.notify("alertError","Rellene todos los campos");
             }
+            
 
         });
 

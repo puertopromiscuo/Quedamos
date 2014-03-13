@@ -64,7 +64,7 @@ a {
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
-#formulario > input,#formulario > textarea{
+#formulario > input,#formulario > textarea,#formulario > select {
     color: white;
     margin: 0.5em;
     background-color: rgba(26, 126, 30, 0.3);

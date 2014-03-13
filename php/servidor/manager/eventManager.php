@@ -4,8 +4,8 @@ include '../dao/eventDAO.php';
 include_once '../utils/json.php';
 
 /* MAPA */
-function insertEventManager($event_title, $event_description, $event_date, $event_userid, $event_x, $event_y) {
-    $data = insertEvent($event_title, $event_description, $event_date, $event_userid, $event_x, $event_y);
+function insertEventManager($event_title, $event_description, $event_date, $event_userid, $event_x, $event_y,$event_type) {
+    $data = insertEvent($event_title, $event_description, $event_date, $event_userid, $event_x, $event_y,$event_type);
     if (count($data)) {
         return createJson("ok", "evento creado", $data);
     } else {

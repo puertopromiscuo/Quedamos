@@ -25,7 +25,8 @@ class insertEventManager {
                 $_POST['event_date'],
                 $_POST['event_userid'],
                 $_POST['event_x'],
-                $_POST['event_y']               
+                $_POST['event_y'],
+                $_POST['event_type']
              ) ;
     }
 

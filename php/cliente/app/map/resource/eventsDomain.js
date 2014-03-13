@@ -18,7 +18,7 @@
     }
 
     //INSERTAR EVENTO
-    function insertEvent(event_title, event_description, event_date, event_userid, event_x, event_y, callback) {
+    function insertEvent(event_title, event_description, event_date, event_userid, event_x, event_y,event_type,callback) {
         $.ajax({
             type: 'POST',
             url: 'servidor/services/eventService/insertEventManager',
@@ -29,7 +29,8 @@
                 event_date: event_date,
                 event_userid: event_userid,
                 event_x: event_x,
-                event_y: event_y
+                event_y: event_y,
+                event_type:event_type
             }
         }).done(function(data) {
             if (data.status === "ok") {
