@@ -21,7 +21,8 @@
             event_description: event_description.toString(),
             event_date: event_date.toString(),
             event_userid: event_userid.toString(),
-            event_users: event_users
+            event_users: event_users,
+            event_type:event_type            
         });
         
         google.maps.event.addListener(marker, 'click', function() {

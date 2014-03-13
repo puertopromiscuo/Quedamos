@@ -42,6 +42,9 @@
                 <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
                         Buscar eventos
                     </a></li>
+                <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        Filtrar eventos
+                    </a></li>
             </ul>
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">                     
@@ -76,18 +79,22 @@
                     </div>
                     <div id="collapseFour" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <input type="text" data-id="search" class="form-control" placeholder="Nombre del evento...">
-                            <button id="vertical-toolbar">asa</button>
-                            <div id="user-toolbar-options" class="sr-only">
-                                <a href="#"><i class="icon-user"></i></a>
-                                <a href="#"><i class="icon-star"></i></a>
-                                <a href="#"><i class="icon-edit"></i></a>
-                                <a href="#"><i class="icon-delete"></i></a>
-                                <a href="#"><i class="icon-ban"></i></a>
-                            </div>	
+                            <input type="text" data-id="search" class="form-control" placeholder="Nombre del evento...">                            
                         </div>
                         <ul data-id="search-event-list">                         
                         </ul>
+                    </div>
+                    <div id="collapseFive" class="panel-collapse collapse">
+                        <div class="panel-body">                            
+                                 <select data-id="event-type" class="form-control">                               
+                                    <option value="all">Todos</option>
+                                    <option value="event">General</option>
+                                    <option value="sport">Deporte</option>
+                                    <option value="party">Fiesta</option>
+                                </select>     
+                                <input data-id="event-date" type="date" class="form-control">  
+                                <button type="button" data-id="filter-markers" class="btn btn-success">Filtrar</button>                                
+                        </div>                        
                     </div>
 
 

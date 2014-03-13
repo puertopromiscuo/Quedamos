@@ -44,26 +44,15 @@ iris.ui(function(self) {
                 this.value = "";
             }
         });
-
-
-
-
-
-        /*self.on("del-my-event", function(data) {
-         EVENTS.deleteEvent(data.event_id, function(data) {
-         renderMyEvents();
-         MAP.renderMap();
-         
-         })
-         });
-         
-         //escucha evento de borrado desde registerEventList
-         self.on("del-register-event", function(data) {
-         EVENTS.deleteregisterEvent(data.event_id, function(data) {
-         renderRegisterEvent();
-         })
-         });
-         */
+        
+        
+            //iris.notify("alertSuccess","Eventos filtrados por "+$(this)[0].id);
+            self.get("filter-markers").click(function(){                
+                var type = self.get("event-type").val();
+                var date = self.get("event-date").val();
+                MAP.filterMarkers(type,date); 
+            })
+    
         //on blur de la direccion crea un marcador en el mapa
         self.get("address").blur(function() {
             if (this.value !== "") {

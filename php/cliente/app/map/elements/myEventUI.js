@@ -9,16 +9,13 @@
             EVENTS.deleteEvent($(this).parent().parent().data("eventid"),function(data){
                 iris.notify("render",true);            
                 iris.notify("alertSuccess","Evento borrado");
-            });
-            
+            });            
         })
-        
-
         title = $('<button class="col-xs-8"><span>' + event_title + '</span><br><span>' + event_date + '</span></button>');
         title.on("click", function() {            
             for(i=0;i< MAP.markers.length;i++){
                 if(MAP.markers[i].event_id == event_id){                    
-                    MAP.loadMap2(MAP.markers[i]);
+                    MAP.centerMap(MAP.markers[i]);
                 }
             }
         })

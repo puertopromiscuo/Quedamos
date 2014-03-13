@@ -20,19 +20,20 @@
         EVENTS.getAllEvents(function(data) {
             console.log("Cargando eventos del Mapa");
             console.log(data);
-            for (var i = 0; i < data.length; i++) {                
-                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, data[i].users,data[i].event_type, map);
+            for (var i = 0; i < data.length; i++) {
+                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, data[i].users, data[i].event_type, map);
                 markers.push(marker);
             }
-           
+
         });
     }
-    
-    function loadMap2(position) {
+
+    function centerMap(position) {
         map.setCenter(position.position);
-        map.setZoom(5);
+        map.setZoom(20);
     }
-    
+
+
     // Borra marcadores del mapa y del array
     function deleteMarkers() {
         var i;
@@ -69,8 +70,8 @@
             console.log(data.result);
         })
         come = '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + event_id + ');"> Desapuntarte</button>';
-        $('#come'+event_id).children().remove();
-        $('#come'+event_id).append(come);
+        $('#come' + event_id).children().remove();
+        $('#come' + event_id).append(come);
         iris.notify("render", false);
     }
 
@@ -79,15 +80,33 @@
             console.log(data.result);
         })
         come = '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + event_id + ');"> Me apunto</button>';
-        $('#come'+event_id).children().remove();
-        $('#come'+event_id).append(come);
+        $('#come' + event_id).children().remove();
+        $('#come' + event_id).append(come);
         iris.notify("render", false);
     }
-    
+
     function renderMap() {
         deleteMarkers();
         loadAllMarkers();
     }
+
+    function filterMarkers(type, date) {
+        markers.forEach(function(marker) {
+            if (marker.event_type == type || type == "all") {
+                marker.setMap(map);
+            } else {
+                marker.setMap(null);
+            }
+        })
+        if (date) {
+            markers.forEach(function(marker) {
+                if (marker.event_date != date) {
+                    marker.setMap(null);
+                }
+            });
+        }
+    }
+
 
 
 
@@ -103,7 +122,8 @@
     root.MAP.deleteUserEvent = delUserEvent;
     //prueba
     root.MAP.markers = markers;
-    root.MAP.loadMap2 = loadMap2;
+    root.MAP.centerMap = centerMap;
+    root.MAP.filterMarkers = filterMarkers;
 
 
 

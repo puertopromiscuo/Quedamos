@@ -15,7 +15,8 @@
             console.log(eventList);            
             callback(eventList);            
         })
-    }   
+    }      
+    
     
     function loadMyRegisterEvents(callback) {
         var eventList = [];
