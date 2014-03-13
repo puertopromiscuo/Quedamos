@@ -9,7 +9,11 @@ iris.ui(function(self) {
         self.tmplMode(self.APPEND);
         self.tmpl(iris.path.ui.panel.html);
         render(false);
-
+        
+        iris.on("render", function(map) {
+                    render(map);
+                    console.log("event render panel")
+                });
 
 
         self.get("date")
@@ -108,7 +112,7 @@ iris.ui(function(self) {
 
     };
 
-    function renderMyEvents() {
+    function renderMyEvents() {        
         self.get("my-events-list").html("");
         PANEL.loadMyEvents(function(data) {
             var myEvent;
@@ -120,8 +124,8 @@ iris.ui(function(self) {
     }
 
 
-    function renderRegisterEvent() {
-        self.destroyUIs('register-events-list');
+    function renderRegisterEvent() {        
+        self.get("register-events-list").html("");        
         PANEL.loadMyRegisterEvents(function(data) {
             data.forEach(function(event) {
                 myEvent = MYEVENT.createMyEvent(event.event_id, event.event_title, event.event_date, event.users)

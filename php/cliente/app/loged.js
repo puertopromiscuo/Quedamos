@@ -11,9 +11,11 @@ iris.screen(
                 /*ALERTAS*/
                 iris.on("alertError", function(message) {
                     self.get("error-panel").show().removeClass("hidden").text(message).fadeOut(5000);
+                    console.log("event alertError")
                 });
                 iris.on("alertSuccess", function(message) {
                     self.get("success-panel").show().removeClass("hidden").text(message).fadeOut(5000);
+                    console.log("event alertSuccess")
                 });
 
 

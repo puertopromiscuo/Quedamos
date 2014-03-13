@@ -71,7 +71,7 @@
         come = '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + event_id + ');"> Desapuntarte</button>';
         $('#come'+event_id).children().remove();
         $('#come'+event_id).append(come);
-         
+        iris.notify("render", false);
     }
 
     function delUserEvent(event_id) {
@@ -81,7 +81,7 @@
         come = '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + event_id + ');"> Me apunto</button>';
         $('#come'+event_id).children().remove();
         $('#come'+event_id).append(come);
-       
+        iris.notify("render", false);
     }
     
     function renderMap() {
