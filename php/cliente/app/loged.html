@@ -27,6 +27,14 @@
                                         <li role="presentation"><a role="menuitem" tabindex="-1" data-id="log-out">Cerrar sesión</a></li>
                                     </ul>
                                 </span>
+                                <button id="vertical-toolbar">asa</button>
+                                <div id="user-toolbar-options" class="sr-only">
+                                    <a href="#"><i class="icon-user"></i></a>
+                                    <a href="#"><i class="icon-star"></i></a>
+                                    <a href="#"><i class="icon-edit"></i></a>
+                                    <a href="#"><i class="icon-delete"></i></a>
+                                    <a href="#"><i class="icon-ban"></i></a>
+                                </div>	
                             </div>
 
                             <br><small class="other">(UserId: <span data-id="id-prueba"></span>)</small>
@@ -49,4 +57,10 @@
     </div>-->
     <div data-id="map-container"></div> 
     <div data-id="modal-profile"></div>
+    <script>
+        $('#vertical-toolbar').toolbar({
+            content: '#user-toolbar-options',
+            position: 'right'
+        });
+    </script>
 </div>
