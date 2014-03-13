@@ -1,6 +1,5 @@
 (function() {
-    var root = this;
-    var userId = 118;
+    var root = this;       
     //OBTENER TODOS LOS EVENTOS    
     function getAllEvents(callback) {
         $.ajax({
@@ -148,8 +147,8 @@
     }
 
     function getUserId() {
-        return 118;
-    }
+        return iris.userId;     
+    }    
 
     function arrayUsersToString(users) {
         var usersString = "";

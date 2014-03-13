@@ -20,6 +20,7 @@ iris.screen(
             self.awake = function() {
                 console.log("Loged Screen Awakened");
                 check_session(function(data) {
+                    iris.userId = data.result.id;                    
                     if (data.status === "ok") {
                          self.get("menu-top").text(data.result.name);
                          self.get("id-prueba").text(data.result.id);

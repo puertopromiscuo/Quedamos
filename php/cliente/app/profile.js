@@ -8,8 +8,7 @@ iris.ui(
             self.awake = function() {
                 console.log("profile UI Awakened");
                 EVENTS.checkSession(function(data) {
-                    self.get('name').attr("placeholder", data.name);
-                    console.log(data);
+                    self.get('name').attr("placeholder", data.name);                    
                 });
             };
             self.sleep = function() {

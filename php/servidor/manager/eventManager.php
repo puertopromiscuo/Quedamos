@@ -51,7 +51,7 @@ function getAllEventsManager() {
     if (count($arrayAux)) {
         return createJson("ok", "eventos recuperados", $arrayAux);
     } else {
-        return createJson("error", "error no hay eventos", null);
+        return createJson("error", "error no hay eventos creados", null);
     }
 }
 

@@ -9,15 +9,20 @@ iris.ui(function(self) {
         self.tmplMode(self.APPEND);
         self.tmpl(iris.path.ui.panel.html);
         renderMyEvents();
-        renderRegisterEvent()
-
-
-
+        renderRegisterEvent();
+        
+        /*ALERTAS*/
+        iris.on("alertError",function(message){            
+            self.get("error-panel").show().removeClass("hidden").text(message).fadeOut(5000);
+        });
+        iris.on("alertSuccess",function(message){            
+            self.get("success-panel").show().removeClass("hidden").text(message).fadeOut(5000);
+        });
+        
         self.get("date")
                 .val(PANEL.getToday())
                 .attr("min", PANEL.getToday());
-
-
+        
         //BUSCAR
         self.get("search").on("keyup", function(e) {
             if (e.keyCode === 13 && this.value.trim() !== "") {
@@ -66,15 +71,14 @@ iris.ui(function(self) {
          });
          */
         //on blur de la direccion crea un marcador en el mapa
-        self.get("address").blur(function() {
+        self.get("address").blur(function() {            
             if (this.value !== "") {
                 MAP.findAddress(this.value, function(coord) {
-                    if (coord) {
-                        panelStatus(true);
+                    if (coord) {                        
                         event_x = coord.lat();
                         event_y = coord.lng();
                     } else {
-                        panelStatus(false, "Direccion no encontrada");
+                        iris.notify("alertError","Direccion no encontrada");
                     }
                 });
             }
@@ -90,17 +94,18 @@ iris.ui(function(self) {
                         EVENTS.getUserId(),
                         event_x,
                         event_y,
-                        function(data) {
+                        function(data) {                           
                             renderMyEvents();
                             MAP.renderMap();
+                            iris.notify("alertSuccess","Evento creado");
                         }
                 )
                 self.get("title").val("");
                 self.get("description").val("");
                 self.get("address").val("");
                 self.get("date").val("");
-            } else {
-                panelStatus(false, "Campos Obligatorios");
+            } else {                
+                 iris.notify("alertError","Rellene todos los campos");
             }
 
         });
@@ -141,19 +146,13 @@ iris.ui(function(self) {
     function validatePanel() {
         fields = [self.get("title"), self.get("description"), self.get("address"), self.get("date")]
         for (i = 0; i < fields.length; ++i) {
-            if (!fields[i].val()) {
+            if (!fields[i].val()) {                
                 return false;
             }
         }
         return true;
     }
-    function panelStatus(status, message) {
-        if (status) {
-            self.get("error-panel").addClass("hidden");
-        } else {
-            self.get("error-panel").removeClass("hidden").text(message);
-        }
-    }
+    
 
 }, iris.path.ui.panel.js);
 
