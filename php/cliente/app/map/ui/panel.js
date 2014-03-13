@@ -11,13 +11,7 @@ iris.ui(function(self) {
         renderMyEvents();
         renderRegisterEvent();
         
-        /*ALERTAS*/
-        iris.on("alertError",function(message){            
-            self.get("error-panel").show().removeClass("hidden").text(message).fadeOut(5000);
-        });
-        iris.on("alertSuccess",function(message){            
-            self.get("success-panel").show().removeClass("hidden").text(message).fadeOut(5000);
-        });
+        
         
         self.get("date")
                 .val(PANEL.getToday())

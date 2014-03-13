@@ -42,6 +42,7 @@ body {
 
 #sidebar-wrapper-2 {
     //right: 0;
+    margin-top: 2em;
     background: rgba(1,1,1,0.7);
     position: fixed;
     height: 95%;
@@ -59,7 +60,7 @@ body {
     top: 0px;
     position: fixed;
     z-index: 999;
-    padding: 2em;
+    //padding: 2em;
 }
 #sidebar-wrapper-2 h5{
     color: white;

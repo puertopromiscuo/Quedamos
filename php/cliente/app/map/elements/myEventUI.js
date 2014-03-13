@@ -12,10 +12,10 @@
 
         title = $('<button class="col-xs-8"><span>' + event_title + '</span><br><span>' + event_date + '</span></button>');
         title.on("click", function() {
-            console.log(MAP.markers);
+            //console.log(MAP.markers);
             for(i=0;i< MAP.markers.length;i++){
                 if(MAP.markers[i].event_id == event_id){
-                    alert("yes");
+                    //alert("yes");
                     MAP.loadMap2(MAP.markers[i]);
                 }
             }
