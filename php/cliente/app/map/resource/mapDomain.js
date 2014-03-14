@@ -21,6 +21,7 @@
             console.log("Cargando eventos del Mapa");
             console.log(data);
             for (var i = 0; i < data.length; i++) {
+                deleteMarker(data[i].event_id);
                 var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, data[i].users, data[i].event_type, map);
                 markers.push(marker);
             }
@@ -35,14 +36,21 @@
 
 
     // Borra marcadores del mapa y del array
-    function deleteMarkers() {
+    /*function deleteMarkers() {
         var i;
         for (i = 0; i < markers.length; i++) {
             markers[i].setMap(null);
         }
         markers = [];
+    }*/
+    function deleteMarker(event_id) {
+        var i;
+        for (i = 0; i < markers.length; i++) {
+            if(markers[i].event_id == event_id){
+                    markers[i].setMap(null);
+            }
+        }
     }
-
     /*busca una direccion y crea un marcador*/
     function findAddress(address, callback) {
         if (markerAux) {
@@ -86,7 +94,7 @@
     }
 
     function renderMap() {
-        deleteMarkers();
+        //deleteMarkers();
         loadAllMarkers();
     }
 
@@ -125,7 +133,7 @@
     }
     root.MAP.loadMap = loadMap;
     root.MAP.loadAllMarkers = loadAllMarkers;
-    root.MAP.deleteMarkers = deleteMarkers;
+    //root.MAP.deleteMarkers = deleteMarkers;
     root.MAP.findAddress = findAddress;
     root.MAP.renderMap = renderMap;
     root.MAP.registerUserEvent = registerUserEvent;

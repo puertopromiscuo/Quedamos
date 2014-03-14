@@ -53,7 +53,7 @@ iris.screen(
                    }
                    console.log(iris.updateDate);
                })
-               },3000);
+               },2000);
                /*setInterval(function(){
                     MAP.earNewEvent();
                 },3000);*/

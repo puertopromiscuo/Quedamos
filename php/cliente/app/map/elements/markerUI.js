@@ -14,7 +14,7 @@
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(event_x, event_y),
             icon: getIcon(event_type),
-            animation: google.maps.Animation.DROP,
+            //animation: google.maps.Animation.DROP,
             map: map,
             event_id: event_id.toString(),
             event_title: event_title.toString(),
