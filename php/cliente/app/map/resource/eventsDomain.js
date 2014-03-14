@@ -108,6 +108,28 @@
         });
     }
 
+    //DESAPUNTAR A OTRO USUARIO
+    function deleteUserMyEvent(event_id,user_id, callback) {
+        $.ajax({
+            type: 'POST',
+            url: 'servidor/services/eventService/deleteUserEventManager',
+            dataType: 'json',
+            data: {
+                user_id: user_id,
+                event_id: event_id
+            }
+        }).done(function(data) {
+            if (data.status == "ok") {
+                console.log(data)
+                callback(data);
+            } else {
+                console.log(data.message);
+            }
+        }).fail(function() {
+            console.log("error deleteregisterEvent");
+        });
+    }
+
     //USUARIO
     function checkSession(callback) {
         $.ajax({
@@ -199,6 +221,7 @@
     root.EVENTS.closeSession = closeSession;
     root.EVENTS.checkSession = checkSession;
     root.EVENTS.updateProfile = updateProfile;
+    root.EVENTS.deleteUserMyEvent = deleteUserMyEvent;
 
 
 

@@ -93,6 +93,7 @@
 
     root.MAP.createMarker = createMarker;
     root.MAP.animateMarker = animateMarker;
+    root.MAP.getIcon = getIcon;
 
     
 

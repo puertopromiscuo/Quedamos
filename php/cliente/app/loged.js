@@ -39,7 +39,9 @@ iris.screen(
                     }
                     iris.notify("render",false);
                 });
-                
+               setInterval(function(){
+                    MAP.earNewEvent();
+                },3000);
             };
 
             self.sleep = function() {

@@ -33,8 +33,6 @@
             callback(eventList);            
         })
     }   
-    
-    
 
 
     function deleteEvent(event_id, callback) {

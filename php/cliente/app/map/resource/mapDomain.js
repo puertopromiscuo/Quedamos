@@ -107,7 +107,17 @@
         }
     }
 
-
+    function earNewEvent() {
+        EVENTS.getAllEvents(function(data) {
+            console.log("Cargando eventos del Mapa");
+            if (data.length !== markers.length) {
+                console.log("Falta actualizar");
+                renderMap();
+            } else {
+                console.log("Nada que actualizar");
+            }
+        });
+    }
 
 
     if (!root.MAP) {
@@ -124,6 +134,7 @@
     root.MAP.markers = markers;
     root.MAP.centerMap = centerMap;
     root.MAP.filterMarkers = filterMarkers;
+    root.MAP.earNewEvent = earNewEvent;
 
 
 

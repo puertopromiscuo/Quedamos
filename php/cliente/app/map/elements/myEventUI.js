@@ -25,7 +25,19 @@
         if (admin) {
             conf = $('<button id="conf-my-event" class="glyphicon glyphicon-edit btn btn-warning btn-sm" role="menuitem" tabindex="-1" event-id="' + $(this).parent().parent().data("eventid") + '" data-toggle="modal" data-target="#customEvent"></button>');
             conf.on("click", function() {
-                console.log($(this).parent().parent().data("eventid"));
+                $("#event-id-oculto").val($(this).parent().parent().data("eventid"));
+                eventID = $(this).parent().parent().data("eventid");
+                $("#user-list").html("");
+                $("#date-event").attr("placeholder", event_date);
+                $("#name-event").attr("placeholder", event_title);
+                if (event_users.length) {
+                    for (var i = 0; i < event_users.length; i++) {
+                        var userLi = USERLIST.createUserList(eventID, event_title, event_date, event_users[i]);
+                        $("#user-list").append(userLi);
+                    }
+                } else {
+                    $("#user-list").append("<p>No hay usuarios apuntados a este evento</p>");
+                }
             })
             divConf = $('<div class="col-xs-2"></div>').append(conf);
             container.append(divConf);
@@ -35,6 +47,7 @@
                 EVENTS.deleteEvent($(this).parent().parent().data("eventid"), function(data) {
                     iris.notify("render", true);
                     iris.notify("alertSuccess", "Evento borrado");
+                    $("#user-list").append("<p>No hay usuarios apuntados a este evento</p>");
                 });
             })
 
@@ -48,7 +61,7 @@
                     iris.notify("alertSuccess", "Te has desapuntado del evento");
                 });
             })
-            
+
             divDel = $('<div class="col-xs-2"></div>').append(del);
             container.append(divDel);
         }
