@@ -168,7 +168,23 @@
             console.log("Error UPDATE PERFIL");
         })
     }
+    
+    function lastUpdateDate(callback) {
+        $.ajax({
+            type: 'POST',
+            url: 'servidor/services/eventService/lastUpdateTable',
+            dataType: 'json',
+            data: {
+                update_date: iris.updateDate
+            }
+        }).done(function(data) {
+            callback(data);
+        }).fail(function() {
+            console.log("Error UPDATE DATE");
+        })
+    }
 
+    
     function getUserId() {
         return iris.userId;     
     }    
@@ -222,6 +238,7 @@
     root.EVENTS.checkSession = checkSession;
     root.EVENTS.updateProfile = updateProfile;
     root.EVENTS.deleteUserMyEvent = deleteUserMyEvent;
+    root.EVENTS.lastUpdateDate = lastUpdateDate;
 
 
 

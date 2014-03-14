@@ -4,8 +4,9 @@ include '../dao/eventDAO.php';
 include_once '../utils/json.php';
 
 /* MAPA */
-function insertEventManager($event_title, $event_description, $event_date, $event_userid, $event_x, $event_y,$event_type) {
-    $data = insertEvent($event_title, $event_description, $event_date, $event_userid, $event_x, $event_y,$event_type);
+
+function insertEventManager($event_title, $event_description, $event_date, $event_userid, $event_x, $event_y, $event_type) {
+    $data = insertEvent($event_title, $event_description, $event_date, $event_userid, $event_x, $event_y, $event_type);
     if (count($data)) {
         return createJson("ok", "evento creado", $data);
     } else {
@@ -40,7 +41,8 @@ function deleteUserEventManager($user_id, $event_id) {
     }
 }
 
-/*TODO*/
+/* TODO */
+
 function getAllEventsManager() {
     $arrayAux = array();
     $allEvents = getAllEvents();
@@ -55,12 +57,17 @@ function getAllEventsManager() {
     }
 }
 
+function updateDateManager($date_update) {
+    if (updateDate($date_update)) {
+        return createJson("ok", "se necesita actualizar eventos, hay cambios", updateDate($date_update));
+    } else {
+        return createJson("error", "todo actualizado", null);
+    }
+}
 
 //var_dump(insertEventManager("titulo", "descripbion", "2014-03-06", "110", "2", "4"));
 //var_dump(deleteEventManager(170));
 //var_dump(insertUserEventManager(119,185));
 //var_dump(getAllEventsManager());
-
-
 ?>
 

@@ -12,32 +12,30 @@ Toro::serve(array(
     "/getAllEventsManager" => "getAllEventsManager",
     "/deleteEventManager" => "deleteEventManager",
     "/insertUserEventManager" => "insertUserEventManager",
-    "/deleteUserEventManager" => "deleteUserEventManager"    
+    "/deleteUserEventManager" => "deleteUserEventManager",
+    "/lastUpdateTable" => "lastUpdateTable"
 ));
 
 /* MAPA */
+
 class insertEventManager {
 
     function post() {
         echo insertEventManager(
-                $_POST['event_title'],
-                $_POST['event_description'],
-                $_POST['event_date'],
-                $_POST['event_userid'],
-                $_POST['event_x'],
-                $_POST['event_y'],
-                $_POST['event_type']
-             ) ;
+                $_POST['event_title'], $_POST['event_description'], $_POST['event_date'], $_POST['event_userid'], $_POST['event_x'], $_POST['event_y'], $_POST['event_type']
+        );
     }
 
 }
 
-class getEventManager{
-    function post(){
+class getEventManager {
+
+    function post() {
         echo getEventManager(
-                    $_POST['event_id']
-                ); 
+                $_POST['event_id']
+        );
     }
+
 }
 
 class getAllEventsManager {
@@ -51,21 +49,21 @@ class getAllEventsManager {
 class deleteEventManager {
 
     function post() {
-        echo deleteEventManager( 
-                $_POST['event_id']               
-             ) ;
+        echo deleteEventManager(
+                $_POST['event_id']
+        );
     }
 
 }
 
 /* APUNTARSE */
+
 class insertUserEventManager {
 
     function post() {
-        echo insertUserEventManager( 
-                $_POST['user_id'],
-                $_POST['event_id']                
-             ) ;
+        echo insertUserEventManager(
+                $_POST['user_id'], $_POST['event_id']
+        );
     }
 
 }
@@ -73,12 +71,19 @@ class insertUserEventManager {
 class deleteUserEventManager {
 
     function post() {
-        echo deleteUserEventManager( 
-                $_POST['user_id'],
-                $_POST['event_id']                
-             ) ;
+        echo deleteUserEventManager(
+                $_POST['user_id'], $_POST['event_id']
+        );
     }
 
 }
 
+class lastUpdateTable {
+    function post(){
+        echo updateDateManager(
+                $_POST['update_date']
+        );
+    }
+ 
+}
 ?>
