@@ -25,8 +25,8 @@ iris.screen(
                 self.get('log-out').click(function() {
                     EVENTS.closeSession(function(data) {
                         console.log(data.message);
+                        iris.navigate("#/unloged");
                     });
-                    iris.navigate("#/unloged");
                 });
 
             };

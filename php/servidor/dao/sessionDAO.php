@@ -25,7 +25,8 @@ function dataUser($id) {
 
 function logOut() {
     if (checkSession()) {
-        return session_destroy();
+        session_destroy();
+        return true;
     } else {
         return false;
     }

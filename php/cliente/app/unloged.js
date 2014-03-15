@@ -10,7 +10,8 @@ iris.screen(
             };
             self.awake = function() {
                 MAP.check_session(function(data) {
-                    if (data.status == "ok") {
+                    console.log(data);
+                    if (data.status === "ok") {
                         iris.navigate("#/loged");
                     }
                 });
