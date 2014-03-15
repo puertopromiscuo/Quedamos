@@ -1,8 +1,8 @@
 iris.screen(
         function(self) {
 
-            
-            
+
+
             self.create = function() {
                 console.log("unloged Screen Created");
                 self.tmpl(iris.path.screen.unloged.html);

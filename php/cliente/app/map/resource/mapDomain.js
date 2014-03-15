@@ -16,22 +16,28 @@
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     }
 
-    function loadAllMarkers() {
+    function loadAllMarkers() {        
         EVENTS.getAllEvents(function(data) {
             console.log("Cargando eventos del Mapa");
             console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                //deleteMarker(data[i].event_id);
-                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, data[i].users, data[i].event_type, map);
-                markers.push(marker);
+            for (var i = 0; i < data.length; i++) {                
+                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, data[i].users, data[i].event_type, map);                
+                markers.push(marker);                
             }
-
-        });
+        });       
     }
 
-    function centerMap(position) {
-        map.setCenter(position.position);
-        map.setZoom(20);
+    function centerMap(event_id) {        
+        for (i = 0; i < markers.length; i++) {
+                if (markers[i].event_id == event_id) {
+                    map.setCenter(markers[i].position);
+                    map.setZoom(20);                    
+                }
+            }        
+        
+    }
+    function setZoomMap(zoom) {        
+        map.setZoom(zoom);
     }
 
 
@@ -41,16 +47,8 @@
         for (i = 0; i < markers.length; i++) {
             markers[i].setMap(null);
         }
-        markers = [];
-    }
-    /*function deleteMarker(event_id) {
-     var i;
-     for (i = 0; i < markers.length; i++) {
-     if(markers[i].event_id == event_id){
-     markers[i].setMap(null);
-     }
-     }
-     }*/
+        markers = [];       
+    }    
     /*busca una direccion y crea un marcador*/
     function findAddress(address, callback) {
         if (markerAux) {
@@ -97,6 +95,8 @@
         deleteMarkers();
         loadAllMarkers();
     }
+    
+    
 
     function filterMarkers(type, date) {
         markers.forEach(function(marker) {
@@ -115,17 +115,7 @@
         }
     }
 
-    function earNewEvent() {
-        EVENTS.getAllEvents(function(data) {
-            console.log("Cargando eventos del Mapa");
-            if (data.length !== markers.length) {
-                console.log("Falta actualizar");
-                renderMap();
-            } else {
-                console.log("Nada que actualizar");
-            }
-        });
-    }
+    
 
     function check_session(callback) {
         var settings = {
@@ -155,12 +145,11 @@
     root.MAP.renderMap = renderMap;
     root.MAP.registerUserEvent = registerUserEvent;
     root.MAP.deleteUserEvent = delUserEvent;
-    //prueba
-    root.MAP.markers = markers;
+    //prueba    
     root.MAP.centerMap = centerMap;
-    root.MAP.filterMarkers = filterMarkers;
-    root.MAP.earNewEvent = earNewEvent;
+    root.MAP.filterMarkers = filterMarkers;    
     root.MAP.check_session = check_session;
+    root.MAP.setZoomMap=setZoomMap;
 
 
 

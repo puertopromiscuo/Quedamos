@@ -19,7 +19,10 @@ iris.ui(function(self) {
                 .attr("min", PANEL.getToday());
         
         
-
+        /*SET ZOOM*/
+        self.get("set-zoom").click(function(){
+            MAP.setZoomMap(3);
+        })
         //BUSCAR
         self.get("search").on("keyup", function(e) {
             if (e.keyCode === 13 && this.value.trim() !== "") {
@@ -27,8 +30,7 @@ iris.ui(function(self) {
                 var count = 0;
                 //Vaciar panel de busqueda
                 self.get("search-event-list").html("");
-                EVENTS.getAllEvents(function(data) {
-                    console.log("Buscando eventos");
+                EVENTS.getAllEvents(function(data) {                    
                     var myEvent;
                     data.forEach(function(event) {
                         if (event.event_title == name) {
@@ -79,14 +81,8 @@ iris.ui(function(self) {
                         event_x,
                         event_y,
                         self.get("type").val(),
-                        function(data) {
-                            renderMyEvents();
-                            //MAP.renderMap();
-                            MAP.markers.forEach(function(event){
-                                if(!event.event_id){
-                                    event.setMap(null);
-                                }
-                            })
+                        function(data) {                            
+                            renderMyEvents();                             
                             iris.notify("alertSuccess", "Evento creado");
                         }
                 )
@@ -132,8 +128,7 @@ iris.ui(function(self) {
             self.get("count-my-events-come").text("+" + data.eventsCome);
             self.get("count-my-events").text("+" + data.eventsMy);
         });
-        self.get("menu-top").text(iris.userName);
-        self.get("id-prueba").text(iris.userId);
+        self.get("menu-top").text(iris.userName);        
         self.get("user-image").attr("src","img/userImage/"+iris.userImage+".png");                
     }
 

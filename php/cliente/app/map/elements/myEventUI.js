@@ -8,12 +8,8 @@
 
 
         title = $('<button class="col-xs-4"><span>' + event_title + '</span></button>');
-        title.on("click", function() {
-            for (i = 0; i < MAP.markers.length; i++) {
-                if (MAP.markers[i].event_id == event_id) {
-                    MAP.centerMap(MAP.markers[i]);
-                }
-            }
+        title.on("click", function() {    
+            MAP.centerMap(event_id);            
         })
         container.append(title);
         date = $('<div class="col-xs-2"><small>' + event_date.substr(5, 9).trim().replace("-", "/") + '</small></div>');
