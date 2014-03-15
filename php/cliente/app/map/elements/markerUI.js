@@ -1,16 +1,16 @@
 (function() {
     var root = this;
-    
-    function getIcon(type){
+
+    function getIcon(type) {
         var image = new google.maps.MarkerImage(
-            './img/'+type+'.png'
-            , new google.maps.Size(40, 53)
-            );            
+                './img/' + type + '.png'
+                , new google.maps.Size(40, 53)
+                );
         return image;
     }
 
 
-    function createMarker(event_id, event_title, event_description, event_date, event_userid, event_x, event_y, event_users,event_type, map) {        
+    function createMarker(event_id, event_title, event_description, event_date, event_userid, event_x, event_y, event_users, event_type, map) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(event_x, event_y),
             icon: getIcon(event_type),
@@ -22,14 +22,14 @@
             event_date: event_date.toString(),
             event_userid: event_userid.toString(),
             event_users: event_users,
-            event_type:event_type            
+            event_type: event_type
         });
-        
+
         google.maps.event.addListener(marker, 'click', function() {
-            map.setCenter(marker.getPosition());
-            getInfoWindow(this);
+            map.setCenter(marker.getPosition());            
+            MAP.getInfoWindow(this,createInfo(marker));
         });
-       
+
         return marker;
     }
 
@@ -42,25 +42,17 @@
         } else {
             marker.setAnimation(google.maps.Animation.BOUNCE);
         }
-    }
-    //Mostrar titulo
-    function getInfoWindow(marker) {
-        var infowindow = new google.maps.InfoWindow({
-            content: createInfo(marker)
-        });
-        
-        infowindow.open(marker.get('map'), marker);
-    }
+    }    
 
 
     function createInfo(marker) {
         var userIndicate = false;
-        for(var i in marker.event_users){
-           if(marker.event_users[i].user_id == EVENTS.getUserId()) {
-               userIndicate = true;
-           }
+        for (var i in marker.event_users) {
+            if (marker.event_users[i].user_id == EVENTS.getUserId()) {
+                userIndicate = true;
+            }
         }
-  
+
         var contentString = '' +
                 '<div class="contentInfo" id="contentWindow">' +
                 '<div class="firstHeadingInfo">' + marker.event_title + '</div>' +
@@ -68,20 +60,20 @@
                 '<div class="bodyContentInfo">' +
                 '<p>Descripcion:' + marker.event_description + '</p>' +
                 '<p>Apuntados:' + EVENTS.arrayUsersToString(marker.event_users) + '</p>';
-        if(userIndicate){
+        if (userIndicate) {
             contentString = contentString +
-                '<div id="come' + marker.event_id + '">' +
-                '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + marker.event_id + ');"> Desapuntarte</button>' +
-                '</div>' +
-                '</div>';
-        }else{
+                    '<div id="come' + marker.event_id + '">' +
+                    '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + marker.event_id + ');"> Desapuntarte</button>' +
+                    '</div>' +
+                    '</div>';
+        } else {
             contentString = contentString +
-                '<div id="come' + marker.event_id + '">' +
-                '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + marker.event_id + ');"> Me apunto</button>' +
-                '</div>'+
-                '</div>';
+                    '<div id="come' + marker.event_id + '">' +
+                    '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + marker.event_id + ');"> Me apunto</button>' +
+                    '</div>' +
+                    '</div>';
         }
-        
+
         return contentString;
 
     }
@@ -95,6 +87,6 @@
     root.MAP.animateMarker = animateMarker;
     root.MAP.getIcon = getIcon;
 
-    
+
 
 }).call(this);

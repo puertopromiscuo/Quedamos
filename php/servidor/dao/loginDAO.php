@@ -21,10 +21,9 @@ function insertUser($name, $email, $password) {
             $code = createToken();
             $cuerpo = 'Hola ' . $name . ', para activar tu cuenta haz click en el siguiente link:
                             ' . "\n" . '
-                            <a href="http://http://localhost/git/GoogleMaps/Mapa,buscarNombre/activar.html?code=' . $code . '">http://localhost/git/GoogleMaps/Mapa,buscarNombre/activar.html?code=' . $code . '</a>
-                            O copia el siguiente link en la barra de direcciones de tu navegador:
+                            Copia el siguiente link en la barra de direcciones de tu navegador:
                             ' . "\n" . '
-                            http://localhost/github/quedamos/php/servidor/services/loginService/activate/' . $code;
+                            http://localhost/github/Quedamos/php/servidor/services/loginService/activate/' . $code;
 
             if (send_mail($email, $cuerpo)) {
                 $user_image = rand(1, 10);
@@ -74,7 +73,7 @@ function activateUser($code) {
         $query_state_ok = "UPDATE " . SQL_USERTABLE . " SET user_state='activate' WHERE user_name='" . $row['user_name'] . "'";
         mysqli_query($db, $query_state_ok);
         //NOS REDIRIGE AL INDEX,Y COMO PARAMETROS MANDAMOS EL USUARIO ACTIVO
-        header('Location: /github/pruebas/php/#/loged');
+        header('Location: http://localhost/github/Quedamos/php/index1.html#/unloged');
         return $row['user_name'] . " ha sido activado.";
     }
 }

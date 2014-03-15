@@ -3,6 +3,7 @@
     var map;
     var markers = [];
     var markerAux = false;
+    var infowindow;
 
 
     function loadMap() {
@@ -96,7 +97,8 @@
     function renderMap() {
         deleteMarkers();
         loadAllMarkers();
-    }
+    } 
+    
 
 
 
@@ -115,6 +117,18 @@
                 }
             });
         }
+    }
+    
+    
+    function getInfoWindow(marker,content) {  
+        if(!infowindow){
+            infowindow = new google.maps.InfoWindow({
+                content:content
+            });        
+        }
+        infowindow.close();
+        infowindow.open(marker.get('map'), marker);
+        console.log(infowindow);
     }
 
 
@@ -151,7 +165,8 @@
     root.MAP.centerMap = centerMap;
     root.MAP.filterMarkers = filterMarkers;
     root.MAP.check_session = check_session;
-    root.MAP.setZoomMap = setZoomMap;
+    root.MAP.setZoomMap = setZoomMap; 
+    root.MAP.getInfoWindow=getInfoWindow;
 
 
 
