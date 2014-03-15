@@ -12,7 +12,9 @@
                 <div class="tab-pane" id="profile-content">
                     <div class="row">
                         <div class="col-xs-12 col-md-5">
-                            <img src="img/prueba-perfil.jpg" alt="..." class="img-thumbnail img-responsive">
+                            <img data-id="user-image" src="" class="img-thumbnail img-responsive">
+                            <div data-id="error-form" class="alert alert-danger hidden"></div>
+                            <div data-id="success-form" class="alert alert-success hidden"></div>
                         </div>
                         <div class="col-xs-12 col-md-7">
                             <div class="input-group">
@@ -27,16 +29,11 @@
                                 <span class="input-group-addon dark"><span class="glyphicon glyphicon-lock"></span></span>
                                 <input type="password" data-id="profile-new-password" class="form-control" placeholder="Nueva contraseña">
                             </div>
-                            <br>
-                            <div class="input-group">
-                                <span class="input-group-addon dark"><span class="glyphicon glyphicon-picture"></span></span>
-                                <input type="file" name="profile-img" id="image" class="form-control">
-                            </div>
+                            <br>                            
                         </div>
                     </div>
                     <hr>
-                    <section class="button-demo">
-                        <button id="profile-discar" class="btn btn-danger btn-block">Descartar cambios</button>
+                    <section class="button-demo">                     
                         <button data-id="profile-submit" class="ladda-button btn btn-success btn-block" data-style="contract-overlay" style="z-index: 10;">Guardar</button>
                     </section>
                 </div>

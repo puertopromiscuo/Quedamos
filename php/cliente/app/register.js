@@ -76,6 +76,7 @@ iris.ui(
                 var email = formLogin.find('input[name = user-email]').val();
                 var password = formLogin.find('input[name = user-password]').val();
                 if (validateFormLogin(email, password)) {
+                    play();
                     $.ajax({
                         type: 'POST',
                         url: 'servidor/services/loginService/logUser',
@@ -84,6 +85,13 @@ iris.ui(
                             email: formLogin.find('input[name = user-email]').val(),
                             password: formLogin.find('input[name = user-password]').val()}
                     }).done(function(data) {
+                        if (data.status === "error") {
+                            showFormAlert(data.message, false);
+                        } else if (data.status === "ok") {
+                            showFormAlert(data.message, true);
+                        }
+                        stop();
+                        console.log(data);
                         renderUser(data);
                     }).fail(function() {
                         console.log(arguments);
@@ -128,7 +136,7 @@ iris.ui(
                 if (!regExpPassword.test(password)) {
                     showFormAlert("Contraseña invalida (5-20 letras, numeros o !@#$%^&*)", false);
                     return false;
-                }
+                }                
                 return true;
             }
 

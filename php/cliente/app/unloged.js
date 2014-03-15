@@ -17,11 +17,6 @@ iris.screen(
                 });
             };
 
-            /*self.canSleep = function() {
-                console.log("Can unloged Sceen sleep?");
-                return false;
-            };*/
-
             self.sleep = function() {
                 console.log("unloged Screen Asleep");
             };
