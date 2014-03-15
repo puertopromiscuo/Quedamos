@@ -16,27 +16,27 @@
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     }
 
-    function loadAllMarkers() {        
+    function loadAllMarkers() {
         EVENTS.getAllEvents(function(data) {
             console.log("Cargando eventos del Mapa");
             console.log(data);
-            for (var i = 0; i < data.length; i++) {                
-                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, data[i].users, data[i].event_type, map);                
-                markers.push(marker);                
+            for (var i = 0; i < data.length; i++) {
+                var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, data[i].users, data[i].event_type, map);
+                markers.push(marker);
             }
-        });       
+        });
     }
 
-    function centerMap(event_id) {        
+    function centerMap(event_id) {
         for (i = 0; i < markers.length; i++) {
-                if (markers[i].event_id == event_id) {
-                    map.setCenter(markers[i].position);
-                    map.setZoom(20);                    
-                }
-            }        
-        
+            if (markers[i].event_id == event_id) {
+                map.setCenter(markers[i].position);
+                map.setZoom(20);
+            }
+        }
+
     }
-    function setZoomMap(zoom) {        
+    function setZoomMap(zoom) {
         map.setZoom(zoom);
     }
 
@@ -47,8 +47,8 @@
         for (i = 0; i < markers.length; i++) {
             markers[i].setMap(null);
         }
-        markers = [];       
-    }    
+        markers = [];
+    }
     /*busca una direccion y crea un marcador*/
     function findAddress(address, callback) {
         if (markerAux) {
@@ -72,31 +72,33 @@
         });
     }
     function registerUserEvent(event_id) {
-        EVENTS.insertUserEvent(event_id, function(data) {
-            console.log(data.result);
-        })
         come = '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + event_id + ');"> Desapuntarte</button>';
         $('#come' + event_id).children().remove();
-        $('#come' + event_id).append(come);
-        iris.notify("render", false);
+        EVENTS.insertUserEvent(event_id, function(data) {
+            console.log(data.result);
+            
+            $('#come' + event_id).append(come);
+            iris.notify("render", false);
+        })
+
     }
 
     function delUserEvent(event_id) {
-        EVENTS.deleteUserEvent(event_id, function(data) {
-            console.log(data.result);
-        })
         come = '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + event_id + ');"> Me apunto</button>';
         $('#come' + event_id).children().remove();
-        $('#come' + event_id).append(come);
-        iris.notify("render", false);
+        EVENTS.deleteUserEvent(event_id, function(data) {
+            console.log(data.result);            
+            $('#come' + event_id).append(come);
+            iris.notify("render", false);
+        })
     }
 
     function renderMap() {
         deleteMarkers();
         loadAllMarkers();
     }
-    
-    
+
+
 
     function filterMarkers(type, date) {
         markers.forEach(function(marker) {
@@ -115,7 +117,7 @@
         }
     }
 
-    
+
 
     function check_session(callback) {
         var settings = {
@@ -147,9 +149,9 @@
     root.MAP.deleteUserEvent = delUserEvent;
     //prueba    
     root.MAP.centerMap = centerMap;
-    root.MAP.filterMarkers = filterMarkers;    
+    root.MAP.filterMarkers = filterMarkers;
     root.MAP.check_session = check_session;
-    root.MAP.setZoomMap=setZoomMap;
+    root.MAP.setZoomMap = setZoomMap;
 
 
 
