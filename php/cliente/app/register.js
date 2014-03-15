@@ -41,7 +41,7 @@ iris.ui(
                 var name = formRegister.find('input[name = user-name]').val();
                 var email = formRegister.find('input[name = user-email]').val();
                 var password = formRegister.find('input[name = user-password]').val();
-                if (validateFormRegister(name,email,password)) {                
+                if (validateFormRegister(name, email, password)) {
                     play();
                     $.ajax({
                         type: 'POST',
@@ -52,69 +52,95 @@ iris.ui(
                             email: formRegister.find('input[name = user-email]').val(),
                             password: formRegister.find('input[name = user-password]').val()}
                     }).done(function(data) {
-                        if(data.status === "error"){
-                            showFormAlert(data.message,false);
-                        }else if(data.status === "ok"){
-                            showFormAlert(data.message,true);
-                        }                        
+                        if (data.status === "error") {
+                            showFormAlert(data.message, false);
+                        } else if (data.status === "ok") {
+                            showFormAlert(data.message, true);
+                        }
                         stop();
                         console.log(data);
                     }).fail(function() {
-                        stop();                        
+                        stop();
                         data = {
                             status: "error",
                             message: "Email no existente."
                         }
                         console.log(data);
-                        showFormAlert(data.message,false);
+                        showFormAlert(data.message, false);
                     });
                 }
             }
-            function validateFormRegister(name,email,password){
+            
+             function logSend() {
+                var formLogin = $('#login-content');
+                var email = formLogin.find('input[name = user-email]').val();
+                var password = formLogin.find('input[name = user-password]').val();
+                if (validateFormLogin(email, password)) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'servidor/services/loginService/logUser',
+                        dataType: 'json',
+                        data: {
+                            email: formLogin.find('input[name = user-email]').val(),
+                            password: formLogin.find('input[name = user-password]').val()}
+                    }).done(function(data) {
+                        renderUser(data);
+                    }).fail(function() {
+                        console.log(arguments);
+                    });
+                }
+            }
+            
+            function validateFormRegister(name, email, password) {
                 var regExpEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 var regExpUserName = /^[a-zA-Z]{5,20}$/;
                 var regExpPassword = /^[a-zA-Z0-9!@#$%^&*]{5,20}$/;
-                if(!name || !password || !email ){
-                   showFormAlert("Todos los campos son obligatorios",false);
-                   return false;
-                }
-                if(!regExpEmail.test(email)){
-                    showFormAlert("Email invalido",false);
+                if (!name || !password || !email) {
+                    showFormAlert("Todos los campos son obligatorios", false);
                     return false;
                 }
-                if(!regExpUserName.test(name)){
-                    showFormAlert("Nombre de usuario invalido (5-20 letras)",false);
+                if (!regExpEmail.test(email)) {
+                    showFormAlert("Email invalido", false);
                     return false;
                 }
-                if(!regExpPassword.test(password)){
-                    showFormAlert("Contraseña invalida (5-20 letras, numeros o !@#$%^&*)",false);
+                if (!regExpUserName.test(name)) {
+                    showFormAlert("Nombre de usuario invalido (5-20 letras)", false);
                     return false;
-                }                
+                }
+                if (!regExpPassword.test(password)) {
+                    showFormAlert("Contraseña invalida (5-20 letras, numeros o !@#$%^&*)", false);
+                    return false;
+                }
                 return true;
             }
-            function showFormAlert(message,status){
-                if(status){
+            
+             function validateFormLogin(email, password) {
+                var regExpEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;                
+                var regExpPassword = /^[a-zA-Z0-9!@#$%^&*]{5,20}$/;
+                if (!password || !email) {
+                    showFormAlert("Todos los campos son obligatorios", false);
+                    return false;
+                }
+                if (!regExpEmail.test(email)) {
+                    showFormAlert("Email invalido", false);
+                    return false;
+                }                
+                if (!regExpPassword.test(password)) {
+                    showFormAlert("Contraseña invalida (5-20 letras, numeros o !@#$%^&*)", false);
+                    return false;
+                }
+                return true;
+            }
+            
+            function showFormAlert(message, status) {
+                if (status) {
                     self.get("success-form").show().removeClass("hidden").text(message).fadeOut(3000);
-                }else{
+                } else {
                     self.get("error-form").show().removeClass("hidden").text(message).fadeOut(3000);
                 }
             }
 
-            function logSend() {
-                var formLogin = $('#login-content');
-                $.ajax({
-                    type: 'POST',
-                    url: 'servidor/services/loginService/logUser',
-                    dataType: 'json',
-                    data: {
-                        email: formLogin.find('input[name = user-email]').val(),
-                        password: formLogin.find('input[name = user-password]').val()}
-                }).done(function(data) {
-                    renderUser(data);
-                }).fail(function() {
-                    console.log(arguments);
-                });
-            }
+           
 
             function forgetPass() {
                 var formForget = $('#forget-content');
@@ -138,10 +164,10 @@ iris.ui(
                 $('#register-content').removeClass('active');
 
                 $('#forget-content').addClass('active');
-            }          
-            
+            }
 
-           
+
+
 
             function renderUser(dataUser) {
                 if (dataUser.status == "error") {
