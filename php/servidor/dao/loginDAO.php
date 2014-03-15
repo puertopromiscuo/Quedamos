@@ -27,7 +27,7 @@ function insertUser($name, $email, $password) {
                             http://localhost/github/quedamos/php/servidor/services/loginService/activate/' . $code;
 
             if (send_mail($email, $cuerpo)) {
-                $user_image = rand(1,10);
+                $user_image = rand(1, 10);
                 $query = "INSERT into " . SQL_USERTABLE . " (user_name,user_email,user_password,user_state,user_image) values('$name','$email','$pass','$code','$user_image')";
                 $result = mysqli_query($db, $query);
                 return false;
@@ -96,12 +96,34 @@ function forgetPass($mail) {
         return false;
     } else {
         $content_user_data = mysqli_fetch_array(get_data('user_email', $mail));
-        $cuerpo = "Hola ".$content_user_data['user_name'].":<br><br>Tu contraseña es  " . Encrypter::decrypt($content_user_data['user_password'])."<br><br> Gracias por confiar en Quedamos";
+        $cuerpo = "Hola " . $content_user_data['user_name'] . ":<br><br>Tu contraseña es  " . Encrypter::decrypt($content_user_data['user_password']) . "<br><br> Gracias por confiar en Quedamos";
         send_mail($mail, $cuerpo);
         return $content_user_data['user_name'];
     }
 }
 
+function updateDataUser($id, $pass1, $pass2) {
+    global $db;
+    $pass = Encrypter::encrypt($pass1);
+    $pass2 = Encrypter::encrypt($pass2);
+    echo $pass;
+    $query = "SELECT * FROM " . SQL_USERTABLE . " WHERE user_id='$id'";
+    $result = mysqli_query($db, $query);
+    $row = mysqli_fetch_array($result);
+    if ($row['user_password'] != $pass) {
+        return false;
+    } else {
+        $query = "UPDATE " . SQL_USERTABLE . " SET user_password='$pass2' WHERE user_id='$id'";
+        $result = mysqli_query($db, $query);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+//var_dump(updateDataUser(118, 1, 2));
 //var_dump(insertUser(2, "jesusgraficap@gmail.com" ,2));
 //var_dump(activateUser("627d79a86b13815ef5fb9731c491f400348151e7"));
 ?>

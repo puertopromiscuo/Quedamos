@@ -72,23 +72,5 @@ function updateDataUser1($img) {
     }
 }
 
-function updateDataUser($id, $pass1, $pass2) {
-    $pass = Encrypter::decrypt($pass1);
-    $query = "SELECT * FROM " . SQL_USERTABLE . " WHERE user_id='$id'";
-    $result = mysqli_query($db, $query);
-    $row = mysqli_fetch_array($result);
-    if ($row['$pass'] != $pass) {
-        
-    } else {
-        $query = "UPDATE " . SQL_USERTABLE . " SET user_password='$pass2' WHERE user_id='$id'";
-        $result = mysqli_query($db, $query);
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
-
 //var_dump(checkSession());
 ?>

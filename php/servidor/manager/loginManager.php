@@ -61,12 +61,19 @@ function logOutManager() {
 
 
 function updateProfileManager($img){
-    if (updateDataUser($img)) {
+    if (updateDataUser1($img)) {
         return createJson("ok", "Imagen actualizada","ok" );
     } else {
         return createJson("error", "Error al actualizar el eperfil", "error");
     }
 }
 
+function updateDataUserManager($id, $pass1, $pass2){
+    if (updateDataUser($id, $pass1, $pass2)) {
+        return createJson("ok", "Contraseña actualizada","ok" );
+    } else {
+        return createJson("error", "Error al actualizar el perfil", "error");
+    }
+}
 
 //var_dump(checkSessionManager());

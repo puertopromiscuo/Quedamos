@@ -57,6 +57,12 @@ class UpdateProfile{
     }
 }
 
+class UpdateDataUser{
+    function post(){
+        echo updateDataUserManager($_POST['user_id'], $_POST['user_pass'],$_POST['user_pass2']);
+    }
+}
+
 Toro::serve(array(
     "/insertUser" => "InsertUser",
     "/logUser" => "LogUser",
@@ -64,7 +70,8 @@ Toro::serve(array(
     "/forgetPass" => "ForgetPass",
     "/checkSession" => "CheckSession",
     "/logOut" => "LogOut",
-    "/updateProfile" => "UpdateProfile"
+    "/updateProfile" => "UpdateProfile",
+    "/updateDataUser" => "UpdateDataUser"
 ));
 
 
