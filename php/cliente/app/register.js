@@ -70,8 +70,8 @@ iris.ui(
                     });
                 }
             }
-            
-             function logSend() {
+
+            function logSend() {
                 var formLogin = $('#login-content');
                 var email = formLogin.find('input[name = user-email]').val();
                 var password = formLogin.find('input[name = user-password]').val();
@@ -90,7 +90,7 @@ iris.ui(
                     });
                 }
             }
-            
+
             function validateFormRegister(name, email, password) {
                 var regExpEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 var regExpUserName = /^[a-zA-Z]{5,20}$/;
@@ -113,9 +113,9 @@ iris.ui(
                 }
                 return true;
             }
-            
-             function validateFormLogin(email, password) {
-                var regExpEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;                
+
+            function validateFormLogin(email, password) {
+                var regExpEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 var regExpPassword = /^[a-zA-Z0-9!@#$%^&*]{5,20}$/;
                 if (!password || !email) {
                     showFormAlert("Todos los campos son obligatorios", false);
@@ -124,14 +124,14 @@ iris.ui(
                 if (!regExpEmail.test(email)) {
                     showFormAlert("Email invalido", false);
                     return false;
-                }                
+                }
                 if (!regExpPassword.test(password)) {
                     showFormAlert("Contraseña invalida (5-20 letras, numeros o !@#$%^&*)", false);
                     return false;
                 }
                 return true;
             }
-            
+
             function showFormAlert(message, status) {
                 if (status) {
                     self.get("success-form").show().removeClass("hidden").text(message).fadeOut(3000);
@@ -140,10 +140,11 @@ iris.ui(
                 }
             }
 
-           
+
 
             function forgetPass() {
                 var formForget = $('#forget-content');
+                play();
                 $.ajax({
                     type: 'POST',
                     url: 'servidor/services/loginService/forgetPass',
@@ -152,9 +153,15 @@ iris.ui(
                         email: formForget.find('input[name = user-email]').val()}
                 }).done(function(data) {
                     console.log(data);
-                    viewRegister(data);
+                    if (data.status === "error") {
+                        showFormAlert(data.message, false);
+                    } else if (data.status === "ok") {
+                        showFormAlert(data.message, true);
+                    }
+                    stop();
                 }).fail(function() {
                     console.log(arguments);
+                    stop();
                 });
             }
 
