@@ -106,7 +106,6 @@ function updateDataUser($id, $pass1, $pass2) {
     global $db;
     $pass = Encrypter::encrypt($pass1);
     $pass2 = Encrypter::encrypt($pass2);
-    echo $pass;
     $query = "SELECT * FROM " . SQL_USERTABLE . " WHERE user_id='$id'";
     $result = mysqli_query($db, $query);
     $row = mysqli_fetch_array($result);

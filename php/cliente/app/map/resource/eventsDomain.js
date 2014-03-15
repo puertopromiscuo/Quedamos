@@ -169,6 +169,25 @@
         })
     }
     
+    function updatePassProfile(userId,pass,pass2,callback) {
+         $.ajax({
+            type: 'POST',
+            url: 'servidor/services/loginService/updateDataUser',
+            dataType: 'json',
+            data: {
+                user_id: userId,
+                user_pass: pass,
+                user_pass2: pass2
+            }
+        }).done(function(data) {
+            callback(data);
+        }).fail(function() {
+            console.log("Error UPDATE DATE");
+        }) 
+       
+        
+    }
+    
     function lastUpdateDate(callback) {
         $.ajax({
             type: 'POST',
@@ -225,6 +244,7 @@
     if (!root.EVENTS) {
         root.EVENTS = {};
     }
+    
 
     root.EVENTS.getAllEvents = getAllEvents;
     root.EVENTS.insertEvent = insertEvent;
@@ -239,6 +259,7 @@
     root.EVENTS.updateProfile = updateProfile;
     root.EVENTS.deleteUserMyEvent = deleteUserMyEvent;
     root.EVENTS.lastUpdateDate = lastUpdateDate;
+    root.EVENTS.updatePassProfile = updatePassProfile;
 
 
 
