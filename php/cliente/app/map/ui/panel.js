@@ -81,7 +81,12 @@ iris.ui(function(self) {
                         self.get("type").val(),
                         function(data) {
                             renderMyEvents();
-                            MAP.renderMap();
+                            //MAP.renderMap();
+                            MAP.markers.forEach(function(event){
+                                if(!event.event_id){
+                                    event.setMap(null);
+                                }
+                            })
                             iris.notify("alertSuccess", "Evento creado");
                         }
                 )
@@ -129,8 +134,7 @@ iris.ui(function(self) {
         });
         self.get("menu-top").text(iris.userName);
         self.get("id-prueba").text(iris.userId);
-        self.get("user-image").attr("src","img/userImage/"+iris.userImage+".png");        
-        console.log(iris.userImage);
+        self.get("user-image").attr("src","img/userImage/"+iris.userImage+".png");                
     }
 
     function render(map) {

@@ -8,8 +8,9 @@ iris.screen(
                 self.ui("map-container", iris.path.ui.map.js);
                 self.ui("panel-container", iris.path.ui.panel.js);
 
-                iris.updateDate = "2014-00-00 00:00:00";
-                
+                iris.updateDate = "";
+
+
                 /*ALERTAS*/
                 iris.on("alertError", function(message) {
                     self.get("error-panel").show().removeClass("hidden").text(message).fadeOut(5000);
@@ -18,7 +19,7 @@ iris.screen(
                 iris.on("alertSuccess", function(message) {
                     self.get("success-panel").show().removeClass("hidden").text(message).fadeOut(5000);
                     console.log("event alertSuccess")
-                });                
+                });
 
 
                 self.get('log-out').click(function() {
@@ -27,36 +28,40 @@ iris.screen(
                     });
                     iris.navigate("#/unloged");
                 });
-                
+
             };
 
             self.awake = function() {
                 console.log("Loged Screen Awakened");
+                
                 check_session(function(data) {
                     iris.userId = data.result.id;
                     iris.userName = data.result.name;
                     iris.userImage = data.result.image;
-                    
+
                     if (data.status !== "ok") {
                         iris.navigate("#/unloged");
                     }
-                    iris.notify("render",false);
+                    iris.notify("render", false);
+                     ifUpdateMarkers();
                 });
                 
-               setInterval(function(){
-                EVENTS.lastUpdateDate(function(data){
-                   console.log(iris.updateDate);
-                   console.log(data);
-                   if(data.status === "ok"){
-                       MAP.renderMap();
-                       iris.updateDate = data.result;
-                   }
-                   console.log(iris.updateDate);
-               })
-               },2000);
-               /*setInterval(function(){
-                    MAP.earNewEvent();
-                },3000);*/
+               
+
+
+                function ifUpdateMarkers() {
+                    EVENTS.lastUpdateDate(function(data) {
+                        if (data.status === "ok") {
+                            console.log(data);
+                            MAP.renderMap();
+                            iris.updateDate = data.result;
+                        }
+                        setTimeout(ifUpdateMarkers, 1000);
+                    })
+                }
+
+
+
             };
 
             self.sleep = function() {
