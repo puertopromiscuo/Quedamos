@@ -30,8 +30,9 @@ function logOut() {
         return false;
     }
 }
-function updateDataUser($img) {
-    $i= checkSession();
+
+function updateDataUser1($img) {
+    $i = checkSession();
     $id = empty($i) ? null : $i;
     if ($img) {
         if ($id) {
@@ -51,7 +52,7 @@ function updateDataUser($img) {
 
             if ($ext_correcta && $tipo_correcto && $tamano <= $limite) {
                 if ($img['archivo']['error'] > 0) {
-                        return false;
+                    return false;
                 } else {
                     if (file_exists('../../img/userImage/' . $nombre)) {
                         return false;
@@ -68,6 +69,24 @@ function updateDataUser($img) {
         }
     } else {
         return false;
+    }
+}
+
+function updateDataUser($id, $pass1, $pass2) {
+    $pass = Encrypter::decrypt($pass1);
+    $query = "SELECT * FROM " . SQL_USERTABLE . " WHERE user_id='$id'";
+    $result = mysqli_query($db, $query);
+    $row = mysqli_fetch_array($result);
+    if ($row['$pass'] != $pass) {
+        
+    } else {
+        $query = "UPDATE " . SQL_USERTABLE . " SET user_password='$pass2' WHERE user_id='$id'";
+        $result = mysqli_query($db, $query);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
