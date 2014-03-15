@@ -44,13 +44,13 @@
         markers = [];
     }
     /*function deleteMarker(event_id) {
-        var i;
-        for (i = 0; i < markers.length; i++) {
-            if(markers[i].event_id == event_id){
-                    markers[i].setMap(null);
-            }
-        }
-    }*/
+     var i;
+     for (i = 0; i < markers.length; i++) {
+     if(markers[i].event_id == event_id){
+     markers[i].setMap(null);
+     }
+     }
+     }*/
     /*busca una direccion y crea un marcador*/
     function findAddress(address, callback) {
         if (markerAux) {
@@ -127,6 +127,23 @@
         });
     }
 
+    function check_session(callback) {
+        var settings = {
+            type: 'POST',
+            url: 'servidor/services/loginService/checkSession',
+            dataType: 'json'
+        };
+        iris.ajax(settings)
+                .done(function(data)
+                {
+                    callback(data);
+                })
+                .fail(function() {
+                    console.log("Error 101", arguments);
+                    callback(promise);
+                })
+    }
+    ;
 
     if (!root.MAP) {
         root.MAP = {};
@@ -143,6 +160,7 @@
     root.MAP.centerMap = centerMap;
     root.MAP.filterMarkers = filterMarkers;
     root.MAP.earNewEvent = earNewEvent;
+    root.MAP.check_session = check_session;
 
 
 

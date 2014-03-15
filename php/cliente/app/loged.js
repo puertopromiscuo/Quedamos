@@ -34,7 +34,7 @@ iris.screen(
             self.awake = function() {
                 console.log("Loged Screen Awakened");
                 
-                check_session(function(data) {
+                MAP.check_session(function(data) {
                     iris.userId = data.result.id;
                     iris.userName = data.result.name;
                     iris.userImage = data.result.image;
@@ -79,18 +79,7 @@ iris.screen(
                 dataType: 'json'
             };
 
-            function check_session(callback) {
-                iris.ajax(settings)
-                        .done(function(data)
-                        {
-                            callback(data);
-                        })
-                        .fail(function() {
-                            console.log("Error 101", arguments);
-                            callback(promise);
-                        })
-            }
-            ;
+            
         },
         iris.path.screen.loged.js
         );

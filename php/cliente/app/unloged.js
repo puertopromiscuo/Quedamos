@@ -1,11 +1,7 @@
 iris.screen(
         function(self) {
 
-            var settings = {
-                type: 'POST',
-                url: 'servidor/services/loginService/checkSession',
-                dataType: 'json'
-            };
+            
             
             self.create = function() {
                 console.log("unloged Screen Created");
@@ -13,7 +9,11 @@ iris.screen(
                 self.ui("modal", iris.path.ui.register.js);
             };
             self.awake = function() {
-                console.log("unloged Screen Awakened");
+                MAP.check_session(function(data) {
+                    if (data.status == "ok") {
+                        iris.navigate("#/loged");
+                    }
+                });
             };
 
             /*self.canSleep = function() {

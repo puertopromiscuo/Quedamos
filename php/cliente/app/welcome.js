@@ -37,27 +37,12 @@ iris.screen(function(self) {
         iris.ajax(settings)
                 .done(function(data)
                 {
-                    //console.log(data.status);                    
                     callback(data);
                 })
                 .fail(function() {
-                    //console.log("Error 101", arguments);
                     callback(promise);
                 })
     }
     ;
-
-    
-    /*
-     $.ajax(
-     settings
-     ).done(function(data) {
-     console.log(data.status);
-     callback(data);
-     }).fail(function() {
-     console.log("Error 101", arguments);
-     });
-     
-     */
 
 }, iris.path.screen.welcome.js);
