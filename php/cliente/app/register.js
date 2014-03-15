@@ -38,28 +38,66 @@ iris.ui(
 
             function sendRegister() {
                 var formRegister = $('#register-content');
-                play();
-                $.ajax({
-                    type: 'POST',
-                    url: 'servidor/services/loginService/insertUser',
-                    dataType: 'json',
-                    data: {
-                        name: formRegister.find('input[name = user-name]').val(),
-                        email: formRegister.find('input[name = user-email]').val(),
-                        password: formRegister.find('input[name = user-password]').val()}
-                }).done(function(data) {
-                    viewRegister(data);
-                    stop();
-                    console.log(data);
-                }).fail(function() {
-                    stop();
-                    console.log(arguments);
-                    data= {
-                        status: "error",
-                        message: "Email no existente."
-                    }
-                    viewRegister(data);
-                });
+                var name = formRegister.find('input[name = user-name]').val();
+                var email = formRegister.find('input[name = user-email]').val();
+                var password = formRegister.find('input[name = user-password]').val();
+                if (validateFormRegister(name,email,password)) {                
+                    play();
+                    $.ajax({
+                        type: 'POST',
+                        url: 'servidor/services/loginService/insertUser',
+                        dataType: 'json',
+                        data: {
+                            name: formRegister.find('input[name = user-name]').val(),
+                            email: formRegister.find('input[name = user-email]').val(),
+                            password: formRegister.find('input[name = user-password]').val()}
+                    }).done(function(data) {
+                        if(data.status === "error"){
+                            showFormAlert(data.message,false);
+                        }else if(data.status === "ok"){
+                            showFormAlert(data.message,true);
+                        }                        
+                        stop();
+                        console.log(data);
+                    }).fail(function() {
+                        stop();                        
+                        data = {
+                            status: "error",
+                            message: "Email no existente."
+                        }
+                        console.log(data);
+                        showFormAlert(data.message,false);
+                    });
+                }
+            }
+            function validateFormRegister(name,email,password){
+                var regExpEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                var regExpUserName = /^[a-zA-Z]{5,20}$/;
+                var regExpPassword = /^[a-zA-Z0-9!@#$%^&*]{5,20}$/;
+                if(!name || !password || !email ){
+                   showFormAlert("Todos los campos son obligatorios",false);
+                   return false;
+                }
+                if(!regExpEmail.test(email)){
+                    showFormAlert("Email invalido",false);
+                    return false;
+                }
+                if(!regExpUserName.test(name)){
+                    showFormAlert("Nombre de usuario invalido (5-20 letras)",false);
+                    return false;
+                }
+                if(!regExpPassword.test(password)){
+                    showFormAlert("Contraseña invalida (5-20 letras, numeros o !@#$%^&*)",false);
+                    return false;
+                }                
+                return true;
+            }
+            function showFormAlert(message,status){
+                if(status){
+                    self.get("success-form").show().removeClass("hidden").text(message).fadeOut(3000);
+                }else{
+                    self.get("error-form").show().removeClass("hidden").text(message).fadeOut(3000);
+                }
             }
 
             function logSend() {
@@ -100,22 +138,10 @@ iris.ui(
                 $('#register-content').removeClass('active');
 
                 $('#forget-content').addClass('active');
-            }
+            }          
+            
 
-            function viewRegister(dataRegister) {
-                if (dataRegister.status === "ok") {
-                    $('#ok-form').html(dataRegister.message);
-                    $('#ok-form').removeClass('hidden');
-                    $('#error-form').addClass('hidden');
-                    //Limpiar campos del formulario
-                    $(':input', '#register-content').val('');
-                } else if (dataRegister.status === "error") {
-                    $('#error-form').html(dataRegister.message);
-                    $('#error-form').removeClass('hidden');
-                } else {
-                    console.log("Error al registrar el usuario, intentelo más tarde.");
-                }
-            }
+           
 
             function renderUser(dataUser) {
                 if (dataUser.status == "error") {
@@ -150,14 +176,14 @@ iris.ui(
 
                 });
                 return circle;
-                
+
             }
-            function play(){
+            function play() {
                 var circle = loaged();
                 circle.play();
                 $('#load-loaded').append(circle.canvas);
             }
-            function stop(){
+            function stop() {
                 var circle = loaged();
                 circle.stop();
                 $('#load-loaded').html("");
