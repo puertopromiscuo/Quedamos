@@ -1,13 +1,13 @@
 <div>
     <div class="row w">
         <div class="col-xs-4">
-            <a href=""  data-toggle="modal" data-target="#ModalProfile"><img src="" data-id="user-image" alt="" class="img-responsive "></a>
+            <a href=""  data-toggle="modal" data-target="#ModalProfile"><img src="" data-id="user-image" alt=""></a>
         </div>
         <div class="col-xs-7 padding1">
             <div class="nameUser"> 
                 <span class="nameUser" data-id="menu-top"></span>  
                 <span class="dropdown">
-                    <button class="btn btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                    <button class="btn btn-xs dropdown-toggle button-modify" type="button" id="dropdownMenu1" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-cog"></span>
                         <span class="caret"></span>
                     </button>
@@ -17,7 +17,7 @@
                         <li role="presentation"><a role="menuitem" tabindex="-1" data-id="log-out">Cerrar sesión</a></li>
                     </ul>
                 </span>
-                <button class="btn btn-xs" type="button" data-id="set-zoom">Ver Mapa</button>
+                <button class="btn btn-xs button-modify" type="button" data-id="set-zoom"><span class="glyphicon glyphicon-globe"></span>&nbsp;Ver Mapa</button>
             </div>
 
             
@@ -30,19 +30,19 @@
         <div class="tab-content">            
             <ul class="nav nav-tabs nav-stacked" id="myTab">
                 <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        Crear Evento
+                        <span class="glyphicon glyphicon-pushpin"></span>&nbsp; Crear Evento
                     </a></li>
                 <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        Estoy apuntado
+                        <span class="glyphicon glyphicon-star"></span>&nbsp; Mis eventos
                     </a></li>
                 <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                        Mis eventos
+                        <span class="glyphicon glyphicon-wrench"></span>&nbsp; Administrar eventos
                     </a></li>
                 <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                        Buscar eventos
+                        <span class="glyphicon glyphicon-search"></span>&nbsp; Buscar eventos
                     </a></li>
                 <li class=""><a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                        Filtrar eventos
+                        <span class="glyphicon glyphicon-filter"></span>&nbsp; Filtrar eventos
                     </a></li>
             </ul>
             <div class="panel-group" id="accordion">
@@ -52,14 +52,14 @@
                             <form id="formulario">                                
                                 <input type="text" data-id="title" class="form-control"   placeholder="Titulo" >
                                 <input type="text" data-id="address" class="form-control" id="address"  placeholder="Lugar">
-                                <textarea data-id="description" class="form-control" rows="3" placeholder="Descripcion: actividad, hora, duracion,etc.."></textarea>                                    
+                                <textarea data-id="description" class="form-control" rows="3" placeholder="Descripcion: actividad, hora, como llegar,etc.."></textarea>                                    
                                 <input data-id="date" type="date" class="form-control">   
                                 <select data-id="type" class="form-control">                               
                                     <option value="event">General</option>
                                     <option value="sport">Deporte</option>
                                     <option value="party">Fiesta</option>
                                 </select>
-                                <button type="button" data-id="create-event" id="btn_grabar" class="btn btn-success">Crear</button>                                
+                                <button type="button" data-id="create-event" id="btn_grabar" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>&nbsp;Crear</button>                                
 
                             </form>
                         </div>
@@ -71,13 +71,13 @@
                         <ul class="nav nav-tabs nav-stacked" data-id="my-events-list"></ul>
                     </div>
                     <div id="collapseFour" class="panel-collapse collapse">
-                        <div class="panel-body">
+                        <div class="panel-body formulario">
                             <input type="text" data-id="search" class="form-control" placeholder="Nombre del evento...">                            
                         </div>
                         <ul class="nav nav-tabs nav-stacked" data-id="search-event-list"></ul>
                     </div>
                     <div id="collapseFive" class="panel-collapse collapse">
-                        <div class="panel-body">                            
+                        <div class="panel-body formulario">                            
                                  <select data-id="event-type" class="form-control">                               
                                     <option value="all">Todos</option>
                                     <option value="event">General</option>
@@ -85,7 +85,7 @@
                                     <option value="party">Fiesta</option>
                                 </select>     
                                 <input data-id="event-date" type="date" class="form-control">  
-                                <button type="button" data-id="filter-markers" class="btn btn-success">Filtrar</button>                                
+                                <button type="button" data-id="filter-markers" class="btn btn-success"><span class="glyphicon glyphicon-filter"></span>&nbsp;Filtrar</button>                                
                         </div>                        
                     </div>
 

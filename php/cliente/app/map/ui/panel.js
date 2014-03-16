@@ -57,8 +57,10 @@ iris.ui(function(self) {
             })
     
         //on blur de la direccion crea un marcador en el mapa
-        self.get("address").blur(function() {
-            if (this.value !== "") {
+        self.get("address").blur(function() {                        
+            if (this.value == "") {
+                iris.notify("alertError", "La direccion es obligatoria");
+            }else{
                 MAP.findAddress(this.value, function(coord) {
                     if (coord) {
                         event_x = coord.lat();
@@ -72,11 +74,15 @@ iris.ui(function(self) {
 
         //crea un evento y rederiza el mapa
         self.get("create-event").click(function() {
-            if (validatePanel()) {
+            var title  = self.get("title").val();
+            var description = self.get("description").val();
+            var date = self.get("date").val();
+            
+            if (validatePanel(title,description,date)) {
                 EVENTS.insertEvent(
-                        self.get("title").val(),
-                        self.get("description").val(),
-                        self.get("date").val(),
+                        title,
+                        description,
+                        date,
                         EVENTS.getUserId(),
                         event_x,
                         event_y,
@@ -88,14 +94,13 @@ iris.ui(function(self) {
                 )
                 self.get("title").val("");
                 self.get("description").val("");
-                self.get("address").val("");
-                self.get("date").val("");
+                self.get("address").val("");                
                 self.get("date")
                         .val(PANEL.getToday())
                         .attr("min", PANEL.getToday());
-            } else {
-                iris.notify("alertError", "Rellene todos los campos");
-            }
+            } 
+                
+            
 
 
         });
@@ -142,15 +147,28 @@ iris.ui(function(self) {
     }
 
 
-    function validatePanel() {
-        fields = [self.get("title"), self.get("description"), self.get("address"), self.get("date")]
-        for (i = 0; i < fields.length; ++i) {
-            if (!fields[i].val()) {
-                return false;
-            }
+    function validatePanel(title,description,date) {
+        var regExpTitle = /^[a-zA-Z0-9]{5,}$/;        
+        var today = new Date();
+        today.setHours(0,0,0,0);
+        if(!title || !description || !date){
+            iris.notify("alertError", "Todos los campos son obligatorios");
+            return false;
         }
+        if (!regExpTitle.test(title)) {
+              iris.notify("alertError", "Titulo invalido (min 5 caracteres)");
+          return false;
+        }
+        
+        if (new Date(date) < today) {
+              iris.notify("alertError", "Fecha invalida (min fecha de hoy)");
+              return false;
+        }        
         return true;
-    }
+    }    
+     
+    
+    
 
 
 }, iris.path.ui.panel.js);

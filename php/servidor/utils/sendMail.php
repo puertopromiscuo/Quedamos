@@ -22,7 +22,7 @@ function send_mail($mail_register, $cuerpo) {
     $mail->addAddress($mail_register);
     $mail->WordWrap = 50;
     $mail->isHTML(true);
-    $mail->Subject = "Confirmción de tu cuenta en Quedamos.com";
+    $mail->Subject = "Quedamos.com";
     $mail->Body = $cuerpo;
     $mail->AltBody = "This is the body in plain text for non-HTML mail clients";
 

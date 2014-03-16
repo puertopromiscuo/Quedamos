@@ -24,7 +24,7 @@
             for (var i = 0; i < data.length; i++) {
                 var marker = MAP.createMarker(data[i].event_id, data[i].event_title, data[i].event_description, data[i].event_date, data[i].event_userid, data[i].event_x, data[i].event_y, data[i].users, data[i].event_type, map);
                 markers.push(marker);
-            }
+            }                
         });
     }
 
@@ -77,29 +77,28 @@
         $('#come' + event_id).children().remove();
         EVENTS.insertUserEvent(event_id, function(data) {
             console.log(data.result);
-            
-            $('#come' + event_id).append(come);
-            iris.notify("render", false);
-        })
 
+            $('#come' + event_id).append(come);
+            iris.notify("render", true);
+            iris.notify("alertSuccess", "Estas apuntado");
+        })
     }
 
     function delUserEvent(event_id) {
         come = '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + event_id + ');"> Me apunto</button>';
         $('#come' + event_id).children().remove();
         EVENTS.deleteUserEvent(event_id, function(data) {
-            console.log(data.result);            
+            console.log(data.result);
             $('#come' + event_id).append(come);
-            iris.notify("render", false);
+            iris.notify("render", true);
+            iris.notify("alertSuccess", "Ya no estas apuntado");
         })
     }
 
     function renderMap() {
         deleteMarkers();
         loadAllMarkers();
-    } 
-    
-
+    }    
 
 
     function filterMarkers(type, date) {
@@ -118,16 +117,15 @@
             });
         }
     }
-    
-    
-    function getInfoWindow(marker,content) {  
-        if(!infowindow){
-            infowindow = new google.maps.InfoWindow();        
+
+
+    function getInfoWindow(marker, content) {
+        if (!infowindow) {
+            infowindow = new google.maps.InfoWindow();
         }
         infowindow.close();
         infowindow.setContent(content);
         infowindow.open(marker.get('map'), marker);
-        console.log(infowindow);
     }
 
 
@@ -164,8 +162,8 @@
     root.MAP.centerMap = centerMap;
     root.MAP.filterMarkers = filterMarkers;
     root.MAP.check_session = check_session;
-    root.MAP.setZoomMap = setZoomMap; 
-    root.MAP.getInfoWindow=getInfoWindow;
+    root.MAP.setZoomMap = setZoomMap;
+    root.MAP.getInfoWindow = getInfoWindow;
 
 
 

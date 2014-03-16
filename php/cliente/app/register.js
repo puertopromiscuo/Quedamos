@@ -107,12 +107,13 @@ iris.ui(
                     showFormAlert("Todos los campos son obligatorios", false);
                     return false;
                 }
-                if (!regExpEmail.test(email)) {
-                    showFormAlert("Email invalido", false);
-                    return false;
-                }
+               
                 if (!regExpUserName.test(name)) {
                     showFormAlert("Nombre de usuario invalido (5-20 letras)", false);
+                    return false;
+                }
+                 if (!regExpEmail.test(email)) {
+                    showFormAlert("Email invalido", false);
                     return false;
                 }
                 if (!regExpPassword.test(password)) {

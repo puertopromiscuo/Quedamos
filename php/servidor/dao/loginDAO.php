@@ -95,7 +95,7 @@ function forgetPass($mail) {
         return false;
     } else {
         $content_user_data = mysqli_fetch_array(get_data('user_email', $mail));
-        $cuerpo = "Hola " . $content_user_data['user_name'] . ":<br><br>Tu contraseña es  " . Encrypter::decrypt($content_user_data['user_password']) . "<br><br> Gracias por confiar en Quedamos";
+        $cuerpo = "Hola " . $content_user_data['user_name'] . ":<br><br>Tu contrase&ntilde;a es  " . Encrypter::decrypt($content_user_data['user_password']) . "<br><br> Gracias por confiar en Quedamos";
         send_mail($mail, $cuerpo);
         return $content_user_data['user_name'];
     }
