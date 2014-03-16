@@ -94,3 +94,25 @@ a {
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
+
+.tablet-hidden{
+    visibility: visible;
+}
+.button-menu{
+    z-index: 1002;
+}
+.button1{
+    border-radius: 0px;
+    margin-top: 2.5em;
+    margin-right: 2em;
+    color: #446e9b; 
+    visibility: hidden;
+}
+@media (max-width: 1000px) {
+    .tablet-hidden{
+        visibility: hidden;
+    }
+    .button1{
+        visibility: visible;
+    }
+}

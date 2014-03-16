@@ -9,7 +9,7 @@ iris.screen(
                 self.ui("panel-container", iris.path.ui.panel.js);
 
                 iris.updateDate = "";
-
+                var openPanel;
 
                 /*ALERTAS*/
                 iris.on("alertError", function(message) {
@@ -28,7 +28,20 @@ iris.screen(
                         iris.navigate("#/unloged");
                     });
                 });
-
+                
+                
+                self.get('button-menu').click(function() {
+                    openPanel = !openPanel;
+                    if(openPanel){
+                        $('#myTab').removeClass("tablet-hidden");
+                        $('#juan').removeClass("tablet-hidden");
+                        self.get('panel-menu').removeClass("tablet-hidden");
+                    }else{
+                        $('#myTab').addClass("tablet-hidden");
+                        $('#juan').addClass("tablet-hidden");
+                        self.get('panel-menu').addClass("tablet-hidden");
+                    }
+                });
             };
 
             self.awake = function() {
