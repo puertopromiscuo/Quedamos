@@ -53,7 +53,7 @@ body {
     -ms-transition: all 0.4s ease 0s;
     -o-transition: all 0.4s ease 0s;
     transition: all 0.4s ease 0s;
-    
+
 }
 
 .contenedor {
@@ -349,6 +349,12 @@ i.scroll:hover {
 
     .map {
         height: 75%;
+    }
+
+}
+@media (max-width: 1000px) {
+    #sidebar-wrapper-2{
+        margin-top: 137px;
     }
 
 }
