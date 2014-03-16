@@ -107,12 +107,28 @@ a {
     margin-right: 2em;
     color: #446e9b; 
     visibility: hidden;
+    text-shadow: 0;
+}
+.button2{
+    border-radius: 0px;
+    color: #FFFFFF; 
+    visibility: hidden;
+    text-shadow: 0;
+}
+.panel2{
+    display:none;
 }
 @media (max-width: 1000px) {
     .tablet-hidden{
-        visibility: hidden;
+        display: none;
     }
     .button1{
         visibility: visible;
+    }
+    .button2{
+        visibility: visible;
+    }
+    .panel2{
+        display: inline-block;
     }
 }
