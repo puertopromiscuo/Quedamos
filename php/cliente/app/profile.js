@@ -7,12 +7,13 @@ iris.ui(
                 self.get("profile-submit").click(function() {
                     var pass1 = self.get("profile-old-password").val();
                     var pass2 = self.get("profile-new-password").val();
+                    var img = $("[type=radio]:checked").val();                    
                     if (validateFormProfile(pass1, pass2)) {
-                        EVENTS.updatePassProfile(EVENTS.getUserId(), pass1, pass2, function(data) {
+                        EVENTS.updatePassProfile(EVENTS.getUserId(), pass1, pass2,img, function(data) {
                             if (data.status === "error") {
-                                showFormAlert(data.message, false);
-                            } else if (data.status === "ok") {
-                                showFormAlert(data.message, true);
+                                showFormAlert(data.message, false);                                
+                            } else if (data.status === "ok") {                                
+                                showFormAlert(data.message, true);                                
                             }                         
                         })
                     }
@@ -23,8 +24,7 @@ iris.ui(
             self.awake = function() {
                 console.log("profile UI Awakened");
                 EVENTS.checkSession(function(data) {
-                    self.get('name').attr("placeholder", data.name);
-                    self.get("user-image").attr("src", "img/userImage/" + data.image + ".png");
+                    self.get('name').attr("placeholder", data.name);                    
                 });
             };
             self.sleep = function() {

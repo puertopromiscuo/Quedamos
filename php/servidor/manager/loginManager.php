@@ -68,8 +68,8 @@ function updateProfileManager($img){
     }
 }
 
-function updateDataUserManager($id, $pass1, $pass2){
-    if (updateDataUser($id, $pass1, $pass2)) {
+function updateDataUserManager($id, $pass1, $pass2,$img){
+    if (updateDataUser($id, $pass1, $pass2,$img)) {
         return createJson("ok", "Contraseña actualizada","ok" );
     } else {
         return createJson("error", "Error al actualizar el perfil", "error");

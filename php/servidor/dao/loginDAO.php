@@ -101,7 +101,7 @@ function forgetPass($mail) {
     }
 }
 
-function updateDataUser($id, $pass1, $pass2) {
+function updateDataUser($id, $pass1, $pass2,$img) {
     global $db;
     $pass = Encrypter::encrypt($pass1);
     $pass2 = Encrypter::encrypt($pass2);
@@ -111,7 +111,7 @@ function updateDataUser($id, $pass1, $pass2) {
     if ($row['user_password'] != $pass) {
         return false;
     } else {
-        $query = "UPDATE " . SQL_USERTABLE . " SET user_password='$pass2' WHERE user_id='$id'";
+        $query = "UPDATE " . SQL_USERTABLE . " SET user_password='$pass2',user_image='$img' WHERE user_id='$id'";
         $result = mysqli_query($db, $query);
         if ($result) {
             return true;

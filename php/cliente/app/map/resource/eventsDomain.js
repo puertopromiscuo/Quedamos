@@ -169,7 +169,7 @@
         })
     }
     
-    function updatePassProfile(userId,pass,pass2,callback) {
+    function updatePassProfile(userId,pass,pass2,img,callback) {
          $.ajax({
             type: 'POST',
             url: 'servidor/services/loginService/updateDataUser',
@@ -177,7 +177,8 @@
             data: {
                 user_id: userId,
                 user_pass: pass,
-                user_pass2: pass2
+                user_pass2: pass2,
+                user_img:img
             }
         }).done(function(data) {
             callback(data);

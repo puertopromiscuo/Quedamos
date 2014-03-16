@@ -127,9 +127,9 @@ iris.ui(function(self) {
         EVENTS.countEvents(function(data) {
             self.get("count-my-events-come").text("+" + data.eventsCome);
             self.get("count-my-events").text("+" + data.eventsMy);
-        });
-        self.get("menu-top").text(iris.userName);        
-        self.get("user-image").attr("src","img/userImage/"+iris.userImage+".png");                
+            self.get("menu-top").text(iris.userName);        
+            self.get("user-image").attr("src","img/userImage/"+iris.userImage+".png"); 
+        });                       
     }
 
     function render(map) {
