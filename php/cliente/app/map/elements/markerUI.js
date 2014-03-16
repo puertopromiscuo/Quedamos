@@ -26,8 +26,8 @@
         });
 
         google.maps.event.addListener(marker, 'click', function() {
-            map.setCenter(marker.getPosition());            
-            MAP.getInfoWindow(this,createInfo(marker));
+            map.setCenter(marker.getPosition());
+            MAP.getInfoWindow(this, createInfo(marker));
         });
 
         return marker;
@@ -42,7 +42,7 @@
         } else {
             marker.setAnimation(google.maps.Animation.BOUNCE);
         }
-    }    
+    }
 
 
     function createInfo(marker) {
@@ -54,24 +54,32 @@
         }
 
         var contentString = '' +
-                '<div class="contentInfo" id="contentWindow">' +
-                '<div class="firstHeadingInfo">' + marker.event_title + '</div>' +
-                '<div class="secondHeadingInfo">' + marker.event_date + '</div>' +
-                '<div class="bodyContentInfo">' +
-                '<p>Descripcion:' + marker.event_description + '</p>' +
-                '<p>Apuntados:' + EVENTS.arrayUsersToString(marker.event_users) + '</p>';
-        if (userIndicate) {
+                '<div style="overflow:hidden;">' +
+                '<div class="list-group">' +
+                '<a class="list-group-item active"><b>' + marker.event_title + '</b></a>' +
+                '<a class="list-group-item"><b>FECHA:</b> ' + marker.event_date + '</a>' +
+                '<a class="list-group-item"><b>DESCRIPCION:</b> ' + marker.event_description + '</a>' +
+                '<a class="list-group-item"><b>APUNTADOS:</b> '+
+        '<ul>';
+        marker.event_users.forEach(function(user) {
+            contentString += '<li>' + user.user_name + '</li>';
+        })
+        contentString += '</ul>'+
+        '</a>' +
+        '</div>';
+                if (userIndicate) {
             contentString = contentString +
                     '<div id="come' + marker.event_id + '">' +
                     '<button class="glyphicon glyphicon-minus btn btn-sm btn-danger" onclick="MAP.deleteUserEvent(' + marker.event_id + ');"> Desapuntarte</button>' +
-                    '</div>' +
                     '</div>';
+
         } else {
             contentString = contentString +
                     '<div id="come' + marker.event_id + '">' +
                     '<button class="glyphicon glyphicon-plus btn btn-sm btn-success" onclick="MAP.registerUserEvent(' + marker.event_id + ');"> Me apunto</button>' +
                     '</div>' +
                     '</div>';
+
         }
 
         return contentString;

@@ -122,11 +122,10 @@
     
     function getInfoWindow(marker,content) {  
         if(!infowindow){
-            infowindow = new google.maps.InfoWindow({
-                content:content
-            });        
+            infowindow = new google.maps.InfoWindow();        
         }
         infowindow.close();
+        infowindow.setContent(content);
         infowindow.open(marker.get('map'), marker);
         console.log(infowindow);
     }
