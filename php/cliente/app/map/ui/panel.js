@@ -74,7 +74,7 @@ iris.ui(function(self) {
 
         //crea un evento y rederiza el mapa
         self.get("create-event").click(function() {
-            var title  = self.get("title").val();
+            var title  = self.get("title").val().trim();
             var description = self.get("description").val();
             var date = self.get("date").val();
             
@@ -154,12 +154,7 @@ iris.ui(function(self) {
         if(!title || !description || !date){
             iris.notify("alertError", "Todos los campos son obligatorios");
             return false;
-        }
-        if (!regExpTitle.test(title)) {
-              iris.notify("alertError", "Titulo invalido (min 5 caracteres)");
-          return false;
-        }
-        
+        }        
         if (new Date(date) < today) {
               iris.notify("alertError", "Fecha invalida (min fecha de hoy)");
               return false;
