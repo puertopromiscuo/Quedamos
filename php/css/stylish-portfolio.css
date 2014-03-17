@@ -356,6 +356,8 @@ i.scroll:hover {
 @media (max-width: 1000px) {
     #sidebar-wrapper-2{
         margin-top: 137px;
+        height: auto;
+        position: initial;
     }
 
 }
